@@ -68,7 +68,7 @@ const Page = ({ params:{id} }:{
         <div>
           <h1 className="text-white text-2xl font-bold">Similar Movies</h1>
           <Suspense fallback={<DiscoverMainSkeleton />}>
-            <Discover cat="SimilarMovie" id={id} />
+            <Discover cat="SimilarMovie" id={id} filter={null} />
           </Suspense>
         </div>
       </div>

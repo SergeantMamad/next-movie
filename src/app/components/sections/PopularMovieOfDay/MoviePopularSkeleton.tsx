@@ -3,7 +3,7 @@ const MoviePopularSkeleton = () => {
   let contents = [];
   for (let index = 0; index <= 15; index++) {
     contents.push(
-      <MoviePopularSkeletonCart index={index} />
+      <MoviePopularSkeletonCart index={index} key={index} />
     );
   }
   return (

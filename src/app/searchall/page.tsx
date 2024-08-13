@@ -7,10 +7,13 @@ import { useInView } from "react-intersection-observer"
 import TrendingCard from "../components/sections/TodaysTrending/TrendingCard"
 import { useSearchInfiniteQuery } from "../utils/hooks/useSearchInfiniteQuery"
 import { useSetParam } from "../utils/hooks/useSetParam"
+import { useSearchParams } from "next/navigation"
 
 const page = () => {
   const { ref, inView } = useInView()
-  const [searchParam, setSearchParam] = useState("")
+  const params = useSearchParams()
+  const [searchParam, setSearchParam] = useState(params.get("search") || "")
+
 
   const searchQuery = useSearchInfiniteQuery(searchParam, inView)
   useSetParam(searchParam)
@@ -52,6 +55,7 @@ const page = () => {
     <>
       <div className="relative flex justify-center">
         <input
+          defaultValue={searchParam}
           placeholder="Type A Movie Or A Series Name"
           className="w-2/3 mt-32 p-3 rounded-md outline-none bg-[#08070A] border border-[#353535] placeholder-gray-800 transition-all focus:border-white"
           onInput={debounce(handleType, 1500)}

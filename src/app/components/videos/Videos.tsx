@@ -8,13 +8,13 @@ import ScrollButtons from "../cartGeneral/ScrollButtons"
 import VideosFullScreen from "./VideosFullScreen"
 
 export type VidListProps = {
-  index:number
-  youtubeKey:string
+  index: number
+  youtubeKey: string
 }[]
 
 export type VideosProps = {
-  index:number
-  youtubeKey:string
+  index: number
+  youtubeKey: string
 }
 
 const Videos = ({
@@ -35,11 +35,11 @@ const Videos = ({
     youtubeKey: "",
   })
 
-  const [vidList,setVidList] = useSetVidList(data)
-  
+  const [vidList, setVidList] = useSetVidList(data)
+
   const vidRef = useRef(null)
 
-  function handleVideoClick(index:number, youtubeKey:string) {
+  function handleVideoClick(index: number, youtubeKey: string) {
     setVideo({
       index,
       youtubeKey,
@@ -50,17 +50,21 @@ const Videos = ({
     <>
       <div className="relative flex items-center mt-10">
         <ScrollButtons ref={vidRef} value={320} />
-        <div
-          className="flex overflow-hidden scroll-smooth gap-3"
-          ref={vidRef}
-        >
-          {data?.map((vids, index) => (
-            <VideosPreview handleVideoClick={handleVideoClick} index={index} key={vids.key!} name={vids.name!} />
-          ))}
+        <div className="flex overflow-hidden scroll-smooth gap-3" ref={vidRef}>
+          {data &&
+            data?.map((vids, index) => (
+                <VideosPreview
+                  handleVideoClick={handleVideoClick}
+                  index={index}
+                  youtubeKey={vids.key!}
+                  name={vids.name!}
+                  key={index}
+                />
+            ))}
         </div>
       </div>
       {video.youtubeKey != "" && (
-        <VideosFullScreen video={video} setVideo={setVideo} vidList={vidList}/>
+        <VideosFullScreen video={video} setVideo={setVideo} vidList={vidList} />
       )}
     </>
   )

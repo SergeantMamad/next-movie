@@ -6,19 +6,28 @@ import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline"
 import BackImage from "./BackImage"
 import ScrollButtons from "../../cartGeneral/ScrollButtons"
 import TrendingCard from "../TodaysTrending/TrendingCard"
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { SliderItems } from "@/action"
 
-const SergeantMain = () => {
+const SergeantMain = ({listNumber}:{listNumber:number}) => {
+  const {data} = useSuspenseQuery({
+    queryKey: ["slider"+listNumber],
+    queryFn: () => SliderItems(listNumber)
+  })
   const ref = useRef<HTMLDivElement>(null)
-  const [slideN, setSlideN] = useState(1)
+  const [slideN, setSlideN] = useState(0)
   return (
     <>
       <div className="relative h-[880px]">
         <div className="relative w-full h-[880px]">
-          {sergeantSlideObj.map((slide, index) => (
+          {data?.map((slide, index) => (
             <BackImage
               index={index}
               slideN={slideN}
-              sergeantSlideObj={sergeantSlideObj}
+              desc={slide.overview!}
+              image={slide.backdrop_path!}
+              title={slide.original_title!}
+              key={index}
             />
           ))}
           <div className="absolute left-12 top-28">
@@ -36,16 +45,17 @@ const SergeantMain = () => {
                 className="flex mt-10 gap-4 overflow-hidden scroll-smooth"
                 ref={ref}
               >
-                {sergeantSlideObj.map((slide, index) => (
+                {data?.map((slide, index) => (
                   <TrendingCard
                     onClick={() => setSlideN(index)}
                     id={index}
                     slideN={slideN}
                     mediaType=""
-                    title={sergeantSlideObj[index].title}
-                    posterPath={sergeantSlideObj[index].cover}
+                    title={slide.original_title!}
+                    posterPath={slide.poster_path!}
                     voteAverage={0}
                     isInSergeantMain={true}
+                    key={index}
                   />
                 ))}
               </div>

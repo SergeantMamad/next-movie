@@ -8,7 +8,7 @@ import ScrollButtons from "../../cartGeneral/ScrollButtons";
 
 const TodayTrending = () => {
   const DivElement = useRef<HTMLDivElement>(null)
-  const { data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ["todayTrending"],
     queryFn: MainTodayTrending,
   });
@@ -21,6 +21,7 @@ const TodayTrending = () => {
             <TrendingCard id={res.id} mediaType={res.media_type!} posterPath={res.poster_path!} title={res.title! || (res as any).name} voteAverage={res.vote_average} isInSergeantMain={false} key={index} />
           )
         )}
+       
       </div>
     </div>
   );

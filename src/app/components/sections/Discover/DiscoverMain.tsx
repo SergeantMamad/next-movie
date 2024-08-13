@@ -1,21 +1,24 @@
 "use client"
-import { useRef, useState } from "react"
-import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline"
-import { StarIcon } from "@heroicons/react/24/solid"
+import { useRef } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import Image from "next/image"
 import { categoris, DiscoverMain } from "@/action"
-import Link from "next/link"
 import ScrollButtons from "../../cartGeneral/ScrollButtons"
 import DiscoverMainCard from "./DiscoverMainCard"
-const Discover = ({ cat, id }: { cat: categoris; id?: number }) => {
+import { operations } from "../../../../../schema"
+type DiscoverProps = {
+  cat: categoris
+  id: number
+  filter: operations["discover-movie"]['parameters']['query'] | operations['discover-tv']['parameters']['query'] | null
+}
+const Discover = ({ cat, id, filter }: DiscoverProps) => {
   const divRef = useRef<HTMLDivElement>(null)
   const { data } = useSuspenseQuery({
-    queryKey: [cat + (id ? id : 0)],
+    queryKey: [cat + id],
     queryFn: () =>
       DiscoverMain({
         cat,
-        id: id ? id : 0,
+        id ,
+        filter
       }),
   })
   if (data?.length == 0) {
@@ -35,7 +38,14 @@ const Discover = ({ cat, id }: { cat: categoris; id?: number }) => {
         ref={divRef}
       >
         {data?.map((res, index) => (
-          <DiscoverMainCard id={res.id} cat={cat} title={(res as any).title || (res as any).name} backdropPath={res.backdrop_path!} voteAverage={res.vote_average} key={index} />
+          <DiscoverMainCard
+            id={res.id}
+            cat={cat}
+            title={(res as any).title || (res as any).name}
+            backdropPath={res.backdrop_path!}
+            voteAverage={res.vote_average}
+            key={index}
+          />
         ))}
       </div>
     </div>

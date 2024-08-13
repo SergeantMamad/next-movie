@@ -8,6 +8,9 @@ import { useEffect, useState } from "react"
 import { search } from "@/action"
 import ResultComponent from "./ResultComponent"
 import { customcn } from "@/app/utils/functions/customcn"
+import { useSetParam } from "@/app/utils/hooks/useSetParam"
+import { useSearchParams } from "next/navigation"
+import Link from "next/link"
 
 export default function Search() {
   const [isClicked, setIsClicked] = useState(false)
@@ -16,6 +19,8 @@ export default function Search() {
     mutationKey: ["search"],
     mutationFn: search,
   })
+  useSetParam(searchInput)
+  const searchParam = useSearchParams().get("search")
 
   function handleInput(value: string) {
     if (value == "") {
@@ -37,9 +42,11 @@ export default function Search() {
         onClick={() => setIsClicked((prevState) => !prevState)}
       />
       <input
-        onInput={debounce((e: React.ChangeEvent<HTMLInputElement>) =>
-          setSearchInput(e.target.value),1500)
-        }
+        onInput={debounce(
+          (e: React.ChangeEvent<HTMLInputElement>) =>
+            setSearchInput(e.target.value),
+          1500
+        )}
         className={customcn(
           `w-[500px] h-[30px] p-6 rounded-md outline-none bg-[#08070A] text-lg border border-transparent focus:border-white invisible transition-all duration-1000 opacity-0`,
           isClicked && "transition-all duration-1000 opacity-100 visible"
@@ -52,26 +59,35 @@ export default function Search() {
               Type A Movie Or A TV Show
             </p>
           ) : mutation.data && mutation.data.length > 0 ? (
-            mutation.data.map((result) => (
-              <ResultComponent
-                id={result.id}
-                mediaType={result.media_type!}
-                posterPath={result.poster_path!}
-                title={(result as any).name || result.title}
-                voteAverage={result.vote_average}
-                firstAirDate={
-                  result.media_type == "tv"
-                    ? (result as any).first_air_date
-                    : undefined
-                }
-                releaseDate={
-                  result.media_type == "movie" ? result.release_date : undefined
-                }
-              />
-            ))
+            <>
+              {mutation.data.map((result) => (
+                <ResultComponent
+                  id={result.id}
+                  mediaType={result.media_type!}
+                  posterPath={result.poster_path!}
+                  title={(result as any).name || result.title}
+                  voteAverage={result.vote_average}
+                  firstAirDate={
+                    result.media_type == "tv"
+                      ? (result as any).first_air_date
+                      : undefined
+                  }
+                  releaseDate={
+                    result.media_type == "movie"
+                      ? result.release_date
+                      : undefined
+                  }
+                />
+              ))}
+              <Link href={`searchall/?search=${searchParam}`} className="block text-center w-full p-5 hover:bg-[#0e0c11] rounded-md transition-colors border-gray-900">Search For More</Link>
+            </>
           ) : mutation.data?.length == 0 ? (
             <p className="text-center w-full p-7 block">There is no result</p>
-          ) : mutation.isPending ? <p className="text-center w-full p-7 block">Searching...</p> : <div></div>}
+          ) : mutation.isPending ? (
+            <p className="text-center w-full p-7 block">Searching...</p>
+          ) : (
+            <div></div>
+          )}
         </div>
       )}
     </div>

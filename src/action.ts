@@ -1,11 +1,10 @@
 import createClient, { Middleware } from "openapi-fetch"
-import type { paths } from "../schema"
+import type { operations, paths } from "../schema"
 
-export type categoris = "movie" | "tv" | "anime" | "SimilarMovie" | "SimilarTv"
+export type categoris = "movie" | "tv" | "SimilarMovie" | "SimilarTv"
 export type types = "movie" | "tv" | "TvSeason"
 const AuthMiddleware: Middleware = {
   async onRequest({ request, options }) {
-    // set "foo" header
     request.headers.set(
       "Authorization",
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNTg1MThkYzYzYWJkZTc2ODU0Yzk2ZWQxM2M5NWNlMSIsInN1YiI6IjY1NzQ2ZWJjN2EzYzUyMDBjYTc4YzE3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.o7EsCAMQAr00UlxKw7idJ6YtIoz6o5Yg4rkD9cK-igk"
@@ -47,22 +46,17 @@ export async function TodayPopular() {
 export async function DiscoverMain({
   cat,
   id = 0,
+  filter
 }: {
   cat: categoris
   id: number
+  filter: operations["discover-movie"]['parameters']['query'] | operations['discover-tv']['parameters']['query'] | null
 }) {
   switch (cat) {
     case "movie": {
       const { data } = await client.GET("/3/discover/movie", {
         params: {
-          query: {
-            include_adult: false,
-            include_video: false,
-            language: "en-US",
-            page: 1,
-            primary_release_year: 2023,
-            sort_by: "vote_count.desc",
-          },
+          query: filter as any | {},
         },
       })
       return data?.results
@@ -70,30 +64,7 @@ export async function DiscoverMain({
     case "tv": {
       const { data } = await client.GET("/3/discover/tv", {
         params: {
-          query: {
-            include_adult: false,
-            include_video: false,
-            language: "en-US",
-            page: 1,
-            first_air_date_year: 2023,
-            sort_by: "vote_count.desc",
-          },
-        },
-      })
-      return data?.results
-    }
-    case "anime": {
-      const { data } = await client.GET("/3/discover/tv", {
-        params: {
-          query: {
-            include_adult: false,
-            include_null_first_air_dates: false,
-            language: "en-US",
-            page: 1,
-            with_genres: "16",
-            sort_by: "vote_count.desc",
-            with_origin_country: "JP",
-          },
+          query: filter as any | {}
         },
       })
       return data?.results
@@ -406,4 +377,15 @@ export async function searchall({
     },
   })
   return data?.results?.filter((options) => options.media_type != "person")
+}
+
+export async function SliderItems(listID: number) {
+  const { data } = await client.GET("/3/list/{list_id}", {
+    params: {
+      path: {
+        list_id: listID,
+      },
+    },
+  })
+  return data?.items
 }

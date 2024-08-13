@@ -40,7 +40,7 @@ const HeaderImage = ({
           <Image
             src={`https://image.tmdb.org/t/p/original${backdropPath}`}
             fill
-            className="object-cover h-full"
+            className="object-cover h-full object-top"
             alt="title"
           />
         </div>

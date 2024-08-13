@@ -31,6 +31,7 @@ const MainImages = ({
     queryKey: [type + id + (season ? season : 0) + "pics"],
     queryFn: () => getImages({ type, id, season }),
   })
+
   const imageRef = useRef(null)
 
   const [fullPic, setFullPic] = useState<FullPicType>({

@@ -29,11 +29,7 @@ const TrendingCard = ({
       className={`min-w-[310px] h-[450px] relative cursor-pointer `}
     >
       <Image
-        src={
-          isInSergeantMain
-            ? `${posterPath}`
-            : `https://image.tmdb.org/t/p/original${posterPath}`
-        }
+        src={`https://image.tmdb.org/t/p/w500${posterPath}`}
         fill
         className={`rounded-xl object-cover ${
           slideN == id && "border border-green-500"
@@ -42,7 +38,9 @@ const TrendingCard = ({
       />
       <div className="absolute bottom-5 ml-5">
         <p className="text-white font-bold">{title}</p>
-        {isInSergeantMain == false && <CartDescription mediaType={mediaType} voteAverage={voteAverage} />}
+        {isInSergeantMain == false && (
+          <CartDescription mediaType={mediaType} voteAverage={voteAverage} />
+        )}
       </div>
     </div>
   )

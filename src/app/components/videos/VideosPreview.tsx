@@ -2,14 +2,14 @@ import Image from "next/image"
 
 type VideosPreviewProps = {
     index:number
-    key:string
+    youtubeKey:string
     name:string
     handleVideoClick: (index:number, youtube_key:string) => void
 }
 
 const VideosPreview = ({
     index,
-    key,
+    youtubeKey,
     name,
     handleVideoClick
 }:VideosPreviewProps) => {
@@ -20,8 +20,8 @@ const VideosPreview = ({
           fill
           alt=""
           className="rounded-md object-cover hover:cursor-pointer"
-          src={`https://img.youtube.com/vi/${key}/hqdefault.jpg`}
-          onClick={() => handleVideoClick(index, key)}
+          src={`https://img.youtube.com/vi/${youtubeKey}/hqdefault.jpg`}
+          onClick={() => handleVideoClick(index, youtubeKey)}
         />
       </div>
       <p className="text-white font-bold truncate w-[320px] mx-auto">
