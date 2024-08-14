@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import CartDescription from "../../cartGeneral/CartDescription"
 
-type MoviePopularCardProps = {
+type PopularCardProps = {
   id: number
   index: number
   posterPath: string
@@ -10,26 +10,23 @@ type MoviePopularCardProps = {
   mediaType: string
   voteAverage: number
 }
-const MoviePopularCard = ({
+const PopularCard = ({
   id,
   index,
   posterPath,
   title,
   mediaType,
   voteAverage,
-}: MoviePopularCardProps) => {
+}: PopularCardProps) => {
   return (
-    <Link href={`/movie/${id}`}>
+    <Link href={mediaType == "tv" ? `/series/${id}` :`/movie/${id}`}>
       <div className="min-w-[410px] flex gap-4">
         <p className="my-auto text-white text-4xl font-bold">{index + 1}</p>
         <div className="min-w-[130px] min-h-[170px] w-[130px] h-[170px] relative object-cover">
           <Image
-            src={`https://image.tmdb.org/t/p/original${posterPath}`}
+            src={`https://image.tmdb.org/t/p/w500${posterPath}`}
             fill
-            style={{
-              objectFit: "cover",
-            }}
-            className="rounded-xl"
+            className="rounded-xl object-cover"
             alt="Image of a movie cover"
           />
         </div>
@@ -41,4 +38,4 @@ const MoviePopularCard = ({
     </Link>
   )
 }
-export default MoviePopularCard
+export default PopularCard

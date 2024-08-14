@@ -5,7 +5,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import ScrollButtons from "../../cartGeneral/ScrollButtons";
 
 
-const TodaysTrendingSkeleton = () => {
+const WeekTrendingSkeleton = () => {
   let contents = [];
   const divRef = useRef<HTMLDivElement>(null)
   for (let index = 0; index <= 15; index++) {
@@ -31,4 +31,4 @@ const TodaysTrendingSkeleton = () => {
   );
 };
 
-export default TodaysTrendingSkeleton;
+export default WeekTrendingSkeleton;

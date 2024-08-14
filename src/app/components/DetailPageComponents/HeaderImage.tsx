@@ -18,6 +18,7 @@ type HeaderImageProps = {
   firstAirDate?: string
   numberOfSeasons?: number
   numberOfEpisodes?: number
+  link:string
 }
 
 const HeaderImage = ({
@@ -31,6 +32,7 @@ const HeaderImage = ({
   firstAirDate,
   numberOfSeasons,
   numberOfEpisodes,
+  link
 }: HeaderImageProps) => {
   console.log(isTvSeries)
   return (
@@ -72,7 +74,7 @@ const HeaderImage = ({
               />
             )
           )}
-          <MoreButtonsComponent />
+          <MoreButtonsComponent link={link} />
         </div>
       </div>
     </div>

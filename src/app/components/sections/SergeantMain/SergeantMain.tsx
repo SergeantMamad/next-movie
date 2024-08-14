@@ -1,8 +1,5 @@
 "use client"
-import Image from "next/image"
 import { useState, useRef } from "react"
-import { sergeantSlideObj } from "./sergeantMainSlide"
-import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline"
 import BackImage from "./BackImage"
 import ScrollButtons from "../../cartGeneral/ScrollButtons"
 import TrendingCard from "../TodaysTrending/TrendingCard"
@@ -28,6 +25,8 @@ const SergeantMain = ({listNumber}:{listNumber:number}) => {
               image={slide.backdrop_path!}
               title={slide.original_title!}
               key={index}
+              id={slide.id}
+              mediaType={slide.media_type!}
             />
           ))}
           <div className="absolute left-12 top-28">

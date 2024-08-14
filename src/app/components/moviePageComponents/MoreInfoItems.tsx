@@ -11,7 +11,7 @@ const MoreInfoItems = ({ title, iconTitle,children }: MoreInfoItemsProps) => {
       <IconChange iconType={iconTitle} />
       <div className="flex flex-col gap-3">
         <h1 className="text-white font-semibold text-lg w-full">{title}</h1>
-        <p className="text-gray-500 font-semibold text-sm w-max">{children}</p>
+        <p className="text-gray-500 font-semibold text-sm w-[full]">{children}</p>
       </div>
     </div>
   )

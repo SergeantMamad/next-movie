@@ -1,7 +1,5 @@
 "use client"
-import { useRef, useState } from "react"
-import Image from "next/image"
-import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline"
+import { useRef } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { getCasts, types } from "../../../action"
 import ScrollButtons from "../cartGeneral/ScrollButtons"

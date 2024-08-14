@@ -9,6 +9,7 @@ type TopImdbCartProps = {
   title: string
   voteAverage: number
   overview: string
+  id:number
 }
 const TopImdbMainCart = ({
   backdropPath,
@@ -16,6 +17,7 @@ const TopImdbMainCart = ({
   title,
   voteAverage,
   overview,
+  id,
 }: TopImdbCartProps) => {
   return (
     <div className="w-[680px] flex flex-col gap-8">
@@ -42,7 +44,7 @@ const TopImdbMainCart = ({
       <p className="text-white text-xs line-clamp-4 text-justify w-[645px]">
         {overview}
       </p>
-      <MoreButtonsComponent />
+      <MoreButtonsComponent link={`/movie/${id}`}/>
     </div>
   )
 }

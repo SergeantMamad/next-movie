@@ -30,7 +30,7 @@
   filter: brightness(0.81);
 }
 
-.sergeantSlide img {
+.middleSlide img {
   mask-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 1) 100%,
@@ -42,11 +42,11 @@
   mask-composite: intersect;
 }
 
-.sergeantSlide {
+.middleSlide {
   opacity: 0;
 }
 
-.sergeantSlide.active {
+.middleSlide.active {
   transition: all 1s ease-out;
   opacity: 1;
 }

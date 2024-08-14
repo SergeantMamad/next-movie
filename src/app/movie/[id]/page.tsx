@@ -1,40 +1,49 @@
-"use client";
-import Image from "next/image";
-import { BookmarkIcon } from "@heroicons/react/24/outline";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { createRef, Suspense, useEffect, useState } from "react";
-import Casts from "@/app/components/casts/Casts";
-import { getMovie } from "../../../action";
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import CastsSkeleton from "@/app/components/casts/CastsSkeleton";
-import MainImagesSekelton from "@/app/components/mainImages/MainImagesSekelton";
-import Videos from "@/app/components/videos/Videos";
-import Discover from "@/app/components/sections/Discover/DiscoverMain";
-import DiscoverMainSkeleton from "@/app/components/sections/Discover/DiscoverMainSkeleton";
-import VideosSkeleton from "@/app/components/videos/VideosSkeleton";
-import MainImages from "@/app/components/mainImages/MainImages";
-import NotFound from "@/app/not-found";
-import HeaderImage from "@/app/components/DetailPageComponents/HeaderImage";
-import MoreInfo from "@/app/components/moviePageComponents/MoreInfo";
-import TabItems from "@/app/components/DetailPageComponents/TabItems";
-const Page = ({ params:{id} }:{
-  params:{
-    id:number
+"use client"
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { Suspense, useState } from "react"
+import Casts from "@/app/components/casts/Casts"
+import { getMovie } from "../../../action"
+import "@fortawesome/fontawesome-svg-core/styles.css"
+import CastsSkeleton from "@/app/components/casts/CastsSkeleton"
+import MainImagesSekelton from "@/app/components/mainImages/MainImagesSekelton"
+import Videos from "@/app/components/videos/Videos"
+import Discover from "@/app/components/sections/Discover/DiscoverMain"
+import DiscoverMainSkeleton from "@/app/components/sections/Discover/DiscoverMainSkeleton"
+import VideosSkeleton from "@/app/components/videos/VideosSkeleton"
+import MainImages from "@/app/components/mainImages/MainImages"
+import NotFound from "@/app/not-found"
+import HeaderImage from "@/app/components/DetailPageComponents/HeaderImage"
+import MoreInfo from "@/app/components/moviePageComponents/MoreInfo"
+import TabItems from "@/app/components/DetailPageComponents/TabItems"
+const Page = ({
+  params: { id },
+}: {
+  params: {
+    id: number
   }
 }) => {
-  const [selected, setSelected] = useState("More Info");
+  const [selected, setSelected] = useState("More Info")
 
-  const { data,error } = useSuspenseQuery({
+  const { data, error } = useSuspenseQuery({
     queryKey: ["movie" + id],
     queryFn: () => getMovie(id),
-  });
+  })
   if (error || !data) {
     return <NotFound />
   }
   return (
     <div>
       <title>{data.original_title}</title>
-      <HeaderImage backdropPath={data.backdrop_path!} genres={data.genres!} isTvSeason={false} isTvSeries={false} releaseDate={data.release_date!} title={data.original_title!} runtime={data.runtime}/>
+      <HeaderImage
+        backdropPath={data.backdrop_path!}
+        genres={data.genres!}
+        isTvSeason={false}
+        isTvSeries={false}
+        releaseDate={data.release_date!}
+        title={data.original_title!}
+        runtime={data.runtime}
+        link={data.homepage!}
+      />
       <div className="p-12">
         <div>
           <h1 className="text-white text-lg font-semibold">Overview</h1>
@@ -46,10 +55,22 @@ const Page = ({ params:{id} }:{
             <Casts type="movie" id={id} season={0} />
           </Suspense>
         </div>
-        <TabItems tabItems={["More Info","Pictures","Videos"]} setItem={setSelected} item={selected} />
+        <TabItems
+          tabItems={["More Info", "Pictures", "Videos"]}
+          setItem={setSelected}
+          item={selected}
+        />
         <div className="mt-10">
           <div className={selected === "More Info" ? "block" : "hidden"}>
-            <MoreInfo budget={data.budget} revenue={data.revenue} language={data.original_language!} productionCompanies={data.production_companies!} productionCountries={data.production_countries!} releaseDate={data.release_date!} voteAverage={data.vote_average} />
+            <MoreInfo
+              budget={data.budget}
+              revenue={data.revenue}
+              language={data.original_language!}
+              productionCompanies={data.production_companies!}
+              productionCountries={data.production_countries!}
+              releaseDate={data.release_date!}
+              voteAverage={data.vote_average}
+            />
           </div>
           <div className={selected === "Pictures" ? "block" : "hidden"}>
             <Suspense fallback={<MainImagesSekelton />}>
@@ -73,7 +94,7 @@ const Page = ({ params:{id} }:{
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

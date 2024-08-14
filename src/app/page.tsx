@@ -1,8 +1,5 @@
 import { Suspense } from "react"
-import TodayTrending from "./components/sections/TodaysTrending/TodayTrending"
-import TodaysTrendingSkeleton from "./components/sections/TodaysTrending/TodaysTrendingSkeleton"
-import MoviePopular from "./components/sections/PopularMovieOfDay/MoviePopular"
-import MoviePopularSkeleton from "./components/sections/PopularMovieOfDay/MoviePopularSkeleton"
+import TodayTrending from "./components/sections/TodaysTrending/WeekTrending"
 import SergeantMain from "./components/sections/SergeantMain/SergeantMain"
 import Discover from "./components/sections/Discover/DiscoverMain"
 import DiscoverMainSkeleton from "./components/sections/Discover/DiscoverMainSkeleton"
@@ -12,17 +9,24 @@ import UpTopSkeleton from "./components/sections/UpTop/UpTopSkeleton"
 import TopImdbSkeleton from "./components/sections/TopImdb/TopImdbSkeleton"
 import Slider from "./components/slider/Slider"
 import CustomH1 from "./components/other/CustomH1"
+import SliderSkeleton from "./components/slider/SliderSkeleton"
+import PopularSkeleton from "./components/sections/PopularOfDay/PopularSkeleton"
+import Popular from "./components/sections/PopularOfDay/Popular"
+import WeekTrendingSkeleton from "./components/sections/TodaysTrending/WeekTrendingSkeleton"
+import WeekTrending from "./components/sections/TodaysTrending/WeekTrending"
 export default async function Home() {
   return (
     <>
       <main>
         <div>
-          <Slider listNumber={8309819} />
+          <Suspense fallback={<SliderSkeleton />}>
+            <Slider listNumber={8309819} />
+          </Suspense>
         </div>
         <div className="p-12">
-          <CustomH1 title="Today's Trending" />
-          <Suspense fallback={<TodaysTrendingSkeleton />}>
-            <TodayTrending />
+          <CustomH1 title="This Week's Trending" />
+          <Suspense fallback={<WeekTrendingSkeleton />}>
+            <WeekTrending cat="all" />
           </Suspense>
           <div className="flex justify-between">
             <CustomH1 title="Popular Movie's Of The Day" />
@@ -30,12 +34,14 @@ export default async function Home() {
               Show More
             </button>
           </div>
-          <Suspense fallback={<MoviePopularSkeleton />}>
-            <MoviePopular />
+          <Suspense fallback={<PopularSkeleton />}>
+            <Popular cat="movie" />
           </Suspense>
         </div>
         <div className="mt-10">
-          <SergeantMain listNumber={8309843} />
+          <Suspense fallback={<SliderSkeleton />}>
+            <SergeantMain listNumber={8309843} />
+          </Suspense>
         </div>
         <div className="p-12">
           <div className="flex justify-between">
@@ -45,11 +51,15 @@ export default async function Home() {
             </button>
           </div>
           <Suspense fallback={<DiscoverMainSkeleton />}>
-            <Discover id={0} cat="movie" filter={{
-              sort_by: "vote_count.desc",
-              primary_release_year:2024,
-              page:1
-            }} />
+            <Discover
+              id={0}
+              cat="movie"
+              filter={{
+                sort_by: "vote_count.desc",
+                primary_release_year: 2024,
+                page: 1,
+              }}
+            />
           </Suspense>
           <div className="flex justify-between">
             <CustomH1 title="TV Series" />

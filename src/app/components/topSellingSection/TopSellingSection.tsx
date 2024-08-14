@@ -2,6 +2,7 @@
 import { DiscoverMain } from "@/action"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import Image from "next/image"
+import TopSellingCard from "./TopSellingCard"
 
 const TopSellingSection = () => {
   const { data } = useSuspenseQuery({
@@ -23,18 +24,7 @@ const TopSellingSection = () => {
       {data?.map(
         (res, index) =>
           index <= 2 && (
-            <div className="w-[32%] h-[350px] relative">
-              <Image
-                src={`https://image.tmdb.org/t/p/w780${res.backdrop_path}`}
-                className="object-cover rounded-lg brightness-50"
-                fill
-                alt=""
-              />
-              <div className="absolute flex flex-col pl-5 bottom-3 gap-2">
-                <p className="text-3xl font-bold">{(res as any).title}</p>
-                <p className="text-xs font-semibold">{res.overview}</p>
-              </div>
-            </div>
+            <TopSellingCard backdropPath={res.backdrop_path!} overview={res.overview!} title={(res as any).title} id={res.id} key={index}/>
           )
       )}
     </div>

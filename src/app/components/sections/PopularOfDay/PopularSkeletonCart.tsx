@@ -2,7 +2,7 @@ import { StarIcon } from "@heroicons/react/24/outline"
 import Skeleton from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css";
 
-const MoviePopularSkeletonCart = ({index}:{
+const PopularSkeletonCart = ({index}:{
     index:number
 }) => {
   return (
@@ -37,4 +37,4 @@ const MoviePopularSkeletonCart = ({index}:{
       </div>
   )
 }
-export default MoviePopularSkeletonCart
+export default PopularSkeletonCart

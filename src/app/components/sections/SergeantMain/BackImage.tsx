@@ -7,11 +7,13 @@ type BackImageProps = {
   image: string
   title: string
   desc: string
+  id:number
+  mediaType:string
 }
 
-const BackImage = ({ slideN, index, image, title, desc }: BackImageProps) => {
+const BackImage = ({ slideN, index, image, title, desc,id,mediaType }: BackImageProps) => {
   return (
-    <div className={`sergeantSlide ${slideN == index ? "active" : ""}`}>
+    <div className={`middleSlide ${slideN == index ? "active visible" : "invisible"}`}>
       <Image
         fill
         key={index}
@@ -22,7 +24,7 @@ const BackImage = ({ slideN, index, image, title, desc }: BackImageProps) => {
       <div className="absolute left-12 bottom-48">
         <h1 className="font-bold text-white text-5xl">{title}</h1>
         <p className="text-white text-sm w-1/3 mt-4 text-justify">{desc}</p>
-        <MoreButtonsComponent />
+        <MoreButtonsComponent link={mediaType == "tv" ? `series/${id}` : `/movie/${id}`} />
       </div>
     </div>
   )

@@ -2,26 +2,28 @@
 import React, { useRef } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { TodayPopular } from "@/action"
-import MoviePopularCard from "./MoviePopularCard"
+import PopularCard from "./PopularCard"
 import ScrollButtons from "../../cartGeneral/ScrollButtons"
 
-const MoviePopular = () => {
+const Popular = ({cat}:{
+  cat:"movie" | "tv"
+}) => {
   const divRef = useRef<HTMLDivElement>(null)
   const { data } = useSuspenseQuery({
     queryKey: ["todayPopular"],
-    queryFn: TodayPopular,
+    queryFn: () =>TodayPopular(cat),
   })
   return (
     <div className="relative">
       <ScrollButtons ref={divRef} value={310} />
       <div className="flex mt-10 gap-4 overflow-hidden scroll-smooth Card-Popular" ref={divRef}>
         {data?.map((res, index) => (
-          <MoviePopularCard
+          <PopularCard
             id={res.id}
             index={index}
-            title={res.title!}
+            title={(res as any).title! || (res as any).name!}
             posterPath={res.poster_path!}
-            mediaType="Movie"
+            mediaType={cat}
             voteAverage={res.vote_average}
             key={index}
           />
@@ -31,4 +33,4 @@ const MoviePopular = () => {
   )
 }
 
-export default MoviePopular
+export default Popular

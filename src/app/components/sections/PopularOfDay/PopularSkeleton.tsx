@@ -1,5 +1,5 @@
-import MoviePopularSkeletonCart from "./MoviePopularSkeletonCart";
-const MoviePopularSkeleton = () => {
+import MoviePopularSkeletonCart from "./PopularSkeletonCart";
+const PopularSkeleton = () => {
   let contents = [];
   for (let index = 0; index <= 15; index++) {
     contents.push(
@@ -15,4 +15,4 @@ const MoviePopularSkeleton = () => {
   );
 };
 
-export default MoviePopularSkeleton;
+export default PopularSkeleton;

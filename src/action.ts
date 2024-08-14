@@ -24,33 +24,86 @@ const options = {
 const client = createClient<paths>({ baseUrl: "https://api.themoviedb.org" })
 client.use(AuthMiddleware)
 
-export async function MainTodayTrending() {
-  const { data, error } = await client.GET("/3/trending/all/{time_window}", {
-    params: {
-      path: {
-        time_window: "day",
-      },
-      query: {
-        language: "en-US",
-      },
-    },
-  })
-  return data?.results
+export async function MainWeekTrending(category: "movie" | "tv" | "all") {
+  switch (category) {
+    case "movie": {
+      const { data } = await client.GET("/3/trending/movie/{time_window}", {
+        params: {
+          path: {
+            time_window: "day",
+          },
+          query: {
+            language: "en-US",
+          },
+        },
+      })
+      return data?.results
+    }
+    case "tv": {
+      const { data } = await client.GET("/3/trending/tv/{time_window}", {
+        params: {
+          path: {
+            time_window: "day",
+          },
+          query: {
+            language: "en-US",
+          },
+        },
+      })
+      return data?.results
+    }
+    case "all": {
+      const { data } = await client.GET("/3/trending/all/{time_window}", {
+        params: {
+          path: {
+            time_window: "day",
+          },
+          query: {
+            language: "en-US",
+          },
+        },
+      })
+      return data?.results
+    }
+  }
 }
 
-export async function TodayPopular() {
-  const { data } = await client.GET("/3/movie/popular")
-  return data?.results?.slice(0, 9)
+export async function TodayPopular(category: "movie" | "tv") {
+  switch (category) {
+    case "movie": {
+      const { data } = await client.GET("/3/movie/popular", {
+        params: {
+          query: {
+            language: "en-US",
+          },
+        },
+      })
+      return data?.results?.slice(0, 9)
+    }
+    case "tv": {
+      const { data } = await client.GET("/3/tv/popular", {
+        params: {
+          query: {
+            language: "en-US",
+          },
+        },
+      })
+      return data?.results?.slice(0, 9)
+    }
+  }
 }
 
 export async function DiscoverMain({
   cat,
   id = 0,
-  filter
+  filter,
 }: {
   cat: categoris
   id: number
-  filter: operations["discover-movie"]['parameters']['query'] | operations['discover-tv']['parameters']['query'] | null
+  filter:
+    | operations["discover-movie"]["parameters"]["query"]
+    | operations["discover-tv"]["parameters"]["query"]
+    | null
 }) {
   switch (cat) {
     case "movie": {
@@ -64,7 +117,7 @@ export async function DiscoverMain({
     case "tv": {
       const { data } = await client.GET("/3/discover/tv", {
         params: {
-          query: filter as any | {}
+          query: filter as any | {},
         },
       })
       return data?.results
@@ -388,4 +441,13 @@ export async function SliderItems(listID: number) {
     },
   })
   return data?.items
+}
+
+export async function getCategories(mainCategory: "tv" | "movie") {
+  switch (mainCategory) {
+    case "movie": {
+      const { data } = await client.GET("/3/genre/movie/list")
+      return data?.genres
+    }
+  }
 }

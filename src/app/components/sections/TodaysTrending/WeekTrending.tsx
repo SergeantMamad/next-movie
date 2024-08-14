@@ -1,16 +1,18 @@
 "use client";
-import { MainTodayTrending } from "@/action";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { MainWeekTrending } from "@/action";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import TrendingCard from "./TrendingCard";
 import { useRef } from "react";
 import ScrollButtons from "../../cartGeneral/ScrollButtons";
 
 
-const TodayTrending = () => {
+const WeekTrending = ({cat}:{
+  cat: "movie" | "tv" | "all"
+}) => {
   const DivElement = useRef<HTMLDivElement>(null)
   const { data } = useSuspenseQuery({
-    queryKey: ["todayTrending"],
-    queryFn: MainTodayTrending,
+    queryKey: ["WeekTrending" + cat],
+    queryFn: () => MainWeekTrending(cat),
   });
   return (
     <div className="relative">
@@ -18,7 +20,7 @@ const TodayTrending = () => {
       <div className="flex mt-10 gap-4 overflow-hidden scroll-smooth cards" ref={DivElement}>
         {data?.map((res, index) =>
           res.vote_average == 0.0 ? null : (
-            <TrendingCard id={res.id} mediaType={res.media_type!} posterPath={res.poster_path!} title={res.title! || (res as any).name} voteAverage={res.vote_average} isInSergeantMain={false} key={index} />
+            <TrendingCard id={res.id} mediaType={res.media_type!} posterPath={res.poster_path!} title={(res as any).title! || (res as any).name} voteAverage={res.vote_average} isInSergeantMain={false} key={index} />
           )
         )}
        
@@ -28,4 +30,4 @@ const TodayTrending = () => {
   
 };
 
-export default TodayTrending;
+export default WeekTrending;
