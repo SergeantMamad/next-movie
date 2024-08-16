@@ -32,7 +32,7 @@ const MainImages = ({
     queryFn: () => getImages({ type, id, season }),
   })
 
-  const imageRef = useRef(null)
+  const imageRef = useRef<HTMLDivElement>(null)
 
   const [fullPic, setFullPic] = useState<FullPicType>({
     index: 0,
@@ -49,10 +49,10 @@ const MainImages = ({
 
   return (
     <>
-      <div className="relative flex items-center mt-10">
+      <div className="relative">
         <ScrollButtons ref={imageRef} value={325} />
         <div
-          className="flex overflow-hidden scroll-smooth gap-3"
+          className="flex mt-4 gap-4 overflow-hidden scroll-smooth"
           ref={imageRef}
         >
           {data?.map((images, index) => (

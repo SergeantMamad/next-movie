@@ -24,12 +24,14 @@ const Recommendations = ({ mainCategory }: mainCategory) => {
     queryKey: [mainCategory + currentCategory],
     queryFn: () =>
       DiscoverMain({
-        cat: "movie",
+        cat: mainCategory,
         id: 0,
         filter: {
           with_genres: currentCategory.toString(),
           "primary_release_date.gte": "2010-01-01",
           "primary_release_date.lte": "2024-12-30",
+          "first_air_date.gte":"2000-01-01",
+          "first_air_date.lte": "2024-12-30",
           sort_by: "vote_count.desc",
         },
       }),
@@ -48,7 +50,7 @@ const Recommendations = ({ mainCategory }: mainCategory) => {
               backdropPath={movie.backdrop_path!}
               slide={slide}
               index={index}
-              title={(movie as any)?.title}
+              title={(movie as any)?.title || (movie as any).name}
               voteAverage={movie.vote_average}
               key={index}
               genres={getAllCategories
@@ -56,8 +58,8 @@ const Recommendations = ({ mainCategory }: mainCategory) => {
                   movie.genre_ids?.includes(category.id)
                 )
                 .map((category) => category.name)}
-              releaseDate={(movie as any).release_date}
-              mediaType={(movie as any).media_type}
+              releaseDate={(movie as any).release_date || (movie as any).first_air_date}
+              mediaType={mainCategory}
               id={movie.id}
             />
           ))

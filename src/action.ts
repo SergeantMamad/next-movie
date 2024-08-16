@@ -449,5 +449,31 @@ export async function getCategories(mainCategory: "tv" | "movie") {
       const { data } = await client.GET("/3/genre/movie/list")
       return data?.genres
     }
+    case "tv": {
+      const { data } = await client.GET("/3/genre/tv/list")
+      return data?.genres
+    }
   }
+}
+
+export async function getActor(id: number) {
+  const { data } = await client.GET("/3/person/{person_id}", {
+    params: {
+      path: {
+        person_id: id,
+      },
+    },
+  })
+  return data
+}
+
+export async function getActorCredits(id: string) {
+  const { data } = await client.GET("/3/person/{person_id}/combined_credits", {
+    params: {
+      path: {
+        person_id: id,
+      },
+    },
+  })
+  return data
 }

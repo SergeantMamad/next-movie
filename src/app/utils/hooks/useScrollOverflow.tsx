@@ -4,10 +4,19 @@ const useScrollOverflow = (ref: ForwardedRef<HTMLDivElement>) => {
   const [canScrollLeft, setCanScrollLeft] = useState<boolean>(false);
   const [canScrollRight, setCanScrollRight] = useState<boolean>(false);
 
+  const getRefElement = (): HTMLDivElement | null => {
+    if (typeof ref === 'function') {
+      return null; // If it's a function, you would normally not use this pattern
+    } else if (ref && 'current' in ref) {
+      return ref.current;
+    }
+    return null;
+  };
+
   const checkOverflow = () => {
-    const currentRef = ref as MutableRefObject<HTMLDivElement | null>;
-    if (currentRef?.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = currentRef.current;
+    const element = getRefElement();
+    if (element) {
+      const { scrollLeft, scrollWidth, clientWidth } = element;
       setCanScrollLeft(scrollLeft > 0);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
     }
@@ -15,15 +24,16 @@ const useScrollOverflow = (ref: ForwardedRef<HTMLDivElement>) => {
 
   useEffect(() => {
     checkOverflow();
-    const currentRef = ref as MutableRefObject<HTMLDivElement | null>;
-    if (currentRef?.current) {
-      currentRef.current.addEventListener("scroll", checkOverflow);
+    const element = getRefElement();
+    if (element) {
+      element.addEventListener("scroll", checkOverflow);
       window.addEventListener("resize", checkOverflow);
     }
 
     return () => {
-      if (currentRef?.current) {
-        currentRef.current.removeEventListener("scroll", checkOverflow);
+      const element = getRefElement();
+      if (element) {
+        element.removeEventListener("scroll", checkOverflow);
       }
       window.removeEventListener("resize", checkOverflow);
     };

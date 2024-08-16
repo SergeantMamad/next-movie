@@ -13,7 +13,6 @@ const CastsCard = ({
     character,
     roles
 }:CastsCardProps) => {
-    console.log(profilePath)
   return (
     <div className="flex items-center gap-3 min-w-[500px]">
       <div className="w-[90px] h-[90px] rounded-full relative">

@@ -19,6 +19,7 @@ type HeaderImageProps = {
   numberOfSeasons?: number
   numberOfEpisodes?: number
   link:string
+  mediaType: "TV" | "Movie" | "TV Season"
 }
 
 const HeaderImage = ({
@@ -32,7 +33,8 @@ const HeaderImage = ({
   firstAirDate,
   numberOfSeasons,
   numberOfEpisodes,
-  link
+  link,
+  mediaType
 }: HeaderImageProps) => {
   console.log(isTvSeries)
   return (
@@ -48,7 +50,7 @@ const HeaderImage = ({
         </div>
         <div className="absolute grid grid-cols-1 gap-6 left-12 bottom-20">
           <p className="py-1 px-4 rounded-[20px] border border-gray-500 bg-black text-white w-fit font-medium text-xs">
-            Movie
+            {mediaType}
           </p>
           <h1 className="font-bold text-white text-4xl">{title}</h1>
           {isTvSeries == false && (

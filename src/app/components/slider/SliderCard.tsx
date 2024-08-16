@@ -19,7 +19,7 @@ const SliderCard = ({ title, desc, image, slideN, index,id,mediaType }: SliderCa
         <h1 className="font-bold text-white text-4xl">{title}</h1>
         <p className="text-white text-sm w-1/3 mt-4 text-justify">{desc}</p>
         <div className="flex gap-4">
-          <MoreButtonsComponent link={mediaType == "tv" ? `series/${id}` : `/movie/${id}`} />
+          <MoreButtonsComponent link={mediaType == "tv" ? `../series/${id}` : `../movie/${id}`} />
         </div>
       </div>
     </div>

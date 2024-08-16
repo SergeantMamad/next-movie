@@ -3,20 +3,9 @@ import { getSeason, getSeries } from "@/action"
 import Casts from "@/app/components/casts/Casts"
 import NotFound from "@/app/not-found"
 import CastsSkeleton from "@/app/components/casts/CastsSkeleton"
-import Episodes from "@/app/components/episodes/Episodes"
-import EpisodesSkeleton from "@/app/components/episodes/EpisodesSkeleton"
-import MainImages from "@/app/components/mainImages/MainImages"
-import MainImagesSekelton from "@/app/components/mainImages/MainImagesSekelton"
-import Videos from "@/app/components/videos/Videos"
-import VideosSkeleton from "@/app/components/videos/VideosSkeleton"
-import { select, Select, SelectItem } from "@nextui-org/react"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import Image from "next/image"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import React, { Suspense, useEffect, useState } from "react"
+import React, { Suspense, useState } from "react"
 import HeaderImage from "@/app/components/DetailPageComponents/HeaderImage"
-import SelectBox from "@/app/components/seriesPageComponent/SelectBox"
 import TabItems from "@/app/components/DetailPageComponents/TabItems"
 import { useRouteToSeason } from "@/app/utils/hooks/useRouteToSeason"
 
@@ -67,6 +56,8 @@ const Page = ({
         firstAirDate={episodeData.data.air_date}
         title={`${seasonData.data.name} Season ${season}`}
         numberOfEpisodes={episodeData.data.episodes?.length}
+        link={seasonData.data.homepage!}
+        mediaType="TV"
       />
       <div className="p-12">
         <div>
@@ -87,35 +78,13 @@ const Page = ({
           tabItems={["Episodes", "Pictures", "Videos"]}
           item={tabItem}
           setItem={setTabItem}
+          episodes={episodeData.data.episodes!}
+          id={id}
+          mediaType="TvSeason"
+          season={currentSeason.season}
+          seasons={seasons}
+
         />
-        <div
-          className={`relative ${tabItem === "Episodes" ? `block` : `hidden`}`}
-        >
-          <SelectBox
-            className="static ml-auto"
-            season={currentSeason.season}
-            seasons={seasons}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-              setCurrentSeason({
-                season: e.target.value,
-                selected: true,
-              })
-            }
-          />
-          <Suspense fallback={<EpisodesSkeleton />}>
-            <Episodes episodes={episodeData.data.episodes!} />
-          </Suspense>
-        </div>
-        <div className={tabItem === "Pictures" ? "block" : "hidden"}>
-          <Suspense fallback={<MainImagesSekelton />}>
-            <MainImages type="TvSeason" id={id} season={season} />
-          </Suspense>
-        </div>
-        <div className={tabItem === "Videos" ? "block" : "hidden"}>
-          <Suspense fallback={<VideosSkeleton />}>
-            <Videos type="TvSeason" id={id} season={season} />
-          </Suspense>
-        </div>
       </div>
     </div>
   )

@@ -12,7 +12,7 @@ const MainImagesPreview = ({
   filePath,
 }: MainImagesPreviewProps) => {
   return (
-    <div className="w-[300px] h-[200px] min-w-[300px] relative">
+    <div className="h-[200px] min-w-[300px] relative">
       <Image
         fill
         alt=""

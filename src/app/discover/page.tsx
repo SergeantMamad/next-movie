@@ -8,7 +8,7 @@ const Page = () => {
       <Link href="discover/movies" className="relative bg-green-500 h-screen left_pic w-1/2">
           <Image
             fill
-            src="/images/LeftPic.jpg"
+            src="https://image.tmdb.org/t/p/original/7I6VUdPj6tQECNHdviJkUHD2u89.jpg"
             className="object-cover mix-blend-multiply"
             alt=""
           />
@@ -19,7 +19,7 @@ const Page = () => {
       <Link href="discover/series" className="relative bg-red-600 h-screen right_pic w-1/2">
         <Image
           fill
-          src="/images/RightPic.jpg"
+          src="https://image.tmdb.org/t/p/original/vFxjuhENDjEKzWXUGKmRFct15bA.jpg"
           className="object-cover mix-blend-multiply"
           alt=""
         />

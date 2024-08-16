@@ -1,17 +1,18 @@
-import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
-import useScrollOverflow from "@/app/utils/hooks/useScrollOverflow"
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
-import { ForwardedRef, forwardRef } from "react"
+import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight";
+import useScrollOverflow from "@/app/utils/hooks/useScrollOverflow";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { ForwardedRef, forwardRef } from "react";
 
 const ScrollButtons = (
   {
     value,
   }: {
-    value: number
+    value: number;
   },
   ref: ForwardedRef<HTMLDivElement>
 ) => {
-  const { canScrollLeft, canScrollRight } = useScrollOverflow(ref)
+  const { canScrollLeft, canScrollRight } = useScrollOverflow(ref);
+
   return (
     <>
       {canScrollRight && (
@@ -31,6 +32,7 @@ const ScrollButtons = (
         </button>
       )}
     </>
-  )
-}
-export default forwardRef(ScrollButtons)
+  );
+};
+
+export default forwardRef(ScrollButtons);

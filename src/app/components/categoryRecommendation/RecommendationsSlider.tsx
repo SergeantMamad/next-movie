@@ -44,7 +44,7 @@ const RecommendationsSlider = ({
             voteAverage={voteAverage}
             releaseDate={releaseDate}
           />
-          <MoreButtonsComponent link={mediaType == "tv" ? `series/${id}` : `/movie/${id}`} />
+          <MoreButtonsComponent link={mediaType == "tv" ? `/series/${id}` : `/movie/${id}`} />
         </div>
       </div>
     </>
