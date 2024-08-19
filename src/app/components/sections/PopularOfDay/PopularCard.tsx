@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import CartDescription from "../../cartGeneral/CartDescription"
+import GenreDescription from "../../cartGeneral/GenreDescription"
 
 type PopularCardProps = {
   id: number
@@ -9,6 +10,7 @@ type PopularCardProps = {
   title: string
   mediaType: string
   voteAverage: number
+  genres: number[]
 }
 const PopularCard = ({
   id,
@@ -17,6 +19,7 @@ const PopularCard = ({
   title,
   mediaType,
   voteAverage,
+  genres
 }: PopularCardProps) => {
   return (
     <Link href={mediaType == "tv" ? `/series/${id}` :`/movie/${id}`}>
@@ -32,7 +35,8 @@ const PopularCard = ({
         </div>
         <div className="flex flex-col gap-4 justify-center">
           <p className="font-bold text-white">{title}</p>
-          <CartDescription mediaType={mediaType} voteAverage={voteAverage} />
+          <GenreDescription genres={genres} mediaType={mediaType}/>
+          <CartDescription mediaType={mediaType} voteAverage={voteAverage} genres={undefined} />
         </div>
       </div>
     </Link>

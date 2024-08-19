@@ -26,6 +26,7 @@ const Popular = ({cat}:{
             mediaType={cat}
             voteAverage={res.vote_average}
             key={index}
+            genres={res.genre_ids!}
           />
         ))}
       </div>

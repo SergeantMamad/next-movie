@@ -2,6 +2,7 @@ import { StarIcon } from "@heroicons/react/24/solid"
 import MoreButtonsComponent from "../../cartGeneral/MoreButtonsComponent"
 import Image from "next/image"
 import { dateConvertor } from "@/app/utils/functions/dateConvertor"
+import CartDescription from "../../cartGeneral/CartDescription"
 
 type TopImdbCartProps = {
   backdropPath: string
@@ -10,6 +11,7 @@ type TopImdbCartProps = {
   voteAverage: number
   overview: string
   id:number
+  genres:number[]
 }
 const TopImdbMainCart = ({
   backdropPath,
@@ -18,6 +20,7 @@ const TopImdbMainCart = ({
   voteAverage,
   overview,
   id,
+  genres
 }: TopImdbCartProps) => {
   return (
     <div className="w-[680px] flex flex-col gap-8">
@@ -35,12 +38,7 @@ const TopImdbMainCart = ({
         {`Release Date : ${dateConvertor(releaseDate)}`}
       </p>
       <h1 className="font-bold text-5xl text-white">{title}</h1>
-      <div className="flex gap-2">
-        <StarIcon className="w-5 h-5 text-yellow-400" />
-        <p className="text-white text-xs font-bold mt-auto">
-          {voteAverage.toFixed(1)}
-        </p>
-      </div>
+      <CartDescription mediaType="movie" genres={genres} voteAverage={voteAverage}/>
       <p className="text-white text-xs line-clamp-4 text-justify w-[645px]">
         {overview}
       </p>

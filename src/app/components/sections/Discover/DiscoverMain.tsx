@@ -44,6 +44,8 @@ const Discover = ({ cat, id, filter }: DiscoverProps) => {
             title={(res as any).title || (res as any).name}
             backdropPath={res.backdrop_path!}
             voteAverage={res.vote_average}
+            mediaType={cat}
+            genres={res.genre_ids!}
             key={index}
           />
         ))}

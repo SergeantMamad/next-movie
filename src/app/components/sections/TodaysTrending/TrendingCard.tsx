@@ -10,6 +10,7 @@ type TrendingCardProps = {
   posterPath: string
   title: string
   voteAverage: number
+  genres:number[]
   isInSergeantMain: boolean
   onClick?: () => void
 }
@@ -21,6 +22,7 @@ const TrendingCard = ({
   posterPath,
   title,
   voteAverage,
+  genres,
   isInSergeantMain,
   onClick,
 }: TrendingCardProps) => {
@@ -36,10 +38,8 @@ const TrendingCard = ({
         alt=""
       />
       <div className="absolute bottom-5 ml-5">
-        <p className="text-white font-bold">{title}</p>
-        {isInSergeantMain == false && (
-          <CartDescription mediaType={mediaType} voteAverage={voteAverage} />
-        )}
+        <p className="text-white font-bold mb-2">{title}</p>
+          <CartDescription mediaType={mediaType} voteAverage={voteAverage} genres={genres} />
       </div>
     </div>
   )

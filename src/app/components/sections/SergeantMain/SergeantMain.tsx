@@ -23,7 +23,7 @@ const SergeantMain = ({listNumber}:{listNumber:number}) => {
               slideN={slideN}
               desc={slide.overview!}
               image={slide.backdrop_path!}
-              title={slide.original_title!}
+              title={slide.title || (slide as any).name}
               key={index}
               id={slide.id}
               mediaType={slide.media_type!}
@@ -49,12 +49,13 @@ const SergeantMain = ({listNumber}:{listNumber:number}) => {
                     onClick={() => setSlideN(index)}
                     id={index}
                     slideN={slideN}
-                    mediaType=""
-                    title={slide.original_title!}
+                    mediaType={slide.media_type!}
+                    title={slide.title || (slide as any).name}
                     posterPath={slide.poster_path!}
-                    voteAverage={0}
+                    voteAverage={slide.vote_average}
                     isInSergeantMain={true}
                     key={index}
+                    genres={slide.genre_ids!}
                   />
                 ))}
               </div>

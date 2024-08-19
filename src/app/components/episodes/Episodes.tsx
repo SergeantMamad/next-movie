@@ -1,6 +1,5 @@
 "use client"
-import { useRef, useState } from "react"
-import Image from "next/image"
+import { useRef } from "react"
 import ScrollButtons from "../cartGeneral/ScrollButtons"
 import EpisodesCard from "./EpisodesCard"
 import { operations } from "../../../../schema"

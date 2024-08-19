@@ -8,6 +8,13 @@ module.exports = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        CustomGray: "#767f87",
+      },
+    },
+  },
   plugins: [
     nextui({
       themes: {
@@ -21,7 +28,7 @@ module.exports = {
           },
         },
       },
-      addCommonColors:true
+      addCommonColors: true,
     }),
   ],
 }

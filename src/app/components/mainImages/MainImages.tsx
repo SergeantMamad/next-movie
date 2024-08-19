@@ -7,6 +7,7 @@ import ScrollButtons from "../cartGeneral/ScrollButtons"
 import MainImagesPreview from "./MainImagesPreview"
 import { useSetPicList } from "@/app/utils/hooks/useSetPicList"
 import MainImagesFullScreen from "./MainImagesFullScreen"
+import { customcn } from "@/app/utils/functions/customcn"
 
 export type PicListProps = {
   index: number
@@ -52,13 +53,14 @@ const MainImages = ({
       <div className="relative">
         <ScrollButtons ref={imageRef} value={325} />
         <div
-          className="flex mt-4 gap-4 overflow-hidden scroll-smooth"
+          className={customcn("flex mt-4 gap-4 overflow-hidden scroll-smooth",type == "actor" && "grid grid-cols-6")}
           ref={imageRef}
         >
           {data?.map((images, index) => (
             <MainImagesPreview
               handleImageClick={handleImageClick}
               filePath={images.file_path!}
+              type={type}
               index={index}
               key={index}
             />

@@ -11,6 +11,7 @@ import { customcn } from "@/app/utils/functions/customcn"
 import { useSetParam } from "@/app/utils/hooks/useSetParam"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
+import BouncingCircles from "../other/BouncingCircles"
 
 export default function Search() {
   const [isClicked, setIsClicked] = useState(false)
@@ -48,7 +49,7 @@ export default function Search() {
           1500
         )}
         className={customcn(
-          `w-[500px] h-[30px] p-6 rounded-md outline-none bg-[#08070A] text-lg border border-transparent focus:border-white invisible transition-all duration-1000 opacity-0`,
+          `w-[500px] h-[30px] p-6 rounded-md outline-none bg-[#08070A] text-lg border border-transparent focus:border-gray-800 invisible transition-all duration-1000 opacity-0`,
           isClicked && "transition-all duration-1000 opacity-100 visible"
         )}
       />
@@ -77,6 +78,8 @@ export default function Search() {
                       ? result.release_date
                       : undefined
                   }
+                  genres={result.genre_ids!}
+                  isInSearch={true}
                 />
               ))}
               <Link href={`searchall/?search=${searchParam}`} className="block text-center w-full p-5 hover:bg-[#0e0c11] rounded-md transition-colors border-gray-900">Search For More</Link>
@@ -84,7 +87,7 @@ export default function Search() {
           ) : mutation.data?.length == 0 ? (
             <p className="text-center w-full p-7 block">There is no result</p>
           ) : mutation.isPending ? (
-            <p className="text-center w-full p-7 block">Searching...</p>
+            <BouncingCircles />
           ) : (
             <div></div>
           )}

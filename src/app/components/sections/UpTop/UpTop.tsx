@@ -23,7 +23,7 @@ const UpTop = ({ cat }:{cat:string}) => {
         ref={topSelling}
       >
         {data?.map((res, index) => (
-          <UpTopCard id={res.id} mediaType={"Movie"} voteAverage={res.vote_average} posterPath={res.poster_path!} title={res.title!} key={index}/>
+          <UpTopCard id={res.id} mediaType={"movie"} voteAverage={res.vote_average} posterPath={res.poster_path!} title={res.title!} genres={res.genre_ids!} key={index}/>
         ))}
       </div>
     </div>

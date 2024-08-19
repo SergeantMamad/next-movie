@@ -1,6 +1,6 @@
-import { StarIcon } from "@heroicons/react/24/solid"
 import Image from "next/image"
 import Link from "next/link"
+import CartDescription from "../../cartGeneral/CartDescription"
 
 type DiscoverMainCardProps = {
   cat: "movie" | "tv" | "SimilarMovie" | "SimilarTv" | "anime"
@@ -8,6 +8,8 @@ type DiscoverMainCardProps = {
   backdropPath: string
   voteAverage: number
   title: string
+  mediaType:string
+  genres: number[]
 }
 const DiscoverMainCard = ({
   cat,
@@ -15,6 +17,8 @@ const DiscoverMainCard = ({
   backdropPath,
   voteAverage,
   title,
+  mediaType,
+  genres
 }: DiscoverMainCardProps) => {
   return (
     <Link
@@ -37,12 +41,7 @@ const DiscoverMainCard = ({
           />
         </div>
         <p className="font-bold text-white truncate w-[290px]">{title}</p>
-        <div className="flex gap-2">
-          <StarIcon className="w-5 h-5 text-yellow-400" />
-          <p className="text-white text-xs font-bold mt-auto">
-            {voteAverage.toFixed(1)}
-          </p>
-        </div>
+        <CartDescription genres={genres} mediaType={mediaType} voteAverage={voteAverage} />
       </div>
     </Link>
   )

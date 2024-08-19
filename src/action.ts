@@ -2,7 +2,7 @@ import createClient, { Middleware } from "openapi-fetch"
 import type { operations, paths } from "../schema"
 
 export type categoris = "movie" | "tv" | "SimilarMovie" | "SimilarTv"
-export type types = "movie" | "tv" | "TvSeason"
+export type types = "movie" | "tv" | "TvSeason" | "actor"
 const AuthMiddleware: Middleware = {
   async onRequest({ request, options }) {
     request.headers.set(
@@ -314,6 +314,18 @@ export async function getImages({
         (iso) => iso.iso_639_1 == "en" || iso.iso_639_1 == null
       )
     }
+    case "actor": {
+      const { data } = await client.GET("/3/person/{person_id}/images", {
+        params: {
+          path: {
+            person_id: id,
+          },
+        },
+      })
+      return data?.profiles?.filter(
+        (iso) => iso.iso_639_1 == "en" || iso.iso_639_1 == null
+      )
+    }
   }
 }
 
@@ -456,19 +468,39 @@ export async function getCategories(mainCategory: "tv" | "movie") {
   }
 }
 
-export async function getActor(id: number) {
+export async function getActor(id: number):Promise<{
+  adult: boolean;
+  also_known_as?: string[];
+  biography?: string;
+  birthday?: string;
+  deathday?: string;
+  gender: number;
+  homepage?: unknown;
+  id: number;
+  imdb_id?: string;
+  known_for_department?: string;
+  name?: string;
+  place_of_birth?: string;
+  popularity: number;
+  profile_path?: string;
+  combined_credits:operations['person-combined-credits']['responses']['200']['content']['application/json']
+} | undefined>
+ {
   const { data } = await client.GET("/3/person/{person_id}", {
     params: {
       path: {
         person_id: id,
       },
+      query: {
+        append_to_response: "combined_credits",
+      },
     },
   })
-  return data
+  return data as any
 }
 
-export async function getActorCredits(id: string) {
-  const { data } = await client.GET("/3/person/{person_id}/combined_credits", {
+export async function getActorPictures(id: number) {
+  const { data } = await client.GET("/3/person/{person_id}/images", {
     params: {
       path: {
         person_id: id,

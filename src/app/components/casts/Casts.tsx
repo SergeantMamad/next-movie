@@ -28,7 +28,7 @@ const Casts = ({
         ref={divRef}
       >
         {data?.map((cast, index) => (
-          <CastsCard name={cast.name!} profilePath={cast?.profile_path} character={(cast as any)?.character} roles={(cast as any)?.roles} key={index}/>
+          <CastsCard name={cast.name!} profilePath={cast?.profile_path} character={(cast as any)?.character} roles={(cast as any)?.roles} key={index} id={cast.id}/>
         ))}
       </div>
     </div>

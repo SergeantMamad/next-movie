@@ -27,7 +27,7 @@ const TopImdbMain = () => {
       >
         <ScrollButtons ref={divRef} value={680} />
         {data?.map((res, index) => (
-          <TopImdbMainCart backdropPath={res.backdrop_path!} overview={res.overview!} releaseDate={res.release_date!} title={res.title!} voteAverage={res.vote_average} id={res.id} />
+          <TopImdbMainCart backdropPath={res.backdrop_path!} overview={res.overview!} releaseDate={res.release_date!} title={res.title!} voteAverage={res.vote_average} genres={res.genre_ids!} id={res.id} />
         ))}
       </div>
     </div>

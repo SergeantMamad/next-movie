@@ -20,7 +20,7 @@ const WeekTrending = ({cat}:{
       <div className="flex mt-10 gap-4 overflow-hidden scroll-smooth cards" ref={DivElement}>
         {data?.map((res, index) =>
           res.vote_average == 0.0 ? null : (
-            <TrendingCard id={res.id} mediaType={res.media_type!} posterPath={res.poster_path!} title={(res as any).title! || (res as any).name} voteAverage={res.vote_average} isInSergeantMain={false} key={index} />
+            <TrendingCard id={res.id} mediaType={res.media_type!} posterPath={res.poster_path!} title={(res as any).title! || (res as any).name} voteAverage={res.vote_average} isInSergeantMain={false} key={index} genres={res.genre_ids!} />
           )
         )}
        
