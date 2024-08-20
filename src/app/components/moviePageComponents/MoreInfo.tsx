@@ -29,7 +29,7 @@ const MoreInfo = ({
   productionCompanies,
 }: MoreInfoProp) => {
   return (
-    <div className="grid grid-cols-4 gap-y-7">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-y-7">
       <MoreInfoItems iconTitle="budget" title="Budget">
         {budget.toLocaleString()}
       </MoreInfoItems>

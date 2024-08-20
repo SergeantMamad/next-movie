@@ -34,7 +34,7 @@ const ActorModal = ({
   return (
     <Modal
       isOpen={isOpen}
-      placement={"center"}
+      placement={"auto"}
       onOpenChange={onOpenChange}
       scrollBehavior="inside"
       classNames={{

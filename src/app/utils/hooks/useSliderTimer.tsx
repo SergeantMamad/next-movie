@@ -11,6 +11,6 @@ export function useSliderTimer(time: number, sliderLength: number) {
     return () => {
       clearInterval(Timer)
     }
-  }, [slide])
+  }, [slide,sliderLength,time])
   return [slide,setSlide] as const
 }

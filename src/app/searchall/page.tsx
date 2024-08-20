@@ -9,7 +9,7 @@ import { useSearchInfiniteQuery } from "../utils/hooks/useSearchInfiniteQuery"
 import { useSetParam } from "../utils/hooks/useSetParam"
 import { useSearchParams } from "next/navigation"
 
-const page = () => {
+const Page = () => {
   const { ref, inView } = useInView()
   const params = useSearchParams()
   const [searchParam, setSearchParam] = useState(params.get("search") || "")
@@ -35,6 +35,8 @@ const page = () => {
               posterPath={res.poster_path!}
               title={res.title! || (res as any).name}
               voteAverage={res.vote_average}
+              genres={res.genre_ids!}
+              key={index}
             />
           )
         }
@@ -46,6 +48,8 @@ const page = () => {
             posterPath={res.poster_path!}
             title={res.title! || (res as any).name}
             voteAverage={res.vote_average}
+            genres={res.genre_ids!}
+            key={index}
           />
         )
       })
@@ -83,4 +87,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

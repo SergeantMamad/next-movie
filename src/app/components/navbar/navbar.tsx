@@ -9,23 +9,12 @@ import Search from "../search/Search"
 const Navbar = () => {
   const pathName = usePathname()
   return (
-    <div className="absolute z-40 text-white w-full p-10">
-      <div className="flex justify-between">
-        <div className={`flex text-4xl ${logoFont.className}`}>
-          <p className="tracking-widest">NEXT</p>
-          <p className="drop-shadow-2xl ml-1">MOVIE</p>
-        </div>
-        <div className="flex gap-4 items-center">
-          <Search />
-          <button className="border border-white text-white px-6 text-sm font-semibold py-3 rounded-xl flex gap-2">
-            Sign Up
-          </button>
-          <button className="bg-green-500 text-white px-12 text-sm font-semibold py-3 rounded-lg">
-            Login
-          </button>
-        </div>
+    <div className="absolute z-40 text-white p-10 w-screen grid grid-cols-2 xl:grid-cols-3 place-items-center">
+      <div className={`flex w-full text-4xl ${logoFont.className}`}>
+        <p className="tracking-widest">NEXT</p>
+        <p className="drop-shadow-2xl ml-1">MOVIE</p>
       </div>
-      <div className="flex justify-normal gap-4 font-medium top-[40%] text-center absolute left-[45%]">
+      <div className="hidden xl:visible xl:flex justify-normal gap-4 font-medium text-center">
         <Link href="/" className={`${pathName == "/" ? "" : "text-[#55545b]"}`}>
           Home
         </Link>
@@ -47,6 +36,17 @@ const Navbar = () => {
         >
           About
         </Link>
+      </div>
+      <div className="flex gap-4 items-center ml-auto">
+        <Search />
+        <div className="xl:flex gap-4 hidden">
+          <button className="border border-white text-white w-mac text-sm font-semibold py-3 px-7 rounded-xl flex gap-2">
+            Sign Up
+          </button>
+          <button className="bg-green-500 text-white w-max text-sm font-semibold  px-7 py-3 rounded-lg">
+            Login
+          </button>
+        </div>
       </div>
     </div>
   )

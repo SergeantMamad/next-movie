@@ -48,7 +48,7 @@ const HeaderImage = ({
             alt="title"
           />
         </div>
-        <div className="absolute grid grid-cols-1 gap-6 left-12 bottom-20">
+        <div className="absolute grid grid-cols-1 gap-6 left-3 right-3 xl:right-0 xl:left-12 bottom-20">
           <p className="py-1 px-4 rounded-[20px] border border-gray-500 bg-black text-white w-fit font-medium text-xs">
             {mediaType}
           </p>

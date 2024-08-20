@@ -10,8 +10,8 @@ type TopImdbCartProps = {
   title: string
   voteAverage: number
   overview: string
-  id:number
-  genres:number[]
+  id: number
+  genres: number[]
 }
 const TopImdbMainCart = ({
   backdropPath,
@@ -20,17 +20,15 @@ const TopImdbMainCart = ({
   voteAverage,
   overview,
   id,
-  genres
+  genres,
 }: TopImdbCartProps) => {
   return (
-    <div className="w-[680px] flex flex-col gap-8">
-      <div className="w-[680px] h-[315px] relative">
+    <div className="min-w-full xl:min-w-full h-max flex flex-col gap-8">
+      <div className="w-full xl:w-full min-h-[300px] relative">
         <Image
           src={`https://image.tmdb.org/t/p/original${backdropPath}`}
           fill
-          style={{
-            objectFit: "cover",
-          }}
+          className="object-cover object-top"
           alt=""
         />
       </div>
@@ -38,11 +36,15 @@ const TopImdbMainCart = ({
         {`Release Date : ${dateConvertor(releaseDate)}`}
       </p>
       <h1 className="font-bold text-5xl text-white">{title}</h1>
-      <CartDescription mediaType="movie" genres={genres} voteAverage={voteAverage}/>
-      <p className="text-white text-xs line-clamp-4 text-justify w-[645px]">
+      <CartDescription
+        mediaType="movie"
+        genres={genres}
+        voteAverage={voteAverage}
+      />
+      <p className="text-white text-xs line-clamp-4 text-justify w-full">
         {overview}
       </p>
-      <MoreButtonsComponent link={`/movie/${id}`}/>
+      <MoreButtonsComponent link={`/movie/${id}`} />
     </div>
   )
 }

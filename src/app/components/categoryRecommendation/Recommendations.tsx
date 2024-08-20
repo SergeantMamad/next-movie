@@ -38,8 +38,8 @@ const Recommendations = ({ mainCategory }: mainCategory) => {
   })
 
   useEffect(() => {
-    setCurrentCategory(getAllCategories!.data![0].id)
-  }, [getAllCategories.data])
+    setCurrentCategory(getAllCategories?.data![0].id)
+  }, [getAllCategories?.data])
   return (
     <div className="h-[900px] w-screen relative mt-20">
       {getMovieFromCategory.data ? (

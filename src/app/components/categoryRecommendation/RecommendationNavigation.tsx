@@ -46,7 +46,7 @@ const RecommendationNavigation = ({
         </div>
         <div className="flex gap-2">
           {getMovieFromCategory?.data?.slice(0, 6).map((_:any, index:number) => (
-            <SliderButton setSlideN={setSlide} index={index} slideN={slide} />
+            <SliderButton setSlideN={setSlide} index={index} slideN={slide} key={index} />
           ))}
         </div>
       </div>

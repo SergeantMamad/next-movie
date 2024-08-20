@@ -10,11 +10,11 @@ import TopSellingSection from "@/app/components/topSellingSection/TopSellingSect
 import TopSellingSkeleton from "@/app/components/topSellingSection/TopSellingSkeleton"
 import { Suspense } from "react"
 
-const page = () => {
+const Page = () => {
   return (
     <main>
       <Slider listNumber={8309849} />
-      <div className="p-12">
+      <div className="p-6 xl:p-12">
         <div className="flex justify-between">
           <CustomH1 title="Popular Movies OF 2024" />
           <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl flex gap-2 mt-20">
@@ -79,7 +79,7 @@ const page = () => {
       <Suspense fallback={<RecommendationImageSkeleton />}>
         <Recommendations mainCategory="movie" />
       </Suspense>
-      <div className="p-12">
+      <div className="p-6 xl:p-12">
         <CustomH1 title="Trending Movie's This Week" />
         <Suspense fallback={<WeekTrendingSkeleton />}>
           <WeekTrending cat="movie" />
@@ -88,4 +88,4 @@ const page = () => {
     </main>
   )
 }
-export default page
+export default Page

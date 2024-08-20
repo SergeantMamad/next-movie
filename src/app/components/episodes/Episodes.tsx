@@ -19,7 +19,7 @@ const Episodes = ({ episodes }: EpisodesProps) => {
         ref={episodeRef}
       >
         {episodes.map((episode, index) => (
-          <EpisodesCard episodeNumber={index+1} name={episode.name!} overview={episode.overview!} stillPath={episode.still_path!}/>
+          <EpisodesCard episodeNumber={index+1} name={episode.name!} overview={episode.overview!} stillPath={episode.still_path!} key={index}/>
         ))}
       </div>
     </div>

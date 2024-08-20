@@ -23,7 +23,7 @@ const MainImagesTopButton = ({ id, filePath }: MainImagesTopButton) => {
   }
 
   return (
-    <div className="w-[120px] h-[30px] top-5 absolute flex justify-evenly">
+    <div className="h-[30px] flex gap-2">
       <button
         onClick={() =>
           FileSaver.saveAs(
@@ -33,7 +33,7 @@ const MainImagesTopButton = ({ id, filePath }: MainImagesTopButton) => {
         }
         data-tooltip-id="download"
         data-tooltip-content="Download Image"
-        className="w-1/2 h-[30px] bg-green-500 rounded-tl-md rounded-bl-md hover:cursor-pointer z-[10000] transition-colors hover:bg-green-600"
+        className="w-[30px] h-[30px] rounded-md hover:cursor-pointer z-[10000] transition-colors border border-white"
       >
         <FontAwesomeIcon className="text-white" icon={faDownload} />
       </button>
@@ -41,14 +41,14 @@ const MainImagesTopButton = ({ id, filePath }: MainImagesTopButton) => {
         ref={shareRef}
         data-tooltip-id="share"
         data-tooltip-content="Copy Link"
-        className="w-1/2 bg-white rounded-tr-md rounded-br-md hover:cursor-pointer z-[10000] transition-colors hover:bg-gray-200"
+        className="w-[30px] rounded-md hover:cursor-pointer z-[10000] transition-colors border border-white"
         onClick={() =>
           handleShareButtonClick(
             `https://image.tmdb.org/t/p/original${filePath}`
           )
         }
       >
-        <FontAwesomeIcon className="text-green-500" icon={faShareNodes} />
+        <FontAwesomeIcon className="text-white" icon={faShareNodes} />
       </button>
       <Tooltip id="download" place="top" />
       <Tooltip id="share" place="top" />

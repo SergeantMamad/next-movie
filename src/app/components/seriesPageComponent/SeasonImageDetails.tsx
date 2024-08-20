@@ -1,5 +1,7 @@
 //episodeData.data.episodes[0].still_path
 
+import { Fragment } from "react"
+
 type SeasonImageDetailsProps = {
   numberOfEpisodes: number
   airDate: string
@@ -14,11 +16,11 @@ const SeasonImageDetails = ({
   genres,
 }: SeasonImageDetailsProps) => {
   return (
-    <div className="text-[#9CA4AB] text-sm text-justify flex gap-1">
-      <p>{numberOfEpisodes} Episodes ●</p>
-      <p>{airDate.split("-")[0]} </p>
+    <div className="text-[#9CA4AB] text-xs flex gap-1 h-fit w-fit">
+      <>{numberOfEpisodes} Episodes ●</>
+      <>{airDate.split("-")[0]} </>
       {genres.map((genre, index) => (
-        <p key={index}> ● {genre.name} </p>
+        <Fragment key={index}> ● {genre.name} </Fragment>
       ))}
     </div>
   )

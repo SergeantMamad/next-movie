@@ -21,7 +21,7 @@ const CastsCard = ({
 }: CastsCardProps) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   return (
-    <div className="flex items-center gap-3 min-w-[500px]">
+    <div className="flex items-center gap-3 min-w-[500px] cursor-pointer">
       <div className="w-[90px] h-[90px] rounded-full relative">
         <Image
           onClick={onOpen}

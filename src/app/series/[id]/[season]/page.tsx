@@ -17,6 +17,12 @@ const Page = ({
     season: number
   }
 }) => {
+  const [tabItem, setTabItem] = useState("Episodes")
+  const [currentSeason, setCurrentSeason] = useState({
+    selected: false,
+    season: season.toString(),
+  })
+  useRouteToSeason(id, currentSeason.season, currentSeason.selected)
   let seasons = []
   const episodeData = useSuspenseQuery({
     queryKey: [id + season + "episode"],
@@ -37,12 +43,6 @@ const Page = ({
       seasons.push(i)
     }
   }
-  const [tabItem, setTabItem] = useState("Episodes")
-  const [currentSeason, setCurrentSeason] = useState({
-    selected: false,
-    season: season.toString(),
-  })
-  useRouteToSeason(id, currentSeason.season, currentSeason.selected)
   return (
     <div>
       <title>
@@ -83,7 +83,6 @@ const Page = ({
           mediaType="TvSeason"
           season={currentSeason.season}
           seasons={seasons}
-
         />
       </div>
     </div>

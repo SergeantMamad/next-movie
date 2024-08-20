@@ -29,7 +29,7 @@ const Slider = ({ listNumber }: { listNumber: number }) => {
           />
         ))}
       </div>
-      <div className="flex gap-2 absolute right-12 bottom-24">
+      <div className="flex gap-2 absolute xl:right-12  xl:bottom-24 right-1/2 translate-x-1/2">
         {data?.map((_, index) => (
           <SliderButton
             index={index}

@@ -13,7 +13,7 @@ import Slider from "@/app/components/slider/Slider"
 import SliderSkeleton from "@/app/components/slider/SliderSkeleton"
 import { Suspense } from "react"
 
-const page = () => {
+const Page = () => {
   return (
     <main>
       <Suspense fallback={<SliderSkeleton />}>
@@ -98,4 +98,4 @@ const page = () => {
     </main>
   )
 }
-export default page
+export default Page

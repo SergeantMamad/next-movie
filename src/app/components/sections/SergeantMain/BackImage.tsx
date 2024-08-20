@@ -21,11 +21,6 @@ const BackImage = ({ slideN, index, image, title, desc,id,mediaType }: BackImage
         className="object-cover"
         alt=""
       />
-      <div className="absolute left-12 bottom-48">
-        <h1 className="font-bold text-white text-5xl">{title}</h1>
-        <p className="text-white text-sm w-1/3 mt-4 text-justify">{desc}</p>
-        <MoreButtonsComponent link={mediaType == "tv" ? `series/${id}` : `/movie/${id}`} />
-      </div>
     </div>
   )
 }

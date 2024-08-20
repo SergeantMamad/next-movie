@@ -64,49 +64,49 @@
   z-index: 100;
 }
 
-.left_pic p {
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
+@media screen and (min-width: 1280px) {
+  .left_pic p {
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .left_pic {
+    transition: all 0.3s ease-in-out;
+  }
+  .left_pic:hover {
+    background-color: rgb(42, 131, 79);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .left_pic:hover p {
+    opacity: 100;
+    transition: all 0.3s ease-in-out;
+  }
+  .right_pic {
+    transition: all 0.3s ease-in-out;
+  }
+
+  .right_pic:hover {
+    background-color: rgb(134, 10, 54);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .right_pic:hover p {
+    opacity: 100;
+    transition: all 0.3s ease-in-out;
+  }
+  .right_pic p {
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
 }
 
-.left_pic {
-  transition: all 0.3s ease-in-out;
-}
-.left_pic:hover {
-  background-color: rgb(42, 131, 79);
-  transition: all 0.3s ease-in-out;
-}
-
-.left_pic:hover p {
-  opacity: 100;
-  transition: all 0.3s ease-in-out;
-}
-
-.right_pic p {
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-}
-
-.right_pic {
-  transition: all 0.3s ease-in-out;
-}
-
-.right_pic:hover {
-  background-color: rgb(134, 10, 54);
-  transition: all 0.3s ease-in-out;
-}
-
-.right_pic:hover p {
-  opacity: 100;
-  transition: all 0.3s ease-in-out;
-}
-
-.search-box{
+.search-box {
   width: fit-content;
   height: fit-content;
   position: relative;
 }
-.input-search{
+.input-search {
   height: 50px;
   width: 50px;
   border-style: none;
@@ -114,17 +114,17 @@
   font-size: 14px;
   outline: none;
   border-radius: 7px;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   padding-right: 40px;
   background-color: transparent;
   color: white;
 }
 
 .input-search::placeholder {
-  color: #201E24;
+  color: #201e24;
 }
 
-.btn-search{
+.btn-search {
   width: 50px;
   height: 50px;
   border-style: none;
@@ -135,21 +135,21 @@
   border-radius: 7px;
   position: absolute;
   right: 0px;
-  color:#ffffff;
-  pointer-events: painted;  
+  color: #ffffff;
+  pointer-events: painted;
 }
 
-.input-search-js{
+.input-search-js {
   width: 500px;
-  border: 1px solid #201E24;
+  border: 1px solid #201e24;
   border-radius: 7px;
-  background-color: #08070A;
+  background-color: #08070a;
   transition: all 500ms;
 }
-.input-search-js:focus{
+.input-search-js:focus {
   width: 500px;
   border-radius: 7px;
-  background-color: #08070A;
+  background-color: #08070a;
   border: 1px solid white;
   transition: all 500ms;
 }

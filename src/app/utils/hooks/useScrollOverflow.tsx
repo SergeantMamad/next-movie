@@ -1,26 +1,26 @@
-import { useEffect, useState, MutableRefObject, ForwardedRef } from "react";
+import { useEffect, useState, MutableRefObject, ForwardedRef, useCallback } from "react";
 
 const useScrollOverflow = (ref: ForwardedRef<HTMLDivElement>) => {
   const [canScrollLeft, setCanScrollLeft] = useState<boolean>(false);
   const [canScrollRight, setCanScrollRight] = useState<boolean>(false);
 
-  const getRefElement = (): HTMLDivElement | null => {
+  const getRefElement = useCallback((): HTMLDivElement | null => {
     if (typeof ref === 'function') {
       return null; // If it's a function, you would normally not use this pattern
     } else if (ref && 'current' in ref) {
       return ref.current;
     }
     return null;
-  };
+  },[ref]);
 
-  const checkOverflow = () => {
+  const checkOverflow = useCallback(() => {
     const element = getRefElement();
     if (element) {
       const { scrollLeft, scrollWidth, clientWidth } = element;
       setCanScrollLeft(scrollLeft > 0);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
     }
-  };
+  },[getRefElement]);
 
   useEffect(() => {
     checkOverflow();
@@ -37,7 +37,7 @@ const useScrollOverflow = (ref: ForwardedRef<HTMLDivElement>) => {
       }
       window.removeEventListener("resize", checkOverflow);
     };
-  }, [ref]);
+  }, [ref,checkOverflow,getRefElement]);
 
   return { canScrollLeft, canScrollRight };
 };

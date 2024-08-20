@@ -23,7 +23,7 @@ export function useSearchInfiniteQuery(searchParam:string,inView:boolean) {
     if (inView && searchQuery.hasNextPage) {
       searchQuery.fetchNextPage()
     }
-  }, [inView, searchQuery.fetchNextPage, searchQuery.hasNextPage])
+  }, [inView, searchQuery.fetchNextPage, searchQuery.hasNextPage,searchQuery])
 
   return searchQuery
 }

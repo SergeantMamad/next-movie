@@ -39,6 +39,7 @@ const KnownForSlider = ({ works }: KnownForSliderProps) => {
               genres={work.genre_ids!}
               isInSearch={false}
               job={(work as any).character || (work as any).job}
+              key={index}
             />
           ))}
       </div>

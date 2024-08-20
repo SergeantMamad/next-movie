@@ -20,7 +20,7 @@ const TopSellingSection = () => {
       }),
   })
   return (
-    <div className="flex justify-between mt-3">
+    <div className="flex-col xl:flex-row flex justify-between mt-3 gap-5">
       {data?.map(
         (res, index) =>
           index <= 2 && (

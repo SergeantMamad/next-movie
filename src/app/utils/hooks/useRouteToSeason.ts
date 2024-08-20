@@ -16,5 +16,5 @@ export function useRouteToSeason(
     } else if (selected == true && season == "") {
       router.replace(`/series/${id}`)
     }
-  }, [season])
+  }, [season,id,router,selected])
 }

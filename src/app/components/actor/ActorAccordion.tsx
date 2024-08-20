@@ -41,6 +41,7 @@ const ActorAccordion = ({
   const accordionItems = Array.from(deparments).map((department, index) => (
     <AccordionItem
       title={department}
+      key={index}
       classNames={{
         title: customcn("font-semibold", isInModal && "text-lg"),
       }}

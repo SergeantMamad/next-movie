@@ -100,7 +100,7 @@ const TabItems = ({
             ) : tab == "Episodes" ? (
               <>
                 <SelectBox
-                  className="static ml-auto"
+                  className="relative ml-auto"
                   season={season!}
                   seasons={seasons!}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>

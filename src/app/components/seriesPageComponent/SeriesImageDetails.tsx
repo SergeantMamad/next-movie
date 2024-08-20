@@ -1,3 +1,5 @@
+import { Fragment } from "react"
+
 type SeriesImageDeatilsProps = {
   numberOfSeasons: number
   firstAirDate: string
@@ -13,11 +15,11 @@ const SeriesImageDetails = ({
   genres,
 }: SeriesImageDeatilsProps) => {
   return (
-    <div className="text-[#9CA4AB] text-sm text-justify flex gap-1">
-      <p>{numberOfSeasons} Seasons ●</p>
-      <p>{firstAirDate.split("-")[0]} </p>
+    <div className="text-[#9CA4AB] text-xs flex gap-1 h-fit w-fit">
+      <>{numberOfSeasons} Seasons ●</>
+      <>{firstAirDate.split("-")[0]} </>
       {genres.map((genre, index) => (
-        <p key={index}> ● {genre.name} </p>
+        <Fragment key={index}> ● {genre.name} </Fragment>
       ))}
     </div>
   )

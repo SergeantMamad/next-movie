@@ -11,7 +11,7 @@ import HeaderImage from "@/app/components/DetailPageComponents/HeaderImage"
 import TabItems from "@/app/components/DetailPageComponents/TabItems"
 import { useRouteToSeason } from "@/app/utils/hooks/useRouteToSeason"
 
-const page = ({
+const Page = ({
   params: { id },
 }: {
   params: {
@@ -19,6 +19,9 @@ const page = ({
   }
 }) => {
   let seasons = []
+  const [tabItem, setTabItem] = useState("Seasons")
+  const [season, setSeason] = useState("")
+  useRouteToSeason(id, season)
   const { data } = useSuspenseQuery({
     queryKey: ["tv" + id],
     queryFn: () => getSeries(id),
@@ -30,11 +33,6 @@ const page = ({
       seasons.push(i)
     }
   }
-
-  const [tabItem, setTabItem] = useState("Seasons")
-  const [season, setSeason] = useState("")
-  useRouteToSeason(id, season)
-
   return (
     <div>
       <title>{data.name}</title>
@@ -49,7 +47,7 @@ const page = ({
         link={data.homepage!}
         mediaType="TV Season"
       />
-      <div className="p-12">
+      <div className="p-6 xl:p-12">
         <div>
           <h1 className="text-white text-lg font-semibold">Overview</h1>
           <p className="text-[#9CA4AB] mt-3">{data.overview}</p>
@@ -84,4 +82,4 @@ const page = ({
   )
 }
 
-export default page
+export default Page

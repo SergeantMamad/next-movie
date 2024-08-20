@@ -5,17 +5,17 @@ type TopSellingCardProps = {
   backdropPath: string
   title: string
   overview: string
-  id:number
+  id: number
 }
 
 const TopSellingCard = ({
   backdropPath,
   title,
   overview,
-  id
+  id,
 }: TopSellingCardProps) => {
   return (
-    <div className="w-[32%] h-[350px] relative">
+    <div className="w-full xl:w-[32%] h-[350px] relative">
       <Image
         src={`https://image.tmdb.org/t/p/w780${backdropPath}`}
         className="object-cover rounded-lg brightness-50"
@@ -24,8 +24,10 @@ const TopSellingCard = ({
       />
       <div className="absolute flex flex-col pl-5 bottom-3 gap-2">
         <p className="text-3xl font-bold">{title}</p>
-        <p className="text-xs font-semibold">{overview}</p>
-        <MoreButtonsComponent link={`/movie/${id}`} />
+        <p className="text-xs font-semibold line-clamp-2">{overview}</p>
+        <div className="w-[95%] xl:w-auto">
+          <MoreButtonsComponent link={`/movie/${id}`} />
+        </div>
       </div>
     </div>
   )

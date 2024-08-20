@@ -23,7 +23,7 @@ const UpTopCard = ({
   return (
     <Link href={`movie/${id}`}>
       <div className="min-w-[310px] flex gap-4">
-        <div className="min-w-[130px] min-h-[150px] w-[130px] h-[150px] relative object-cover">
+        <div className="min-w-[130px] min-h-[150px] relative object-cover">
           <Image
             src={`https://image.tmdb.org/t/p/w500${posterPath}`}
             fill

@@ -19,7 +19,7 @@ const UpTop = ({ cat }:{cat:string}) => {
     <div className="relative">
       <ScrollButtons ref={topSelling} value={340} />
       <div
-        className="grid grid-rows-4 gap-8 grid-flow-col w-[312px] mt-4 overflow-x-hidden scroll-smooth grid-test"
+        className="grid grid-rows-4 gap-8 gap-y-10 grid-flow-col max-w-[312px] mt-4 overflow-x-hidden scroll-smooth"
         ref={topSelling}
       >
         {data?.map((res, index) => (
