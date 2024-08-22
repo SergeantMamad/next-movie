@@ -1,19 +1,18 @@
 "use client"
-import { useRef } from "react"
-import Image from "next/image"
-import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline"
-import { StarIcon } from "@heroicons/react/24/solid"
-import { BookmarkIcon } from "@heroicons/react/24/outline"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { TopImdb } from "@/action"
-import debounce from "lodash.debounce"
-import Link from "next/link"
 import ScrollButtons from "../../cartGeneral/ScrollButtons"
-import { dateConvertor } from "@/app/utils/functions/dateConvertor"
 import TopImdbMainCart from "./TopImdbMainCart"
+import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
+import useSwipe from "@/app/utils/hooks/useSwipe"
+import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
 
 const TopImdbMain = () => {
-  const divRef = useRef<HTMLDivElement>(null)
+  const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
+  const { onTouchEnd, onTouchMove, onTouchStart } = useSwipe({
+    onSwipedLeft: () => scrollLeftRight(divRef, "left", divRef.current?.offsetWidth!),
+    onSwipedRight: () => scrollLeftRight(divRef, "right", divRef.current?.offsetWidth!),
+  })
 
   const { data } = useSuspenseQuery({
     queryKey: ["TopImdb"],
@@ -24,6 +23,9 @@ const TopImdbMain = () => {
       <div
         className="flex max-w-screen xl:w-[540px] h-max mt-4 overflow-x-hidden scroll-smooth"
         ref={divRef}
+        onTouchEnd={onTouchEnd}
+        onTouchMove={onTouchMove}
+        onTouchStart={onTouchStart}
       >
         <ScrollButtons ref={divRef} value={divRef.current?.offsetWidth!} />
         {data?.map((res, index) => (

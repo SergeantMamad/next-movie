@@ -11,7 +11,7 @@ type SelectBoxProps = {
 const SelectBox = ({ season, seasons, onChange,className }: SelectBoxProps) => {
   return (
     <Select
-      className={customcn(`max-w-full xl:max-w-xs absolute top-0 translate-x-1/2 right-1/2 xl:translate-x-0 xl:right-0`,className)}
+      className={customcn(`max-w-full lg:max-w-xs absolute top-0 translate-x-1/2 right-1/2 lg:translate-x-0 lg:right-0`,className)}
       aria-label="Select a season"
       placeholder="Select a season"
       onChange={onChange}

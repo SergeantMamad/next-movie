@@ -1,17 +1,20 @@
 import { Rubik } from "next/font/google"
 import "./globals.css"
 import NextTopLoader from "nextjs-toploader"
-import {Nextprovider} from "./providers/Nextprovider"
+import { Nextprovider } from "./providers/Nextprovider"
 import TanstackProvider from "./providers/TanStackProvider"
 import LayoutProvider from "./providers/LayoutProvider"
 import Navbar from "./components/navbar/navbar"
+import { Suspense } from "react"
 const rubik = Rubik({ subsets: ["latin"], display: "swap" })
-export default function RootLayout({ children }:{
-  children:React.ReactNode
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
-      <body className={`${rubik.className} dark bg-[#0d0c0f]  text-foreground`}>
+      <body className={`${rubik.className} dark bg-[#0d0c0f]  text-foreground min-h-screen`}>
         <Nextprovider>
           <TanstackProvider>
             <LayoutProvider>

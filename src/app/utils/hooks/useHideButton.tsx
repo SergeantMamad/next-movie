@@ -1,18 +1,19 @@
-import { useEffect, useRef, useState,useCallback } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
 
 export function useHideButton(dep: unknown, timer: number) {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const [isButtonVisible, setIsButtonVisible] = useState(false)
-  const click = useCallback(() => {
-    setIsButtonVisible(true)
-    timerRef.current = setTimeout(() => {
-      setIsButtonVisible(false)
-    }, timer)
-  },[timer])
+  const [isButtonVisible, setIsButtonVisible] = useState(true)
+  const [click, setClick] = useState(false)
   useEffect(() => {
-    click()
+    if (click) {
+      setIsButtonVisible(true)
+      timerRef.current = setTimeout(() => {
+        setIsButtonVisible(false)
+        setClick(false)
+      }, timer)
+    }
     return () => clearTimeout(timerRef.current!)
-  }, [dep,click])
+  }, [dep, click])
 
-  return { isButtonVisible, click }
+  return { isButtonVisible, click,setClick }
 }

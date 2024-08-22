@@ -1,5 +1,5 @@
 import { Gender } from "@/app/utils/configs/genderChange"
-import { differenceInYears, format } from "date-fns"
+import { differenceInYears, format, formatDistance, formatDistanceStrict, formatDistanceToNow, formatDistanceToNowStrict } from "date-fns"
 import Image from "next/image"
 import Detail from "./Detail"
 import { customcn } from "@/app/utils/functions/customcn"
@@ -44,25 +44,25 @@ const ActorInitialDetail = ({
           )}
         />
       </div>
-      <div className={customcn("flex flex-col gap-4", isInModal && "grid grid-cols-2 gap-6 md:flex md:flex-row md:gap-24")}>
-        <Detail isInModal={isInModal} title="Gender">
+      <div className={customcn("flex flex-col gap-4", isInModal && "grid grid-cols-2 gap-6 md:flex md:flex-row md:gap-16")}>
+        {gender && <Detail isInModal={isInModal} title="Gender">
           {Gender[gender]}
-        </Detail>
-        <Detail isInModal={isInModal} title="Birthday">
+        </Detail>}
+        {birthday && <Detail isInModal={isInModal} title="Birthday">
           {format(birthday!, "e LLLL yyyy")} (
           <>{differenceInYears(deathday || new Date(), birthday!)} Years Old</>)
-        </Detail>
-        {deathday != null && (
+        </Detail>}
+        {deathday && (
           <Detail isInModal={isInModal} title="Day of Death">
-            {deathday}
+            {format(deathday!, "e LLLL yyyy")} <>({formatDistanceToNowStrict(deathday)} Ago)</>
           </Detail>
         )}
-        <Detail isInModal={isInModal} title="Place Of Birth">
+        {placeOfBirth && <Detail isInModal={isInModal} title="Place Of Birth">
           {placeOfBirth}
-        </Detail>
-        <Detail isInModal={isInModal} title="Known For">
+        </Detail>}
+        {knownForDepartment && <Detail isInModal={isInModal} title="Known For">
           {knownForDepartment}
-        </Detail>
+        </Detail>}
       </div>
     </div>
   )

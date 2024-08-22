@@ -47,7 +47,7 @@ const ResultComponent = ({
           />
         </div>
         <div className="flex flex-col justify-center gap-[6px]">
-          <p className="font-semibold">{title}</p>
+          <p className="font-semibold line-clamp-2">{title}</p>
           {isInSearch == false && <JobDescription job={job!} />}
           <GenreDescription genres={genres} mediaType={mediaType} />
           <CartDescription

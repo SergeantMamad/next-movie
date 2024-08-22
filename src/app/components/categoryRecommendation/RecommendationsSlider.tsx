@@ -38,7 +38,7 @@ const RecommendationsSlider = ({
           <p className="py-1 px-6 rounded-[20px] bg-black/50 text-white w-fit font-medium">
             Explore By Genre
           </p>
-          <h1 className="font-bold text-white text-3xl xl:text-5xl mt-5 w-[50%]">{title}</h1>
+          <h1 className="font-bold text-white text-3xl lg:text-5xl mt-5 w-[50%]">{title}</h1>
           <RecommendationsSliderMoreInfo
             genres={genres}
             voteAverage={voteAverage}

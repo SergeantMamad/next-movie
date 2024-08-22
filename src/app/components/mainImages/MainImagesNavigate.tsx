@@ -4,35 +4,19 @@ import { customcn } from "@/app/utils/functions/customcn"
 
 type MainImageNavigateProps = {
   picList: PicListProps
-  setFullPic: React.Dispatch<React.SetStateAction<FullPicType>>
   fullPicIndex: number
   additionalButtonClassName?: string
+  nextPic: (index: number) => void
+  prevPic: (index:number) => void
 }
 
 const MainImagesNavigate = ({
   picList,
-  setFullPic,
   fullPicIndex,
   additionalButtonClassName,
+  nextPic,
+  prevPic
 }: MainImageNavigateProps) => {
-  function nextPic(index: number) {
-    const nextIndex = (index += 1)
-    const nextPic = picList.find((findIndex) => findIndex.index == nextIndex)
-    setFullPic({
-      index: nextPic!.index,
-      filePath: nextPic!.filePath,
-    })
-  }
-
-  function prevPic(index: number) {
-    const prevIndex = (index -= 1)
-    const prevPic = picList.find((findIndex) => findIndex.index == prevIndex)
-    setFullPic({
-      index: prevPic!.index,
-      filePath: prevPic!.filePath,
-    })
-  }
-
   return (
     <>
       {fullPicIndex != picList.length - 1 && (

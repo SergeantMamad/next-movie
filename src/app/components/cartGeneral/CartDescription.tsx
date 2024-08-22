@@ -22,15 +22,15 @@ const CartDescription = ({
       </div>
       <p className="font-medium text-CustomGray  text-sm">|</p>
       <p className="text-CustomGray font-semibold text-xs capitalize">
-        {mediaType}
-        {genres != undefined && mediaType == "movie"
+        {(mediaType == "movie" || mediaType == "SimilarMovie") ? "Movie" : "tv"}
+        {genres != undefined && (mediaType == "movie" || mediaType == "SimilarMovie")
           ? movieGenre
               .filter((category) => genres.includes(category.id))
               .map((genre, index) => (
                 <Fragment key={index}> ● {genre.name} </Fragment>
               ))
               .slice(0, 2)
-          : mediaType == "tv" &&
+          : (mediaType == "tv" || mediaType == "SimilarTv") &&
             seriesGenre
               .filter((category) => genres?.includes(category.id))
               .map((genre, index) => (

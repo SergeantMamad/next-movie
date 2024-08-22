@@ -1,21 +1,21 @@
 import Link from "next/link"
 import { operations } from "../../../../schema"
-import BouncingCircles from "../other/BouncingCircles"
 import ResultComponent from "./ResultComponent"
+import DotPulse from "../loader/DotPulse"
 
 type SearchBodyProps = {
-    data : operations['search-multi']['responses']['200']['content']['application/json']['results']
-    searchInput:string
-    searchParam:string | null
-    isPending:boolean
+  data: operations["search-multi"]["responses"]["200"]["content"]["application/json"]["results"]
+  searchInput: string
+  searchParam: string | null
+  isPending: boolean
 }
 
 const SearchBody = ({
-    data,
-    searchInput,
-    searchParam,
-    isPending
-}:SearchBodyProps) => {
+  data,
+  searchInput,
+  searchParam,
+  isPending,
+}: SearchBodyProps) => {
   return (
     <div className="w-full max-h-[550px] overflow-y-auto p-2">
       {searchInput == "" ? (
@@ -54,7 +54,9 @@ const SearchBody = ({
       ) : data?.length == 0 ? (
         <p className="text-center w-full p-7 block">There is no result</p>
       ) : isPending ? (
-        <BouncingCircles />
+        <div className="w-full flex items-center justify-center">
+          <DotPulse />
+        </div>
       ) : (
         <div></div>
       )}

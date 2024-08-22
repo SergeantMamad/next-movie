@@ -1,44 +1,38 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
 import { VideosFullScreenProps } from "./VideosFullScreen"
+import { customcn } from "@/app/utils/functions/customcn"
+
+type VideosNavigationProps = {
+  nextVid: (index: number) => void
+  prevVid: (index: number) => void
+} & VideosFullScreenProps
 
 const VideosNavigation = ({
   video,
-  setVideo,
   vidList,
-}: VideosFullScreenProps) => {
-  function nextVid(index: number) {
-    const nextIndex = (index += 1)
-    const nextVid = vidList.find((findIndex) => findIndex.index == nextIndex)
-    setVideo({
-      index: nextVid!.index,
-      youtubeKey: nextVid!.youtubeKey,
-    })
-  }
-
-  function prevVid(index: number) {
-    const prevIndex = (index -= 1)
-    const prevVid = vidList.find((findIndex) => findIndex.index == prevIndex)
-    setVideo({
-      index: prevVid!.index,
-      youtubeKey: prevVid!.youtubeKey,
-    })
-  }
+  nextVid,
+  prevVid,
+}: VideosNavigationProps) => {
   return (
     <>
       {video.index != vidList.length - 1 && (
         <button
-          className="w-10 h-10 bg-[#55545b] rounded-full absolute right-28 z-10"
+          className={customcn(
+            "w-8 h-8 xl:h-10 xl:w-10 bg-[#55545b] rounded-full absolute right-10 xl:right-28 z-10 transition-all"
+          )}
           onClick={() => nextVid(video.index)}
         >
-          <ChevronRightIcon className="w-7 h-7 mx-auto text-white" />
+          <ChevronRightIcon className="w-4 h-4 Xl:w-7 xl:h-7 mx-auto text-white" />
         </button>
       )}
       {video.index != 0 && (
         <button
-          className="w-10 h-10 bg-[#55545b] rounded-full absolute left-28 z-10"
+          className={customcn(
+            "w-8 h-8 xl:h-10 xl:w-10 bg-[#55545b] rounded-full absolute left-10 xl:left-28 z-10 transition-opacity duration-500"
+          )}
           onClick={() => prevVid(video.index)}
         >
-          <ChevronLeftIcon className="w-7 h-7 mx-auto text-white" />
+          <ChevronLeftIcon className="w-4 h-4 Xl:w-7 xl:h-7 mx-auto text-white" />
         </button>
       )}
     </>

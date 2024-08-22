@@ -12,7 +12,7 @@ const Page = () => {
             className="object-cover mix-blend-multiply object-center"
             alt=""
           />
-          <p className="mix-blend-screen text-white text-center  mt-[90%] md:mt-[90vh] text-4xl xl:text-6xl font-bold">
+          <p className="mix-blend-screen text-white text-center  mt-[90%] md:mt-[90vh] text-4xl lg:text-6xl font-bold">
             Movies
           </p>
       </Link>
@@ -23,7 +23,7 @@ const Page = () => {
           className="object-cover mix-blend-multiply"
           alt=""
         />
-        <p className="mix-blend-screen text-white text-center mt-[90%] md:mt-[90vh] text-4xl xl:text-6xl font-bold">
+        <p className="mix-blend-screen text-white text-center mt-[90%] md:mt-[90vh] text-4xl lg:text-6xl font-bold">
           TV Series
         </p>
       </Link>

@@ -4,28 +4,20 @@ import { UseQueryResult } from "@tanstack/react-query"
 import SliderButton from "../slider/SliderButton"
 type RecommendationNavigationProps = {
   getMovieFromCategory: UseQueryResult<any>
-  setSlide: React.Dispatch<React.SetStateAction<number>>
   slide: number
+  setSlide: React.Dispatch<React.SetStateAction<number>>
+  handleLeft: () => void
+  handleRight: () => void
 }
 const RecommendationNavigation = ({
   getMovieFromCategory,
-  setSlide,
   slide,
+  handleLeft,
+  handleRight,
+  setSlide
 }: RecommendationNavigationProps) => {
-  function handleSlideLeft() {
-    setSlide((prevSlide) =>
-      prevSlide == 0
-        ? getMovieFromCategory!.data!.slice(0, 6).length - 1
-        : prevSlide - 1
-    )
-  }
-  function handleSlideRight() {
-    setSlide((prevSlide) =>
-      prevSlide == getMovieFromCategory!.data!.slice(0, 6).length - 1
-        ? 0
-        : prevSlide + 1
-    )
-  }
+
+  
 
   return (
     <div className="absolute top-[60%] w-full">
@@ -33,13 +25,13 @@ const RecommendationNavigation = ({
         <div className="flex gap-2">
           <button
             className="w-10 h-10 bg-[#55545b] rounded-full"
-            onClick={handleSlideLeft}
+            onClick={handleLeft}
           >
             <ChevronLeftIcon className="w-7 h-7 mx-auto text-white" />
           </button>
           <button
             className="w-10 h-10 bg-[#55545b] rounded-full"
-            onClick={handleSlideRight}
+            onClick={handleRight}
           >
             <ChevronRightIcon className="w-7 h-7 mx-auto text-white" />
           </button>

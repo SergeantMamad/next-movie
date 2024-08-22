@@ -27,10 +27,7 @@ const UpTopCard = ({
           <Image
             src={`https://image.tmdb.org/t/p/w500${posterPath}`}
             fill
-            style={{
-              objectFit: "cover",
-            }}
-            className="rounded-xl"
+            className="rounded-xl object-cover"
             alt=""
           />
         </div>

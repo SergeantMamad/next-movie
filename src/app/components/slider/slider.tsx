@@ -5,6 +5,8 @@ import SliderButton from "./SliderButton"
 import { useSliderTimer } from "@/app/utils/hooks/useSliderTimer"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { SliderItems } from "@/action"
+import { memo, useRef } from "react"
+import useSwipe from "@/app/utils/hooks/useSwipe"
 
 const Slider = ({ listNumber }: { listNumber: number }) => {
   const { data } = useSuspenseQuery({
@@ -12,10 +14,18 @@ const Slider = ({ listNumber }: { listNumber: number }) => {
     queryFn: () => SliderItems(listNumber),
   })
   const [slide, setSlide] = useSliderTimer(5000, data?.length!)
-
+  const { onTouchEnd, onTouchMove, onTouchStart } = useSwipe({
+    onSwipedLeft: () => setSlide(slide == 0 ? data?.length! - 1 : slide - 1),
+    onSwipedRight: () => setSlide(slide == data?.length! - 1 ? 0 : slide + 1),
+  })
   return (
     <div className="relative">
-      <div className="relative w-full h-[780px]">
+      <div
+        className="relative w-full h-[780px]"
+        onTouchEnd={onTouchEnd}
+        onTouchMove={onTouchMove}
+        onTouchStart={onTouchStart}
+      >
         {data?.map((value, index) => (
           <SliderCard
             title={value.title || (value as any).name}
@@ -29,7 +39,7 @@ const Slider = ({ listNumber }: { listNumber: number }) => {
           />
         ))}
       </div>
-      <div className="flex gap-2 absolute xl:right-12  xl:bottom-24 right-1/2 translate-x-1/2">
+      <div className="flex gap-2 absolute lg:right-12  lg:bottom-24 right-1/2 translate-x-1/2">
         {data?.map((_, index) => (
           <SliderButton
             index={index}

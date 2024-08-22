@@ -15,7 +15,7 @@ const RecommendationsSliderMoreInfo = ({
   return (
     <div className="flex gap-2 mt-2 text-sm items-center">
       <div className="flex gap-2">
-        <StarIcon className="w-5 h-5 xl:w-6 xl:h-6 text-yellow-400" />
+        <StarIcon className="w-5 h-5 lg:w-6 lg:h-6 text-yellow-400" />
         <p className="text-white text-sm font-bold mt-auto">
           {voteAverage.toFixed(1)}
         </p>

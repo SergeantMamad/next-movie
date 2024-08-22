@@ -2,7 +2,7 @@
 import { getActor } from "@/action"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import Image from "next/image"
-import { useMemo } from "react"
+import { Suspense, useMemo } from "react"
 import { Tab, Tabs } from "@nextui-org/react"
 import { removeDuplicates } from "@/app/utils/functions/removeDuplicates"
 import KnownForSlider from "@/app/components/actor/KnownForSlider"
@@ -10,6 +10,7 @@ import MainImages from "@/app/components/mainImages/MainImages"
 import ActorInitialDetail from "@/app/components/actor/ActorInitialDetail"
 import Biography from "@/app/components/actor/Biography"
 import ActorAccordion from "@/app/components/actor/ActorAccordion"
+import MainImagesSekelton from "@/app/components/mainImages/MainImagesSekelton"
 
 type ActorProps = {
   params: {
@@ -22,7 +23,6 @@ const Actor = ({ params: { id } }: ActorProps) => {
     queryFn: () => getActor(id),
   })
 
-  
   const cast = useMemo(() => {
     return removeDuplicates(data?.combined_credits.cast!, "id")
   }, [data?.combined_credits.cast])
@@ -56,10 +56,16 @@ const Actor = ({ params: { id } }: ActorProps) => {
           <KnownForSlider works={removeDuplicates([...crew, ...cast], "id")} />
           <Tabs variant="underlined" color="primary">
             <Tab title="All Works">
-              <ActorAccordion isInModal={false} credits={data?.combined_credits!} defaultPagination={6} />
+              <ActorAccordion
+                isInModal={false}
+                credits={data?.combined_credits!}
+                defaultPagination={6}
+              />
             </Tab>
             <Tab title="Picture">
-              <MainImages type="actor" id={id} season={0} />
+              <Suspense fallback={<MainImagesSekelton />}>
+                <MainImages type="actor" id={id} season={0} />
+              </Suspense>
             </Tab>
           </Tabs>
         </div>

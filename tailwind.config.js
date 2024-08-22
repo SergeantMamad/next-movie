@@ -30,5 +30,6 @@ module.exports = {
       },
       addCommonColors: true,
     }),
+    require('tailwindcss-animated')
   ],
 }

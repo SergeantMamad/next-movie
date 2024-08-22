@@ -2,8 +2,8 @@ import Skeleton from "react-loading-skeleton"
 
 const TopImdbSkeletonCart = () => {
   return (
-    <div className="w-[680px] flex flex-col gap-8">
-      <div className="w-[680px] h-[315px] relative">
+    <div className="min-w-full xl:min-w-full h-max flex flex-col gap-8">
+      <div className="w-full xl:w-full min-h-[300px] relative">
         <Skeleton
           width={680}
           height={315}

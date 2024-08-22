@@ -11,7 +11,7 @@ type TrendingCardProps = {
   title: string
   voteAverage: number
   genres:number[]
-  isInSergeantMain: boolean
+  type: "sergenat" | "main" | "search"
   onClick?: () => void
 }
 
@@ -23,13 +23,13 @@ const TrendingCard = ({
   title,
   voteAverage,
   genres,
-  isInSergeantMain,
+  type,
   onClick,
 }: TrendingCardProps) => {
   const content = (
     <div
       onClick={onClick}
-      className={customcn(`min-w-[310px] h-[430px] relative cursor-pointer rounded-xl`,slideN == id && "bg-green-200")}
+      className={customcn(`min-w-[310px] min-h-[430px] relative cursor-pointer rounded-xl`,slideN == id && "bg-green-200",type == "search" && "min-w-0 min-h-0 w-[280px] h-[410px]")}
     >
       <Image
         src={`https://image.tmdb.org/t/p/w342${posterPath}`}
@@ -43,7 +43,7 @@ const TrendingCard = ({
       </div>
     </div>
   )
-  return isInSergeantMain == false ? (
+  return type == "main" ? (
     <Link href={mediaType == "tv" ? `series/${id}` : `movie/${id}`}>
       {content}
     </Link>

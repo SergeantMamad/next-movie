@@ -28,14 +28,14 @@ const Page = ({
   }
   return (
     <div>
-      <title>{data.original_title}</title>
+      <title>{data.title}</title>
       <HeaderImage
         backdropPath={data.backdrop_path!}
         genres={data.genres!}
         isTvSeason={false}
         isTvSeries={false}
         releaseDate={data.release_date!}
-        title={data.original_title!}
+        title={data.title!}
         runtime={data.runtime}
         link={data.homepage!}
         mediaType="Movie"

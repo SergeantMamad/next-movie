@@ -15,7 +15,7 @@ const TopImdbSkeleton = () => {
     <div className="relative">
       <ScrollButtons ref={topSelling} value={310} />
       <div
-        className="flex w-[645px] h-[700px] mt-4 overflow-x-hidden scroll-smooth"
+         className="flex max-w-screen xl:w-[540px] h-max mt-4 overflow-x-hidden scroll-smooth"
         ref={topSelling}
       >
         {contents}

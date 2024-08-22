@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { Fragment, useEffect, useRef, useState } from "react"
 import ActorModal from "../modals/ActorModal"
 import { useDisclosure } from "@nextui-org/react"
 
@@ -19,10 +19,10 @@ const CastsCard = ({
   id,
   roles,
 }: CastsCardProps) => {
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
   return (
-    <div className="flex items-center gap-3 min-w-[500px] cursor-pointer">
-      <div className="w-[90px] h-[90px] rounded-full relative">
+    <div className="flex items-center gap-3 min-w-[400px] cursor-pointer">
+      <div className="min-w-[90px] min-h-[90px] rounded-full relative">
         <Image
           onClick={onOpen}
           src={`${
@@ -36,15 +36,17 @@ const CastsCard = ({
         />
       </div>
       <div className="flex flex-col gap-3">
-        <h1 className="text-white font-semibold text-lg w-full">{name}</h1>
-        <div className="text-gray-500 font-semibold text-xs flex w-max">
-          {character ||
-            roles?.map((character, index) => (
-              <p key={index}>{character.character}</p>
-            ))}
+        <h1 className="text-white font-semibold text-lg">{name}</h1>
+        <div className="text-gray-500 font-semibold text-xs">
+          <p className="line-clamp-1">
+            {character ||
+              roles?.map((character, index) => (
+                <Fragment key={index}>{character.character}</Fragment>
+              ))}
+          </p>
         </div>
       </div>
-      <ActorModal id={id} isOpen={isOpen} onOpenChange={onOpenChange}  />
+      <ActorModal id={id} isOpen={isOpen} onOpenChange={onOpenChange} />
     </div>
   )
 }

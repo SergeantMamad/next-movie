@@ -1,13 +1,19 @@
-export function removeDuplicates<T>(originalArray:T[], prop:string):T[] {
-    var newArray = [];
-    var lookupObject  = {} as any;
+export function removeDuplicates<T extends Record<string, any>>(
+  originalArray: T[],
+  prop: keyof T
+): T[] {
+  const lookupObject: Record<string, T> = {}
+  const newArray: T[] = []
 
-    for(var i in originalArray) {
-       lookupObject[originalArray[i][prop]] = originalArray[i];
-    }
+  for (const item of originalArray) {
+    lookupObject[item[prop] as string] = item
+  }
 
-    for(i in lookupObject) {
-        newArray.push(lookupObject[i]);
+  for (const key in lookupObject) {
+    if (Object.prototype.hasOwnProperty.call(lookupObject, key)) {
+      newArray.push(lookupObject[key])
     }
-     return newArray;
+  }
+
+  return newArray
 }

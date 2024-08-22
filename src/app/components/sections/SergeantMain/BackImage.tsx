@@ -5,15 +5,11 @@ type BackImageProps = {
   slideN: number
   index: number
   image: string
-  title: string
-  desc: string
-  id:number
-  mediaType:string
 }
 
-const BackImage = ({ slideN, index, image, title, desc,id,mediaType }: BackImageProps) => {
+const BackImage = ({ slideN, index, image }: BackImageProps) => {
   return (
-    <div className={`middleSlide ${slideN == index ? "active visible" : "invisible"}`}>
+    <div className={`middleSlide ${slideN == index ? "block" : "hidden"}`}>
       <Image
         fill
         key={index}

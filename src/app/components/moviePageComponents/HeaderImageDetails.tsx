@@ -1,4 +1,5 @@
 import { DateDetailConvertor } from "@/app/utils/functions/dateDetailConvertor"
+import { Fragment } from "react"
 
 type HeaderImageDetailsProps = {
   runtime: number
@@ -16,10 +17,10 @@ const HeaderImageDetails = ({
   console.log(runtime)
   return (
     <div className="text-[#9CA4AB] text-sm text-justify flex gap-1">
-      <p>{DateDetailConvertor(runtime)} ●</p>
-      <p>{releaseDate.split("-")[0]} </p>
+      <>{DateDetailConvertor(runtime)} ●</>
+      <>{releaseDate.split("-")[0]} </>
       {genres.map((genre, index) => (
-        <p key={index}> ● {genre.name} </p>
+        <Fragment key={index}> ● {genre.name} </Fragment>
       ))}
     </div>
   )

@@ -16,7 +16,7 @@ const Categoris = ({
   return (
     <button
       className={customcn(
-        "min-w-[250px] xl:min-w-[270px] rounded-2xl h-[90px] xl:h-[130px] text-xl font-semibold bg-black/50 transition-colors duration-300 cursor-pointer",
+        "min-w-[250px] lg:min-w-[270px] rounded-2xl h-[90px] lg:h-[130px] text-xl font-semibold bg-black/50 transition-colors duration-300 cursor-pointer",
         id == currentCategory && "border border-green-500 bg-green-500/20"
       )}
       onClick={() => setCurrentCategory(id)}

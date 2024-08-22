@@ -1,6 +1,5 @@
 "use client"
 import { useState } from "react"
-import SkeletonSearch from "./SkeletonSearch"
 import React from "react"
 import debounce from "debounce"
 import { useInView } from "react-intersection-observer"
@@ -8,17 +7,18 @@ import TrendingCard from "../components/sections/TodaysTrending/TrendingCard"
 import { useSearchInfiniteQuery } from "../utils/hooks/useSearchInfiniteQuery"
 import { useSetParam } from "../utils/hooks/useSetParam"
 import { useSearchParams } from "next/navigation"
+import DotPulse from "../components/loader/DotPulse"
 
 const Page = () => {
   const { ref, inView } = useInView()
   const params = useSearchParams()
   const [searchParam, setSearchParam] = useState(params.get("search") || "")
-
+  
 
   const searchQuery = useSearchInfiniteQuery(searchParam, inView)
   useSetParam(searchParam)
 
-  function handleType(e:any) {
+  function handleType(e: any) {
     setSearchParam(e.target.value)
   }
 
@@ -26,10 +26,9 @@ const Page = () => {
     searchQuery.data.pages[0] &&
     searchQuery.data.pages.map((page) =>
       page?.map((res, index) => {
-        if (page.length == index + 1) {
-          return res.vote_average == 0.0 ? null : (
+        return res.vote_average == 0.0 ? null : (
             <TrendingCard
-              isInSergeantMain={false}
+              type="search"
               id={res.id}
               mediaType={res.media_type!}
               posterPath={res.poster_path!}
@@ -38,19 +37,6 @@ const Page = () => {
               genres={res.genre_ids!}
               key={index}
             />
-          )
-        }
-        return res.vote_average == 0.0 ? null : (
-          <TrendingCard
-            isInSergeantMain={false}
-            id={res.id}
-            mediaType={res.media_type!}
-            posterPath={res.poster_path!}
-            title={res.title! || (res as any).name}
-            voteAverage={res.vote_average}
-            genres={res.genre_ids!}
-            key={index}
-          />
         )
       })
     )
@@ -66,15 +52,17 @@ const Page = () => {
         />
       </div>
       {searchParam !== "" ? (
-        <div className="grid sm:grid-cols-2 xl:grid-cols-4 px-28 items-center justify-center p-5 gap-32">
-          {content}
-          <div ref={ref}></div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-28 place-items-center p-5 gap-32">
+            {content}
+          </div>
           {searchQuery.isFetching && (
-            <>
-              <SkeletonSearch />
-            </>
+            <div className="w-screen flex items-center justify-center h-40">
+              <DotPulse />
+            </div>
           )}
-        </div>
+          <div ref={ref} className="h-20"></div>
+        </>
       ) : (
         <div className="h-screen flex justify-center items-center">
           <p className="text-white text-6xl font-black text-center">

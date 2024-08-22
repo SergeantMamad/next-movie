@@ -12,8 +12,9 @@ export function useSearchInfiniteQuery(searchParam:string,inView:boolean) {
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      return allPages.length + 1
+      return lastPage?.length ? allPages.length + 1 : undefined
     },
+    
   })
   useEffect(() => {
     searchQuery.refetch()

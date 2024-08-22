@@ -4,19 +4,31 @@ import { useSuspenseQuery } from "@tanstack/react-query"
 import { TodayPopular } from "@/action"
 import PopularCard from "./PopularCard"
 import ScrollButtons from "../../cartGeneral/ScrollButtons"
+import useSwipe from "@/app/utils/hooks/useSwipe"
+import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
+import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
 
-const Popular = ({cat}:{
-  cat:"movie" | "tv"
-}) => {
-  const divRef = useRef<HTMLDivElement>(null)
+const Popular = ({ cat }: { cat: "movie" | "tv" }) => {
+  const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
+  const { onTouchEnd, onTouchMove, onTouchStart } = useSwipe({
+    onSwipedLeft: () => scrollLeftRight(divRef, "right", width + 16),
+    onSwipedRight: () => scrollLeftRight(divRef, "left", width + 16),
+  })
+
   const { data } = useSuspenseQuery({
     queryKey: ["todayPopular"],
-    queryFn: () =>TodayPopular(cat),
+    queryFn: () => TodayPopular(cat),
   })
   return (
     <div className="relative">
-      <ScrollButtons ref={divRef} value={310} />
-      <div className="flex mt-10 gap-4 overflow-hidden scroll-smooth Card-Popular" ref={divRef}>
+      <ScrollButtons ref={divRef} value={width + 16} />
+      <div
+        className="flex mt-10 gap-4 overflow-hidden scroll-smooth Card-Popular"
+        ref={divRef}
+        onTouchEnd={onTouchEnd}
+        onTouchMove={onTouchMove}
+        onTouchStart={onTouchStart}
+      >
         {data?.map((res, index) => (
           <PopularCard
             id={res.id}

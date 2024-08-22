@@ -28,9 +28,9 @@ export default async function Home() {
           <Suspense fallback={<WeekTrendingSkeleton />}>
             <WeekTrending cat="all" />
           </Suspense>
-          <div className="flex justify-between">
+          <div className="flex-col md:flex-row flex justify-between gap-4 md:gap-0">
             <CustomH1 title="Popular Movie's Of The Day" />
-            <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl flex gap-2 mt-20">
+            <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl gap-2 md:mt-20 flex justify-center">
               Show More
             </button>
           </div>
@@ -43,10 +43,10 @@ export default async function Home() {
             <SergeantMain listNumber={8309843} />
           </Suspense>
         </div>
-        <div className="p-6 xl:p-12">
-          <div className="flex justify-between">
+        <div className="p-6 lg:p-12">
+          <div className="flex-col md:flex-row flex justify-between gap-4 md:gap-0">
             <CustomH1 title="Movies" />
-            <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl flex gap-2 mt-20">
+            <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl gap-2 md:mt-20 flex justify-center">
               Show More
             </button>
           </div>
@@ -61,9 +61,9 @@ export default async function Home() {
               }}
             />
           </Suspense>
-          <div className="flex justify-between">
+          <div className="flex-col md:flex-row flex justify-between gap-4 md:gap-0">
             <CustomH1 title="TV Series" />
-            <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl flex gap-2 mt-20">
+            <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl gap-2 md:mt-20 flex justify-center">
               Show More
             </button>
           </div>
@@ -78,9 +78,9 @@ export default async function Home() {
               }}
             />
           </Suspense>
-          <div className="flex justify-between">
+          <div className="flex-col md:flex-row flex justify-between gap-4 md:gap-0">
             <CustomH1 title="Anime" />
-            <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl flex gap-2 mt-20">
+            <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl gap-2 md:mt-20 flex justify-center">
               Show More
             </button>
           </div>
@@ -106,17 +106,19 @@ export default async function Home() {
                 <TopImdbMain />
               </Suspense>
             </div>
-            <div>
-              <CustomH1 title="Top Selling" />
-              <Suspense fallback={<UpTopSkeleton />}>
-                <UpTop cat="Top" />
-              </Suspense>
-            </div>
-            <div>
-              <CustomH1 title="UP Coming" />
-              <Suspense fallback={<UpTopSkeleton />}>
-                <UpTop cat="Up" />
-              </Suspense>
+            <div className="lg:flex justify-around">
+              <div>
+                <CustomH1 title="Top Selling" />
+                <Suspense fallback={<UpTopSkeleton />}>
+                  <UpTop cat="Top" />
+                </Suspense>
+              </div>
+              <div>
+                <CustomH1 title="UP Coming" />
+                <Suspense fallback={<UpTopSkeleton />}>
+                  <UpTop cat="Up" />
+                </Suspense>
+              </div>
             </div>
           </div>
         </div>
