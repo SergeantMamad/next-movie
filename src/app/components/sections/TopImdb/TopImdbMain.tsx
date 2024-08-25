@@ -1,11 +1,11 @@
 "use client"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { TopImdb } from "@/action"
 import ScrollButtons from "../../cartGeneral/ScrollButtons"
 import TopImdbMainCart from "./TopImdbMainCart"
 import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
 import useSwipe from "@/app/utils/hooks/useSwipe"
 import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
+import { getTopImdbMovies } from "@/app/utils/actions/sectionsAuction"
 
 const TopImdbMain = () => {
   const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
@@ -16,7 +16,7 @@ const TopImdbMain = () => {
 
   const { data } = useSuspenseQuery({
     queryKey: ["TopImdb"],
-    queryFn: TopImdb,
+    queryFn: getTopImdbMovies,
   })
   return (
     <div className="relative">
@@ -37,6 +37,7 @@ const TopImdbMain = () => {
             voteAverage={res.vote_average}
             genres={res.genre_ids!}
             id={res.id}
+            posterPath={res.poster_path!}
             key={index}
           />
         ))}

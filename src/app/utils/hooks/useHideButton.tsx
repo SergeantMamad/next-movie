@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function useHideButton(dep: unknown, timer: number) {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)

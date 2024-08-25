@@ -1,11 +1,11 @@
 "use client"
-import { MainWeekTrending } from "@/action"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import TrendingCard from "./TrendingCard"
 import ScrollButtons from "../../cartGeneral/ScrollButtons"
 import useSwipe from "@/app/utils/hooks/useSwipe"
 import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
 import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
+import { getMainWeekTrending } from "@/app/utils/actions/sectionsAuction"
 
 const WeekTrending = ({ cat }: { cat: "movie" | "tv" | "all" }) => {
   const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
@@ -15,7 +15,7 @@ const WeekTrending = ({ cat }: { cat: "movie" | "tv" | "all" }) => {
   })
   const { data } = useSuspenseQuery({
     queryKey: ["WeekTrending" + cat],
-    queryFn: () => MainWeekTrending(cat),
+    queryFn: () => getMainWeekTrending(cat),
   })
 
   return (

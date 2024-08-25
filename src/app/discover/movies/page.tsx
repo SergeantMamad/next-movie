@@ -1,26 +1,28 @@
-import RecommendationImageSkeleton from "@/app/components/categoryRecommendation/RecommendationImageSkeleton"
-import Recommendations from "@/app/components/categoryRecommendation/Recommendations"
 import CustomH1 from "@/app/components/other/CustomH1"
+import ShowMoreSection from "@/app/components/other/ShowMoreSection"
 import Discover from "@/app/components/sections/Discover/DiscoverMain"
 import DiscoverMainSkeleton from "@/app/components/sections/Discover/DiscoverMainSkeleton"
 import WeekTrending from "@/app/components/sections/TodaysTrending/WeekTrending"
 import WeekTrendingSkeleton from "@/app/components/sections/TodaysTrending/WeekTrendingSkeleton"
-import Slider from "@/app/components/slider/Slider"
-import TopSellingSection from "@/app/components/topSellingSection/TopSellingSection"
-import TopSellingSkeleton from "@/app/components/topSellingSection/TopSellingSkeleton"
+import RecommendationImageSkeleton from "@/app/components/sections/categoryRecommendation/RecommendationImageSkeleton"
+import Recommendations from "@/app/components/sections/categoryRecommendation/Recommendations"
+import Slider from "@/app/components/sections/slider/Slider"
+import SliderSkeleton from "@/app/components/sections/slider/SliderSkeleton"
+import TopSellingSection from "@/app/components/sections/topSellingSection/TopSellingSection"
+import TopSellingSkeleton from "@/app/components/sections/topSellingSection/TopSellingSkeleton"
+import { Metadata } from "next"
 import { Suspense } from "react"
-
+export const metadata: Metadata = {
+  title: 'Discover Movies',
+}
 const Page = () => {
   return (
     <main>
-      <Slider listNumber={8309849} />
+      <Suspense fallback={<SliderSkeleton />}>
+        <Slider listNumber={8309849} />
+      </Suspense>
       <div className="p-6 xl:p-12">
-        <div className="flex justify-between">
-          <CustomH1 title="Popular Movies OF 2024" />
-          <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl flex gap-2 mt-20">
-            Show More
-          </button>
-        </div>
+        <ShowMoreSection title="Popular Movies Of 2024" href="/advancedsearch/movie?releaseDate=2024-01-01_&sortBy=vote_count.desc" />
         <Suspense fallback={<DiscoverMainSkeleton />}>
           <Discover
             id={4}
@@ -32,12 +34,7 @@ const Page = () => {
             }}
           />
         </Suspense>
-        <div className="flex justify-between">
-          <CustomH1 title="Best of Hollywood" />
-          <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl flex gap-2 mt-20">
-            Show More
-          </button>
-        </div>
+        <ShowMoreSection title="Popular Movies Of 2024" href="/advancedsearch/movie?sortBy=vote_average.desc&country=US&voteCount=18000-" />
         <Suspense fallback={<DiscoverMainSkeleton />}>
           <Discover
             id={5}
@@ -50,12 +47,7 @@ const Page = () => {
             }}
           />
         </Suspense>
-        <div className="flex justify-between">
-          <CustomH1 title="Best Drama Movies From 2010s" />
-          <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl flex gap-2 mt-20">
-            Show More
-          </button>
-        </div>
+        <ShowMoreSection title="Popular Movies Of 2024" href="/advancedsearch/movie?sortBy=vote_average.desc&country=US&genres=18&releaseDate=2010-01-01_2019-12-30&voteCount=13000-" />
         <Suspense fallback={<DiscoverMainSkeleton />}>
           <Discover
             id={6}

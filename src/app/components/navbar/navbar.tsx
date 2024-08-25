@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation"
 import Link from "next/link"
 import Search from "../search/Search"
 import { Suspense } from "react"
+import { customcn } from "@/app/utils/functions/customcn"
+
 const Navbar = () => {
   const pathName = usePathname()
   return (
@@ -19,37 +21,34 @@ const Navbar = () => {
         <Link href="/" className={`${pathName == "/" ? "" : "text-[#55545b]"}`}>
           Home
         </Link>
-        <Link
-          href="/discover"
-          className={`${
-            pathName == "/discover" ||
-            pathName.includes("/series") ||
-            pathName.includes("/movie")
-              ? ""
-              : "text-[#55545b]"
-          }`}
-        >
+        <Link href="/discover" className={customcn(pathName.includes("/discover") ? "" : "text-[#55545b]")}>
           Discover
         </Link>
         <Link
-          href="/about"
-          className={`${pathName == "/about" ? "" : "text-[#55545b]"}`}
+          href="/watchlist"
+          className={`${pathName == "/watchlist" ? "" : "text-[#55545b]"}`}
         >
-          About
+          Watchlist
+        </Link>
+        <Link
+          href="/personsearch"
+          className={`${pathName == "/personsearch" ? "" : "text-[#55545b]"}`}
+        >
+          People
+        </Link>
+        <Link
+          href="/advancedsearch/movie"
+          className={`${
+            pathName.includes("/advancedsearch") ? "" : "text-[#55545b]"
+          }`}
+        >
+          Advanced Search
         </Link>
       </div>
       <div className="flex gap-4 items-center ml-auto">
         <Suspense>
           <Search />
         </Suspense>
-        <div className="lg:flex gap-4 hidden">
-          <button className="border border-white text-white w-mac text-sm font-semibold py-3 px-7 rounded-xl flex gap-2">
-            Sign Up
-          </button>
-          <button className="bg-green-500 text-white w-max text-sm font-semibold  px-7 py-3 rounded-lg">
-            Login
-          </button>
-        </div>
       </div>
     </div>
   )

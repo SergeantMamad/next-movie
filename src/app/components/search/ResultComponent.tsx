@@ -11,7 +11,7 @@ type ResultComponentProps = {
   posterPath: string
   title: string
   releaseDate?: string
-  voteAverage: number
+  voteAverage?: number
   firstAirDate?: string
   genres: number[]
   isInSearch: boolean
@@ -40,9 +40,16 @@ const ResultComponent = ({
       >
         <div className="relative min-w-[70px] min-h-[120px]">
           <Image
-            src={`https://image.tmdb.org/t/p/w500${posterPath}`}
+            src={`${
+              posterPath
+                ? `https://image.tmdb.org/t/p/w500${posterPath}`
+                : "bg-slate-400"
+            }`}
             fill
-            className="object-cover rounded-md"
+            className={customcn(
+              "object-cover rounded-md",
+              posterPath == null && "bg-slate-400"
+            )}
             alt={id.toString()}
           />
         </div>
@@ -51,11 +58,15 @@ const ResultComponent = ({
           {isInSearch == false && <JobDescription job={job!} />}
           <GenreDescription genres={genres} mediaType={mediaType} />
           <CartDescription
-            genres={undefined}
+            genres={genres}
             mediaType={
+              mediaType
+            }
+            componentType="result"
+            releaseDate={
               firstAirDate == undefined
-                ? mediaType + " ● " + releaseDate?.split("-")[0]!
-                : mediaType + " ● " + +firstAirDate?.split("-")[0]!
+                ? releaseDate?.split("-")[0]!
+                : firstAirDate?.split("-")[0]!
             }
             voteAverage={voteAverage}
           />

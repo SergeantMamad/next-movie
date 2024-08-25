@@ -1,12 +1,11 @@
 "use client"
-import React, { useRef } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { TodayPopular } from "@/action"
 import PopularCard from "./PopularCard"
 import ScrollButtons from "../../cartGeneral/ScrollButtons"
 import useSwipe from "@/app/utils/hooks/useSwipe"
 import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
 import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
+import { getTodayPopularList } from "@/app/utils/actions/sectionsAuction"
 
 const Popular = ({ cat }: { cat: "movie" | "tv" }) => {
   const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
@@ -17,7 +16,7 @@ const Popular = ({ cat }: { cat: "movie" | "tv" }) => {
 
   const { data } = useSuspenseQuery({
     queryKey: ["todayPopular"],
-    queryFn: () => TodayPopular(cat),
+    queryFn: () => getTodayPopularList(cat),
   })
   return (
     <div className="relative">

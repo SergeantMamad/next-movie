@@ -1,7 +1,6 @@
 "use client"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { createRef, Suspense, useEffect, useState } from "react"
-import { getSeries } from "@/action"
+import { Suspense, useState } from "react"
 import CastsSkeleton from "@/app/components/casts/CastsSkeleton"
 import Casts from "@/app/components/casts/Casts"
 import Discover from "@/app/components/sections/Discover/DiscoverMain"
@@ -10,6 +9,7 @@ import NotFound from "../../not-found"
 import HeaderImage from "@/app/components/DetailPageComponents/HeaderImage"
 import TabItems from "@/app/components/DetailPageComponents/TabItems"
 import { useRouteToSeason } from "@/app/utils/hooks/useRouteToSeason"
+import { getSeries } from "@/app/utils/actions/getSingleData"
 
 const Page = ({
   params: { id },
@@ -35,17 +35,19 @@ const Page = ({
   }
   return (
     <div>
-      <title>{data.name}</title>
+      <title>{data.name} | Next Movie</title>
       <HeaderImage
         backdropPath={data.backdrop_path!}
         genres={data.genres!}
         isTvSeason={false}
         isTvSeries={true}
-        title={data.original_name!}
+        title={data.name!}
         firstAirDate={data.first_air_date}
         numberOfSeasons={data.number_of_seasons}
         link={data.homepage!}
-        mediaType="TV Season"
+        mediaType="TV"
+        id={id}
+        posterPath={data.poster_path!}
       />
       <div className="p-6 xl:p-12">
         <div>

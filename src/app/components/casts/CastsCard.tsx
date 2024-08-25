@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment } from "react"
 import ActorModal from "../modals/ActorModal"
 import { useDisclosure } from "@nextui-org/react"
 

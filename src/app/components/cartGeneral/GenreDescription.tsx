@@ -1,6 +1,5 @@
 import { movieGenre, seriesGenre } from "@/app/utils/configs/genres"
 import { FilmIcon } from "@heroicons/react/24/solid"
-import { Fragment } from "react"
 
 const GenreDescription = ({
   genres,

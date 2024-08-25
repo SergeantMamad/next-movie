@@ -12,6 +12,7 @@ type TopImdbCartProps = {
   overview: string
   id: number
   genres: number[]
+  posterPath: string
 }
 const TopImdbMainCart = ({
   backdropPath,
@@ -21,6 +22,7 @@ const TopImdbMainCart = ({
   overview,
   id,
   genres,
+  posterPath,
 }: TopImdbCartProps) => {
   return (
     <div className="min-w-full xl:min-w-full h-max flex flex-col gap-8">
@@ -44,7 +46,14 @@ const TopImdbMainCart = ({
       <p className="text-white text-xs line-clamp-4 text-justify w-full">
         {overview}
       </p>
-      <MoreButtonsComponent link={`/movie/${id}`} />
+      <MoreButtonsComponent
+        genres={genres}
+        id={id.toString()}
+        title={title}
+        mediaType="movie"
+        link={`/movie/${id}`}
+        posterPath={posterPath}
+      />
     </div>
   )
 }

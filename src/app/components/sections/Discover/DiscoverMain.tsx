@@ -1,13 +1,13 @@
 "use client"
-import { useRef } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { categoris, DiscoverMain } from "@/action"
 import ScrollButtons from "../../cartGeneral/ScrollButtons"
 import DiscoverMainCard from "./DiscoverMainCard"
 import { operations } from "../../../../../schema"
 import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
 import useSwipe from "@/app/utils/hooks/useSwipe"
 import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
+import { categoris } from "@/app/utils/actions/config"
+import { getDiscover } from "@/app/utils/actions/sectionsAuction"
 type DiscoverProps = {
   cat: categoris
   id: number
@@ -26,7 +26,7 @@ const Discover = ({ cat, id, filter }: DiscoverProps) => {
   const { data } = useSuspenseQuery({
     queryKey: [cat + id],
     queryFn: () =>
-      DiscoverMain({
+      getDiscover({
         cat,
         id,
         filter,

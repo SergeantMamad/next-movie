@@ -1,16 +1,16 @@
 "use client";
 import { useRef } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { UpTopMain } from "@/action";
 import UpTopCard from "./UpTopCard";
 import ScrollButtons from "../../cartGeneral/ScrollButtons";
 import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth";
 import useSwipe from "@/app/utils/hooks/useSwipe";
 import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight";
+import { getUpcomingAndTopSelling } from "@/app/utils/actions/sectionsAuction";
 const UpTop = ({ cat }:{cat:string}) => {
   const { data } = useSuspenseQuery({
     queryKey: [cat],
-    queryFn: () => UpTopMain(cat),
+    queryFn: () => getUpcomingAndTopSelling(cat),
   });
   const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
   const { onTouchEnd, onTouchMove, onTouchStart } = useSwipe({

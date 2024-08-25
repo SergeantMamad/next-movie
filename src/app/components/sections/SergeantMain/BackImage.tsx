@@ -1,5 +1,4 @@
 import Image from "next/image"
-import MoreButtonsComponent from "../../cartGeneral/MoreButtonsComponent"
 
 type BackImageProps = {
   slideN: number

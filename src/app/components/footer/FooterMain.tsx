@@ -1,5 +1,4 @@
 import React from "react";
-import localFont from "next/font/local";
 import { Rubik } from "next/font/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,6 +7,7 @@ import {
   faTelegram,
 } from "@fortawesome/free-brands-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import Link from "next/link";
 const rubik = Rubik({ subsets: ["latin"] });
 const FooterMain = () => {
   return (
@@ -20,11 +20,9 @@ const FooterMain = () => {
         </h1>
         <div className="flex flex-col justify-between">
           <div className="flex justify-around text-white gap-4 text-lg mt-3 xl:mt-0">
-            <p>Home</p>
+            <Link href="/">Home</Link>
             <p>/</p>
-            <p>About</p>
-            <p>/</p>
-            <p>Actors</p>
+            <Link href="/people">People</Link>
           </div>
           <div className="flex justify-between mt-3 xl:mt-0">
             <FontAwesomeIcon

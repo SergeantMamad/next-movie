@@ -4,11 +4,11 @@ import BackImage from "./BackImage"
 import ScrollButtons from "../../cartGeneral/ScrollButtons"
 import TrendingCard from "../TodaysTrending/TrendingCard"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { SliderItems } from "@/action"
 import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
 import SergeantMainDesc from "./SergeantMainDesc"
 import useSwipe from "@/app/utils/hooks/useSwipe"
 import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
+import { getSliderItems } from "@/app/utils/actions/getSingleData"
 
 const SergeantMain = ({ listNumber }: { listNumber: number }) => {
   const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
@@ -18,7 +18,7 @@ const SergeantMain = ({ listNumber }: { listNumber: number }) => {
   })
   const { data } = useSuspenseQuery({
     queryKey: ["slider" + listNumber],
-    queryFn: () => SliderItems(listNumber),
+    queryFn: () => getSliderItems(listNumber),
   })
   useEffect(() => {
     if (data)
@@ -30,6 +30,7 @@ const SergeantMain = ({ listNumber }: { listNumber: number }) => {
         mediaType: data[0].media_type!,
         voteAvreage: data[0].vote_average,
         genres: data[0].genre_ids!,
+        posterPath:data[0].poster_path!
       })
   }, [data])
   const [slideN, setSlideN] = useState({
@@ -40,6 +41,7 @@ const SergeantMain = ({ listNumber }: { listNumber: number }) => {
     mediaType: "",
     voteAvreage: 0,
     genres: [] as number[],
+    posterPath:""
   })
   return (
     <>
@@ -82,6 +84,7 @@ const SergeantMain = ({ listNumber }: { listNumber: number }) => {
                         mediaType: slide.media_type!,
                         genres: slide.genre_ids!,
                         voteAvreage: slide.vote_average,
+                        posterPath:slide.poster_path!
                       })
                     }
                     id={index}
@@ -113,6 +116,7 @@ const SergeantMain = ({ listNumber }: { listNumber: number }) => {
                 desc={slideN.desc}
                 genres={slideN.genres}
                 voteAverage={slideN.voteAvreage}
+                posterPath={slideN.posterPath}
               />
             </div>
           </div>

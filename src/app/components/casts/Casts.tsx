@@ -1,12 +1,12 @@
 "use client"
-import { useEffect, useRef, useState } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { getCasts, types } from "../../../action"
 import ScrollButtons from "../cartGeneral/ScrollButtons"
 import CastsCard from "./CastsCard"
 import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
 import useSwipe from "@/app/utils/hooks/useSwipe"
 import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
+import { types } from "@/app/utils/actions/config"
+import { getCasts } from "@/app/utils/actions/getSingleData"
 
 const Casts = ({
   type,

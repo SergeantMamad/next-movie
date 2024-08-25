@@ -18,8 +18,10 @@ type HeaderImageProps = {
   firstAirDate?: string
   numberOfSeasons?: number
   numberOfEpisodes?: number
-  link:string
+  link: string
   mediaType: "TV" | "Movie" | "TV Season"
+  posterPath: string
+  id: number
 }
 
 const HeaderImage = ({
@@ -34,7 +36,9 @@ const HeaderImage = ({
   numberOfSeasons,
   numberOfEpisodes,
   link,
-  mediaType
+  mediaType,
+  posterPath,
+  id,
 }: HeaderImageProps) => {
   console.log(isTvSeries)
   return (
@@ -76,7 +80,14 @@ const HeaderImage = ({
               />
             )
           )}
-          <MoreButtonsComponent link={link} />
+          {isTvSeason == false && <MoreButtonsComponent
+            genres={genres.map((genre) => genre.id)}
+            mediaType={mediaType}
+            title={title}
+            posterPath={posterPath}
+            id={id.toString()}
+            link={link}
+          />}
         </div>
       </div>
     </div>

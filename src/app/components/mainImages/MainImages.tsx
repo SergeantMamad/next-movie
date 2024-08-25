@@ -1,7 +1,6 @@
 "use client"
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { getImages, types } from "@/action"
 import "react-tooltip/dist/react-tooltip.css"
 import ScrollButtons from "../cartGeneral/ScrollButtons"
 import MainImagesPreview from "./MainImagesPreview"
@@ -11,6 +10,8 @@ import { customcn } from "@/app/utils/functions/customcn"
 import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
 import useSwipe from "@/app/utils/hooks/useSwipe"
 import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
+import { types } from "@/app/utils/actions/config"
+import { getImages } from "@/app/utils/actions/getSingleData"
 
 export type PicListProps = {
   index: number

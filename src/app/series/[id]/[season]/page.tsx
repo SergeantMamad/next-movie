@@ -1,5 +1,4 @@
 "use client"
-import { getSeason, getSeries } from "@/action"
 import Casts from "@/app/components/casts/Casts"
 import NotFound from "@/app/not-found"
 import CastsSkeleton from "@/app/components/casts/CastsSkeleton"
@@ -8,6 +7,7 @@ import React, { Suspense, useState } from "react"
 import HeaderImage from "@/app/components/DetailPageComponents/HeaderImage"
 import TabItems from "@/app/components/DetailPageComponents/TabItems"
 import { useRouteToSeason } from "@/app/utils/hooks/useRouteToSeason"
+import { getSeason, getSeries } from "@/app/utils/actions/getSingleData"
 
 const Page = ({
   params: { id, season },
@@ -46,7 +46,7 @@ const Page = ({
   return (
     <div>
       <title>
-        {seasonData.data.name} Season {season}
+        {seasonData.data.name} Season {season} | Next Movie
       </title>
       <HeaderImage
         backdropPath={episodeData.data.episodes![0].still_path!}
@@ -57,7 +57,10 @@ const Page = ({
         title={`${seasonData.data.name} Season ${season}`}
         numberOfEpisodes={episodeData.data.episodes?.length}
         link={seasonData.data.homepage!}
-        mediaType="TV"
+        mediaType="TV Season"
+        id={seasonData.data.id}
+        posterPath={seasonData.data.poster_path!}
+        
       />
       <div className="p-12">
         <div>

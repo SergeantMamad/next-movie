@@ -1,8 +1,12 @@
+import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
-
+export const metadata: Metadata = {
+  title: 'Discover',
+}
 const Page = () => {
+  
   return (
     <div className="flex w-screen overflow-hidden flex-col md:flex-row h-screen">
       <Link href="discover/movies" className="relative bg-green-500 h-1/2 md:h-screen left_pic w-full md:w-1/2">

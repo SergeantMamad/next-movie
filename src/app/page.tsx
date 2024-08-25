@@ -1,5 +1,4 @@
 import { Suspense } from "react"
-import TodayTrending from "./components/sections/TodaysTrending/WeekTrending"
 import SergeantMain from "./components/sections/SergeantMain/SergeantMain"
 import Discover from "./components/sections/Discover/DiscoverMain"
 import DiscoverMainSkeleton from "./components/sections/Discover/DiscoverMainSkeleton"
@@ -7,13 +6,18 @@ import TopImdbMain from "./components/sections/TopImdb/TopImdbMain"
 import UpTop from "./components/sections/UpTop/UpTop"
 import UpTopSkeleton from "./components/sections/UpTop/UpTopSkeleton"
 import TopImdbSkeleton from "./components/sections/TopImdb/TopImdbSkeleton"
-import Slider from "./components/slider/Slider"
+import Slider from "./components/sections/slider/Slider"
 import CustomH1 from "./components/other/CustomH1"
-import SliderSkeleton from "./components/slider/SliderSkeleton"
+import SliderSkeleton from "./components/sections/slider/SliderSkeleton"
 import PopularSkeleton from "./components/sections/PopularOfDay/PopularSkeleton"
 import Popular from "./components/sections/PopularOfDay/Popular"
 import WeekTrendingSkeleton from "./components/sections/TodaysTrending/WeekTrendingSkeleton"
 import WeekTrending from "./components/sections/TodaysTrending/WeekTrending"
+import Link from "next/link"
+import { Metadata } from "next"
+export const metadata: Metadata = {
+  title: 'Home | Next Movie',
+}
 export default async function Home() {
   return (
     <>
@@ -23,16 +27,16 @@ export default async function Home() {
             <Slider listNumber={8309819} />
           </Suspense>
         </div>
-        <div className="p-6 xl:p-12">
+        <div className="p-6 lg:p-12">
           <CustomH1 title="This Week's Trending" />
           <Suspense fallback={<WeekTrendingSkeleton />}>
             <WeekTrending cat="all" />
           </Suspense>
           <div className="flex-col md:flex-row flex justify-between gap-4 md:gap-0">
             <CustomH1 title="Popular Movie's Of The Day" />
-            <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl gap-2 md:mt-20 flex justify-center">
+            <Link href="/advancedsearch/movie?sortBy=popularity.desc" className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl gap-2 md:mt-20 flex justify-center">
               Show More
-            </button>
+            </Link>
           </div>
           <Suspense fallback={<PopularSkeleton />}>
             <Popular cat="movie" />
@@ -46,9 +50,9 @@ export default async function Home() {
         <div className="p-6 lg:p-12">
           <div className="flex-col md:flex-row flex justify-between gap-4 md:gap-0">
             <CustomH1 title="Movies" />
-            <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl gap-2 md:mt-20 flex justify-center">
+            <Link href="/advancedsearch/movie?releaseDate=2024-01-01_&sortBy=vote_count.desc" className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl gap-2 md:mt-20 flex justify-center">
               Show More
-            </button>
+            </Link>
           </div>
           <Suspense fallback={<DiscoverMainSkeleton />}>
             <Discover

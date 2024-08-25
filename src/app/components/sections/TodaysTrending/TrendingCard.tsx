@@ -9,7 +9,7 @@ type TrendingCardProps = {
   slideN?: number
   posterPath: string
   title: string
-  voteAverage: number
+  voteAverage?: number
   genres:number[]
   type: "sergenat" | "main" | "search"
   onClick?: () => void
@@ -34,7 +34,7 @@ const TrendingCard = ({
       <Image
         src={`https://image.tmdb.org/t/p/w342${posterPath}`}
         fill
-        className={customcn(`rounded-2xl object-cover`, slideN == id && "border border-green-500 mix-blend-multiply",)}
+        className={customcn(`rounded-2xl object-cover`, slideN == id && "border border-green-500 mix-blend-multiply",posterPath == null && 'bg-stone-950 border border-stone-950')}
         alt=""
       />
       <div className="absolute bottom-5 ml-5">
@@ -43,7 +43,7 @@ const TrendingCard = ({
       </div>
     </div>
   )
-  return type == "main" ? (
+  return (type == "main" || type == "search") ? (
     <Link href={mediaType == "tv" ? `series/${id}` : `movie/${id}`}>
       {content}
     </Link>

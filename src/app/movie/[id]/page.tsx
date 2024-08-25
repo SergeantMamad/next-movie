@@ -2,7 +2,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { Suspense, useState } from "react"
 import Casts from "@/app/components/casts/Casts"
-import { getMovie } from "../../../action"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import CastsSkeleton from "@/app/components/casts/CastsSkeleton"
 import Discover from "@/app/components/sections/Discover/DiscoverMain"
@@ -10,6 +9,7 @@ import DiscoverMainSkeleton from "@/app/components/sections/Discover/DiscoverMai
 import NotFound from "@/app/not-found"
 import HeaderImage from "@/app/components/DetailPageComponents/HeaderImage"
 import TabItems from "@/app/components/DetailPageComponents/TabItems"
+import { getMovie } from "@/app/utils/actions/getSingleData"
 const Page = ({
   params: { id },
 }: {
@@ -28,7 +28,7 @@ const Page = ({
   }
   return (
     <div>
-      <title>{data.title}</title>
+      <title>{data.title} | Next Movie</title>
       <HeaderImage
         backdropPath={data.backdrop_path!}
         genres={data.genres!}
@@ -39,6 +39,8 @@ const Page = ({
         runtime={data.runtime}
         link={data.homepage!}
         mediaType="Movie"
+        posterPath={data.poster_path!}
+        id={data.id}
       />
       <div className="p-12">
         <div>

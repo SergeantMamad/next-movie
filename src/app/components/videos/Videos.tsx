@@ -1,6 +1,5 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { getVids, types } from "@/action"
 import "react-tooltip/dist/react-tooltip.css"
 import VideosPreview from "./VideosPreview"
 import { useSetVidList } from "@/app/utils/hooks/useSetVidList"
@@ -9,6 +8,8 @@ import VideosFullScreen from "./VideosFullScreen"
 import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
 import useSwipe from "@/app/utils/hooks/useSwipe"
 import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
+import { getVids } from "@/app/utils/actions/getSingleData"
+import { types } from "@/app/utils/actions/config"
 
 export type VidListProps = {
   index: number

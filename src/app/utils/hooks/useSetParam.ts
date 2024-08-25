@@ -1,18 +1,39 @@
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useCallback, useEffect, useMemo } from "react"
+"use client"
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 
-export function useSetParam(searchParam: string) {
-  const router = useRouter()
+interface QueryParams {
+  [key: string]: string | null;
+}
+
+const useUpdateQueryParams = () => {
+  const router = useRouter();
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const params = useMemo(() => {
-    return new URLSearchParams(searchParams.toString())
-  }, [searchParams])
-  useEffect(() => {
-    if (searchParam != "") router.push(`?search=${searchParam}`)
-    else {
-      params.delete("search")
-      router.replace(`${pathname}?${params}`)
+
+  const updateQueryParams = (newParams: QueryParams) => {
+    if (typeof window === 'undefined') {
+      return; // Ensure that this code only runs on the client side
     }
-  }, [searchParam, pathname, router, params])
-}
+
+    const currentParams = new URLSearchParams(searchParams.toString());
+
+    Object.keys(newParams).forEach(key => {
+      if (newParams[key]) {
+        currentParams.set(key, newParams[key]!);
+      } else {
+        currentParams.delete(key);
+      }
+    });
+
+    useEffect(() => {
+      router.replace(`${pathname}?${currentParams.toString()}`,{
+        scroll:false
+      });
+    }, [pathname, currentParams, router]);
+  };
+
+  return updateQueryParams;
+};
+
+export default useUpdateQueryParams;

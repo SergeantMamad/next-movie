@@ -1,12 +1,12 @@
-import { searchall } from "@/action"
-import { useSuspenseInfiniteQuery } from "@tanstack/react-query"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import { useEffect } from "react"
+import { getSearch } from "../actions/searchActions"
 
-export function useSearchInfiniteQuery(searchParam:string,inView:boolean) {
-  const searchQuery = useSuspenseInfiniteQuery({
+export function useSearchInfiniteQuery(searchParam: string, inView: boolean) {
+  const searchQuery = useInfiniteQuery({
     queryKey: ["Searchall"],
     queryFn: ({ pageParam }) =>
-      searchall({
+      getSearch({
         value: searchParam,
         pageParam: pageParam,
       }),
@@ -14,7 +14,6 @@ export function useSearchInfiniteQuery(searchParam:string,inView:boolean) {
     getNextPageParam: (lastPage, allPages) => {
       return lastPage?.length ? allPages.length + 1 : undefined
     },
-    
   })
   useEffect(() => {
     searchQuery.refetch()
@@ -24,7 +23,7 @@ export function useSearchInfiniteQuery(searchParam:string,inView:boolean) {
     if (inView && searchQuery.hasNextPage) {
       searchQuery.fetchNextPage()
     }
-  }, [inView, searchQuery.fetchNextPage, searchQuery.hasNextPage,searchQuery])
+  }, [inView, searchQuery.fetchNextPage, searchQuery.hasNextPage, searchQuery])
 
   return searchQuery
 }
