@@ -71,7 +71,7 @@ const Recommendations = ({ mainCategory }: mainCategory) => {
   })
 
   return (
-    <div className="h-[900px] w-screen relative mt-20">
+    <div className="h-[900px] max-w-[100vw] relative mt-20">
       <div
         onTouchEnd={imageSwap.onTouchEnd}
         onTouchMove={imageSwap.onTouchMove}

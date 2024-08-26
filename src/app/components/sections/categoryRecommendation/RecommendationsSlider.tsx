@@ -31,7 +31,7 @@ const RecommendationsSlider = ({
   return (
     <>
       <div
-        className={`middleSlide ${
+        className={`middleSlide relative w-full h-[900px] ${
           slide == index ? "active visible" : "invisible"
         }`}
       >

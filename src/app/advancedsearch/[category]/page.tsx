@@ -119,7 +119,11 @@ const Page = ({
         />
       </div>
       <div className="flex flex-col lg:flex-row px-6 lg:px-12 gap-7 mt-10">
-        <AccordionAdvanced  filter={filter} setFilter={setFilter} category={category} />
+        <AccordionAdvanced
+          filter={filter}
+          setFilter={setFilter}
+          category={category}
+        />
         <div className="w-full">
           <div className="flex justify-between lg:justify-end w-full gap-3">
             <FunnelIcon
@@ -132,12 +136,16 @@ const Page = ({
               filter={filter}
               setFilter={setFilter}
             />
-            <SortItems category={category} filter={filter} setFilter={setFilter} />
+            <SortItems
+              category={category}
+              filter={filter}
+              setFilter={setFilter}
+            />
           </div>
           {checkIfObjectHasValue(debouncedQuery) ? (
             <>
               <div className="flex flex-col lg:grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 w-full gap-x-20 gap-y-10 min-h-screen mt-3">
-                {searchQuery.data?.pages[0] &&
+                {searchQuery?.data?.pages[0] &&
                   searchQuery.data.pages.map((page) =>
                     page?.map((res, index) => {
                       return isLarge ? (
@@ -166,10 +174,15 @@ const Page = ({
                       )
                     })
                   )}
+                {searchQuery.data?.pages[0]?.length == 0 && (
+                  <p className="col-span-4 text-4xl mx-auto font-bold text-white h-screen flex items-center text-center">
+                    There is no resault match with your serach parameters
+                  </p>
+                )}
               </div>
             </>
           ) : (
-            <AdvancedDescription category={category}/>
+            <AdvancedDescription category={category} />
           )}
         </div>
       </div>
@@ -178,6 +191,7 @@ const Page = ({
           <DotPulse />
         </div>
       )}
+
       <div ref={ref}></div>
     </main>
   )
