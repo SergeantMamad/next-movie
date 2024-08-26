@@ -41,7 +41,7 @@ const KnownForSlider = ({ works }: KnownForSliderProps) => {
           )
           .slice(0, 11)
           .map((work, index) => (
-            <SwiperSlide>
+            <SwiperSlide key={index}>
               <ResultComponent
                 id={work!.id}
                 mediaType={work!.media_type!}

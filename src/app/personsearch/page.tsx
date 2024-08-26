@@ -26,7 +26,7 @@ const Page = () => {
     updateQueryParams({
       personSearch: personSearch || null,
     })
-  }, [personSearch, updateQueryParams])
+  }, [personSearch])
   return (
     <main className="w-screen">
       <title>People Search | Next Movie</title>

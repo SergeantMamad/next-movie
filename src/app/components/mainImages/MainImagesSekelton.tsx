@@ -1,8 +1,5 @@
-import { useRef, useState } from "react"
 import Skeleton from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css"
-import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline"
-import ScrollButtons from "../cartGeneral/ScrollButtons"
 let contents = []
 for (let index = 0; index <= 15; index++) {
   contents.push(
@@ -19,11 +16,9 @@ for (let index = 0; index <= 15; index++) {
 }
 
 const MainImagesSekelton = () => {
-  const imageRef = useRef(null)
   return (
     <div className="relative flex items-center mt-10">
-      <ScrollButtons ref={imageRef} value={315} />
-      <div className="flex overflow-hidden scroll-smooth gap-3" ref={imageRef}>
+      <div className="flex overflow-hidden scroll-smooth gap-3">
         {contents}
       </div>
     </div>

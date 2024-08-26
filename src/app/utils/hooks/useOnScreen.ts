@@ -10,7 +10,7 @@ export default function useOnScreen(ref: RefObject<HTMLElement>) {
       );
     }
     return null;
-  }, [ref]);
+  }, []);
 
   useEffect(() => {
     if (!observer || !ref.current) return;

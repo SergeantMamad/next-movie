@@ -13,7 +13,7 @@ export function usePersonSearchQuery(searchQuery: string, inView: boolean) {
   })
   useEffect(() => {
     personData.refetch()
-  }, [searchQuery])
+  }, [searchQuery,personData.refetch])
   useEffect(() => {
     if (inView && personData.hasNextPage) {
         personData.fetchNextPage()

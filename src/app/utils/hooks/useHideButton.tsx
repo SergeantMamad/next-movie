@@ -13,7 +13,7 @@ export function useHideButton(dep: unknown, timer: number) {
       }, timer)
     }
     return () => clearTimeout(timerRef.current!)
-  }, [dep, click])
+  }, [dep, click,timer])
 
   return { isButtonVisible, click,setClick }
 }
