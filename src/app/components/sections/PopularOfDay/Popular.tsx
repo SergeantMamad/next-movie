@@ -1,46 +1,51 @@
 "use client"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import PopularCard from "./PopularCard"
-import ScrollButtons from "../../cartGeneral/ScrollButtons"
-import useSwipe from "@/app/utils/hooks/useSwipe"
-import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
-import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
 import { getTodayPopularList } from "@/app/utils/actions/sectionsAuction"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { A11y, Navigation } from "swiper/modules"
+import { useRef } from "react"
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
+import SwiperCore from "swiper"
+import ScrollButtons from "../../cartGeneral/ScrollButtons"
 
 const Popular = ({ cat }: { cat: "movie" | "tv" }) => {
-  const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
-  const { onTouchEnd, onTouchMove, onTouchStart } = useSwipe({
-    onSwipedLeft: () => scrollLeftRight(divRef, "right", width + 16),
-    onSwipedRight: () => scrollLeftRight(divRef, "left", width + 16),
-  })
-
+  const swiperRef = useRef<SwiperCore>(null)
   const { data } = useSuspenseQuery({
     queryKey: ["todayPopular"],
     queryFn: () => getTodayPopularList(cat),
   })
   return (
     <div className="relative">
-      <ScrollButtons ref={divRef} value={width + 16} />
-      <div
-        className="flex mt-10 gap-4 overflow-hidden scroll-smooth Card-Popular"
-        ref={divRef}
-        onTouchEnd={onTouchEnd}
-        onTouchMove={onTouchMove}
-        onTouchStart={onTouchStart}
+      <ScrollButtons
+        nextElClass="popular-button-next"
+        prevElClass="popular-button-prev"
+      />
+      <Swiper
+        modules={[Navigation, A11y]}
+        autoplay
+        slidesPerView={"auto"}
+        spaceBetween={16}
+        navigation={{
+          nextEl: ".popular-button-next",
+          prevEl: ".popular-button-prev",
+        }}
       >
         {data?.map((res, index) => (
-          <PopularCard
-            id={res.id}
-            index={index}
-            title={(res as any).title! || (res as any).name!}
-            posterPath={res.poster_path!}
-            mediaType={cat}
-            voteAverage={res.vote_average}
-            key={index}
-            genres={res.genre_ids!}
-          />
+          <SwiperSlide key={index}>
+            <PopularCard
+              id={res.id}
+              index={index}
+              title={(res as any).title! || (res as any).name!}
+              posterPath={res.poster_path!}
+              mediaType={cat}
+              voteAverage={res.vote_average}
+              key={index}
+              genres={res.genre_ids!}
+            />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   )
 }

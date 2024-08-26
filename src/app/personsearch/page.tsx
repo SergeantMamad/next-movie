@@ -77,13 +77,19 @@ const Page = () => {
                 />
               ))
             )}
+          {personSearchItems.data?.pages[0]?.length == 0 && (
+            <p className="col-span-4 text-4xl mx-auto font-bold text-white h-screen flex items-center text-center">
+              There is no resault match with your serach parameters
+            </p>
+          )}
         </div>
       </div>
-      {popularData.isFetching || personSearchItems.isFetching && (
-        <div className="w-screen flex items-center justify-center h-40">
-          <DotPulse />
-        </div>
-      )}
+      {popularData.isFetching ||
+        (personSearchItems.isFetching && (
+          <div className="w-screen flex items-center justify-center h-40">
+            <DotPulse />
+          </div>
+        ))}
       <div ref={ref}></div>
     </main>
   )

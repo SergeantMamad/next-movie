@@ -8,7 +8,7 @@ type BackImageProps = {
 
 const BackImage = ({ slideN, index, image }: BackImageProps) => {
   return (
-    <div className={`middleSlide ${slideN == index ? "block" : "hidden"}`}>
+    <div className={`middleSlide w-screen h-[1200px] lg:h-[800px]`}>
       <Image
         fill
         key={index}

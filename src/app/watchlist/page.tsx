@@ -26,7 +26,7 @@ const Page = () => {
         {context?.items?.length == 0 && (
           <>
             <p className="text-2xl lg:text-5xl font-semibold text-center">
-              Whoops, it looks like you don't have any item in your watchlist
+              Whoops, it looks like you don&apos;t have any item in your watchlist
             </p>
             <p className="text-lg font-semibold">
               Try Our{" "}

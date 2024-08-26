@@ -2,12 +2,9 @@
 import React, { useRef } from "react";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import ScrollButtons from "../../cartGeneral/ScrollButtons";
-
 
 const WeekTrendingSkeleton = () => {
   let contents = [];
-  const divRef = useRef<HTMLDivElement>(null)
   for (let index = 0; index <= 15; index++) {
     contents.push(
       <div className="min-w-[310px] relative" key={index}>
@@ -23,8 +20,7 @@ const WeekTrendingSkeleton = () => {
   }
   return (
     <div className="relative">
-      <ScrollButtons ref={divRef} value={310}/>
-      <div className="flex mt-10 gap-4 overflow-hidden scroll-smooth cardsSkeleton" ref={divRef}>
+      <div className="flex mt-10 gap-4 overflow-hidden scroll-smooth cardsSkeleton">
         {contents}
       </div>
     </div>

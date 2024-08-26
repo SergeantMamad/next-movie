@@ -86,6 +86,8 @@ const Page = ({
           mediaType="TvSeason"
           season={currentSeason.season}
           seasons={seasons}
+          setCurrentSeason={setCurrentSeason}
+          
         />
       </div>
     </div>

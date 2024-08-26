@@ -1,40 +1,53 @@
-"use client";
-import { useRef } from "react";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import UpTopCard from "./UpTopCard";
-import ScrollButtons from "../../cartGeneral/ScrollButtons";
-import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth";
-import useSwipe from "@/app/utils/hooks/useSwipe";
-import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight";
-import { getUpcomingAndTopSelling } from "@/app/utils/actions/sectionsAuction";
-const UpTop = ({ cat }:{cat:string}) => {
+"use client"
+import { useSuspenseQuery } from "@tanstack/react-query"
+import UpTopCard from "./UpTopCard"
+import { getUpcomingAndTopSelling } from "@/app/utils/actions/sectionsAuction"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { A11y, Grid, Navigation } from "swiper/modules"
+import "swiper/css"
+import "swiper/css/grid";
+import ScrollButtons from "../../cartGeneral/ScrollButtons"
+const UpTop = ({ cat }: { cat: string }) => {
   const { data } = useSuspenseQuery({
     queryKey: [cat],
     queryFn: () => getUpcomingAndTopSelling(cat),
-  });
-  const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
-  const { onTouchEnd, onTouchMove, onTouchStart } = useSwipe({
-    onSwipedLeft: () => scrollLeftRight(divRef, "left", width + 32),
-    onSwipedRight: () => scrollLeftRight(divRef, "right", width + 32),
   })
-
-
   return (
     <div className="relative">
-      <ScrollButtons ref={divRef} value={width + 32} />
-      <div
-        className="grid grid-rows-4 gap-8 gap-y-10 grid-flow-col max-w-[312px] mt-4 overflow-x-hidden scroll-smooth"
-        ref={divRef}
-        onTouchEnd={onTouchEnd}
-        onTouchMove={onTouchMove}
-        onTouchStart={onTouchStart}
+      <ScrollButtons
+        nextElClass="uptop-button-next"
+        prevElClass="uptop-button-prev"
+      />
+      <Swiper
+        modules={[Navigation, A11y,Grid]}
+        autoplay
+        grid={{
+          rows: 4,
+          fill:'row'
+        }}
+        slidesPerView={1}
+        className="max-w-[312px] mt-4"
+        navigation={{
+          nextEl: ".uptop-button-next",
+          prevEl: ".uptop-button-prev",
+        }}
       >
         {data?.map((res, index) => (
-          <UpTopCard id={res.id} mediaType={"movie"} voteAverage={res.vote_average} posterPath={res.poster_path!} title={res.title!} genres={res.genre_ids!} key={index}/>
+          <SwiperSlide key={index}>
+            <UpTopCard
+              id={res.id}
+              mediaType={"movie"}
+              voteAverage={res.vote_average}
+              posterPath={res.poster_path!}
+              title={res.title!}
+              genres={res.genre_ids!}
+              key={index}
+            />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
-  );
-};
+  )
+}
 
-export default UpTop;
+export default UpTop

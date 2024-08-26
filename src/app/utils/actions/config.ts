@@ -7,7 +7,7 @@ export const AuthMiddleware: Middleware = {
   async onRequest({ request, options }) {
     request.headers.set(
       "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNTg1MThkYzYzYWJkZTc2ODU0Yzk2ZWQxM2M5NWNlMSIsInN1YiI6IjY1NzQ2ZWJjN2EzYzUyMDBjYTc4YzE3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.o7EsCAMQAr00UlxKw7idJ6YtIoz6o5Yg4rkD9cK-igk"
+      "Bearer "+process.env.NEXT_PUBLIC_API_KEY
     )
     return request
   },

@@ -12,7 +12,7 @@ import { customcn } from "@/app/utils/functions/customcn"
 const Navbar = () => {
   const pathName = usePathname()
   return (
-    <div className="absolute z-40 text-white p-10 w-screen grid grid-cols-2 lg:grid-cols-3 place-items-center">
+    <div className="absolute z-40 text-white p-10 w-full grid grid-cols-2 lg:grid-cols-3 place-items-center">
       <div className={`flex w-full text-4xl ${logoFont.className}`}>
         <p className="tracking-widest">NEXT</p>
         <p className="drop-shadow-2xl ml-1">MOVIE</p>
@@ -32,14 +32,14 @@ const Navbar = () => {
         </Link>
         <Link
           href="/personsearch"
-          className={`${pathName == "/personsearch" ? "" : "text-[#55545b]"}`}
+          className={`${pathName == "/personsearch" ? "" : "text-[#55545b] drop-shadow-sm"}`}
         >
           People
         </Link>
         <Link
           href="/advancedsearch/movie"
           className={`${
-            pathName.includes("/advancedsearch") ? "" : "text-[#55545b]"
+            pathName.includes("/advancedsearch") ? "" : "text-[#55545b] drop-shadow-sm"
           }`}
         >
           Advanced Search

@@ -1,16 +1,15 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import "react-tooltip/dist/react-tooltip.css"
 import VideosPreview from "./VideosPreview"
 import { useSetVidList } from "@/app/utils/hooks/useSetVidList"
 import ScrollButtons from "../cartGeneral/ScrollButtons"
 import VideosFullScreen from "./VideosFullScreen"
-import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
-import useSwipe from "@/app/utils/hooks/useSwipe"
-import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
 import { getVids } from "@/app/utils/actions/getSingleData"
 import { types } from "@/app/utils/actions/config"
-
+import { A11y, Navigation } from "swiper/modules"
+import { Swiper, SwiperSlide } from "swiper/react"
+import SwiperCore from "swiper"
 export type VidListProps = {
   index: number
   youtubeKey: string
@@ -41,12 +40,6 @@ const Videos = ({
 
   const [vidList, setVidList] = useSetVidList(data)
 
-  const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
-  const { onTouchEnd, onTouchMove, onTouchStart } = useSwipe({
-    onSwipedLeft: () => scrollLeftRight(divRef, "left", width + 12),
-    onSwipedRight: () => scrollLeftRight(divRef, "right", width + 12),
-  })
-
   function handleVideoClick(index: number, youtubeKey: string) {
     setVideo({
       index,
@@ -57,25 +50,33 @@ const Videos = ({
   return (
     <>
       <div className="relative flex items-center mt-10">
-        <ScrollButtons ref={divRef} value={width + 12} />
-        <div
-          className="flex overflow-hidden scroll-smooth gap-3"
-          ref={divRef}
-          onTouchEnd={onTouchEnd}
-          onTouchMove={onTouchMove}
-          onTouchStart={onTouchStart}
+        <ScrollButtons
+          nextElClass="videos-button-next"
+          prevElClass="videos-button-prev"
+        />
+        <Swiper
+          modules={[Navigation, A11y]}
+          autoplay
+          slidesPerView={"auto"}
+          spaceBetween={16}
+          navigation={{
+            nextEl: ".videos-button-next",
+            prevEl: ".videos-button-prev",
+          }}
         >
           {data &&
             data?.map((vids, index) => (
-              <VideosPreview
-                handleVideoClick={handleVideoClick}
-                index={index}
-                youtubeKey={vids.key!}
-                name={vids.name!}
-                key={index}
-              />
+              <SwiperSlide key={index}>
+                <VideosPreview
+                  handleVideoClick={handleVideoClick}
+                  index={index}
+                  youtubeKey={vids.key!}
+                  name={vids.name!}
+                  key={index}
+                />
+              </SwiperSlide>
             ))}
-        </div>
+        </Swiper>
       </div>
       {video.youtubeKey != "" && (
         <VideosFullScreen video={video} setVideo={setVideo} vidList={vidList} />

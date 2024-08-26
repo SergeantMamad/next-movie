@@ -1,17 +1,17 @@
 "use client"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import "react-tooltip/dist/react-tooltip.css"
-import ScrollButtons from "../cartGeneral/ScrollButtons"
 import MainImagesPreview from "./MainImagesPreview"
 import { useSetPicList } from "@/app/utils/hooks/useSetPicList"
 import MainImagesFullScreen from "./MainImagesFullScreen"
-import { customcn } from "@/app/utils/functions/customcn"
-import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
-import useSwipe from "@/app/utils/hooks/useSwipe"
-import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
 import { types } from "@/app/utils/actions/config"
 import { getImages } from "@/app/utils/actions/getSingleData"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
+import { A11y, Navigation } from "swiper/modules"
+import SwiperCore from "swiper"
+import ScrollButtons from "../cartGeneral/ScrollButtons"
 
 export type PicListProps = {
   index: number
@@ -36,13 +36,6 @@ const MainImages = ({
     queryKey: [type + id + (season ? season : 0) + "pics"],
     queryFn: () => getImages({ type, id, season }),
   })
-
-  const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
-  const { onTouchEnd, onTouchMove, onTouchStart } = useSwipe({
-    onSwipedLeft: () => scrollLeftRight(divRef, "left", width + 16),
-    onSwipedRight: () => scrollLeftRight(divRef, "right", width + 16),
-  })
-
   const [fullPic, setFullPic] = useState<FullPicType>({
     index: 0,
     filePath: "",
@@ -59,27 +52,32 @@ const MainImages = ({
   return (
     <>
       <div className="relative">
-        <ScrollButtons ref={divRef} value={width + 16}/>
-        <div
-          className={customcn(
-            "flex mt-4 gap-4 overflow-hidden scroll-smooth",
-            type == "actor" && "grid grid-cols-2 place-items-center md:grid-cols-4 xl:grid-cols-6 min-w-0 min-h-0"
-          )}
-          ref={divRef}
-          onTouchEnd={onTouchEnd}
-          onTouchMove={onTouchMove}
-          onTouchStart={onTouchStart}
+        <ScrollButtons
+          nextElClass="images-button-next"
+          prevElClass="images-button-prev"
+        />
+        <Swiper
+          modules={[Navigation, A11y]}
+          autoplay
+          slidesPerView={"auto"}
+          spaceBetween={16}
+          navigation={{
+            nextEl: ".images-button-next",
+            prevEl: ".images-button-prev",
+          }}
         >
           {data?.map((images, index) => (
-            <MainImagesPreview
-              handleImageClick={handleImageClick}
-              filePath={images.file_path!}
-              type={type}
-              index={index}
-              key={index}
-            />
+            <SwiperSlide key={index}>
+              <MainImagesPreview
+                handleImageClick={handleImageClick}
+                filePath={images.file_path!}
+                type={type}
+                index={index}
+                key={index}
+              />
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
       {fullPic.filePath != "" && (
         <MainImagesFullScreen

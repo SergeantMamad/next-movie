@@ -3,11 +3,11 @@ import { useSuspenseQuery } from "@tanstack/react-query"
 import ScrollButtons from "../../cartGeneral/ScrollButtons"
 import DiscoverMainCard from "./DiscoverMainCard"
 import { operations } from "../../../../../schema"
-import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
-import useSwipe from "@/app/utils/hooks/useSwipe"
-import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
 import { categoris } from "@/app/utils/actions/config"
 import { getDiscover } from "@/app/utils/actions/sectionsAuction"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { A11y, Navigation } from "swiper/modules"
+import "swiper/css"
 type DiscoverProps = {
   cat: categoris
   id: number
@@ -17,12 +17,6 @@ type DiscoverProps = {
     | null
 }
 const Discover = ({ cat, id, filter }: DiscoverProps) => {
-  const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
-  const { onTouchEnd, onTouchMove, onTouchStart } = useSwipe({
-    onSwipedLeft: () => scrollLeftRight(divRef, "left", width + 16),
-    onSwipedRight: () => scrollLeftRight(divRef, "right", width + 16),
-  })
-
   const { data } = useSuspenseQuery({
     queryKey: [cat + id],
     queryFn: () =>
@@ -43,27 +37,35 @@ const Discover = ({ cat, id, filter }: DiscoverProps) => {
   }
   return (
     <div className="relative">
-      <ScrollButtons ref={divRef} value={width + 16} />
-      <div
-        className="flex mt-4 gap-4 overflow-hidden scroll-smooth"
-        ref={divRef}
-        onTouchEnd={onTouchEnd}
-        onTouchMove={onTouchMove}
-        onTouchStart={onTouchStart}
+      <ScrollButtons
+        nextElClass="discover-button-next"
+        prevElClass="discover-button-prev"
+      />
+      <Swiper
+        modules={[Navigation, A11y]}
+        autoplay
+        slidesPerView={"auto"}
+        spaceBetween={16}
+        navigation={{
+          nextEl: ".discover-button-next",
+          prevEl: ".discover-button-prev",
+        }}
       >
         {data?.map((res, index) => (
-          <DiscoverMainCard
-            id={res.id}
-            cat={cat}
-            title={(res as any).title || (res as any).name}
-            backdropPath={res.backdrop_path!}
-            voteAverage={res.vote_average}
-            mediaType={cat}
-            genres={res.genre_ids!}
-            key={index}
-          />
+          <SwiperSlide key={index}>
+            <DiscoverMainCard
+              id={res.id}
+              cat={cat}
+              title={(res as any).title || (res as any).name}
+              backdropPath={res.backdrop_path!}
+              voteAverage={res.vote_average}
+              mediaType={cat}
+              genres={res.genre_ids!}
+              key={index}
+            />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   )
 }

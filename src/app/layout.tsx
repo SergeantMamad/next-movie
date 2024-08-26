@@ -25,7 +25,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${rubik.className} dark bg-[#0d0c0f]  text-foreground min-h-screen`}
+        className={`${rubik.className} dark bg-[#0d0c0f] text-foreground min-h-screen`}
       >
           <Nextprovider>
             <TanstackProvider>

@@ -11,14 +11,14 @@ for (let index = 0; index <= 11; index++) {
 }
 
 const UpTopSkeleton = () => {
-  const UpTopRef = useRef(null);
+  
   
   return (
     <div className="relative">
-      <ScrollButtons ref={UpTopRef} value={312} />
+      
       <div
         className="grid grid-rows-4 gap-8 grid-flow-col w-[312px] mt-4 overflow-x-hidden scroll-smooth grid-test"
-        ref={UpTopRef}
+        
       >
         {contents}
       </div>

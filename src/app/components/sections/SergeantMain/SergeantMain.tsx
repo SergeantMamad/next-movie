@@ -1,21 +1,16 @@
 "use client"
 import { useState, useEffect } from "react"
 import BackImage from "./BackImage"
-import ScrollButtons from "../../cartGeneral/ScrollButtons"
 import TrendingCard from "../TodaysTrending/TrendingCard"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
 import SergeantMainDesc from "./SergeantMainDesc"
-import useSwipe from "@/app/utils/hooks/useSwipe"
-import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
 import { getSliderItems } from "@/app/utils/actions/getSingleData"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import { A11y, Navigation, Thumbs } from "swiper/modules"
+import ScrollButtons from "../../cartGeneral/ScrollButtons"
 
 const SergeantMain = ({ listNumber }: { listNumber: number }) => {
-  const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
-  const { onTouchEnd, onTouchMove, onTouchStart } = useSwipe({
-    onSwipedLeft: () => scrollLeftRight(divRef, "left", width + 16),
-    onSwipedRight: () => scrollLeftRight(divRef, "right", width + 16),
-  })
   const { data } = useSuspenseQuery({
     queryKey: ["slider" + listNumber],
     queryFn: () => getSliderItems(listNumber),
@@ -30,7 +25,7 @@ const SergeantMain = ({ listNumber }: { listNumber: number }) => {
         mediaType: data[0].media_type!,
         voteAvreage: data[0].vote_average,
         genres: data[0].genre_ids!,
-        posterPath:data[0].poster_path!
+        posterPath: data[0].poster_path!,
       })
   }, [data])
   const [slideN, setSlideN] = useState({
@@ -41,21 +36,31 @@ const SergeantMain = ({ listNumber }: { listNumber: number }) => {
     mediaType: "",
     voteAvreage: 0,
     genres: [] as number[],
-    posterPath:""
+    posterPath: "",
   })
+  const [thumbsSwiper, setThumbsSwiper] = useState(null)
   return (
     <>
       <div className="relative h-[1200px] lg:h-[800px]">
-        <div className="relative w-full h-[1200px] lg:h-[800px]">
-          {data?.map((slide, index) => (
-            <BackImage
-              index={index}
-              slideN={slideN.currentIndex}
-              image={slide.backdrop_path!}
-              key={index}
-            />
-          ))}
-          <div className="absolute left-12 top-28 visible lg:hidden">
+        <div className="relative max-w-screen h-[1200px] lg:h-[800px]">
+          <Swiper
+            modules={[Thumbs]}
+            thumbs={{ swiper: thumbsSwiper }}
+            allowTouchMove={false}
+            slidesPerView={1}
+          >
+            {data?.map((slide, index) => (
+              <SwiperSlide key={index}>
+                <BackImage
+                  index={index}
+                  slideN={slideN.currentIndex}
+                  image={slide.backdrop_path!}
+                  key={index}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div className="absolute left-12 top-28 visible lg:hidden z-10">
             <h1 className="font-bold text-white text-4xl">
               Sergeant Recommends
             </h1>
@@ -63,42 +68,52 @@ const SergeantMain = ({ listNumber }: { listNumber: number }) => {
               List of my recommended movies and TV series for you
             </p>
           </div>
-          <div className="absolute flex flex-col lg:flex-row-reverse right-0 top-72 lg:top-1/2 lg:-translate-y-1/2 w-[95%] gap-10">
-            <div className="relative max-w-full lg:max-w-[60%] right-25">
-              <ScrollButtons ref={divRef} value={width + 16} />
-              <div
-                className="flex gap-4 overflow-hidden scroll-smooth"
-                ref={divRef}
-                onTouchEnd={onTouchEnd}
-                onTouchMove={onTouchMove}
-                onTouchStart={onTouchStart}
+          <div className="absolute flex flex-col lg:flex-row-reverse right-0 top-72 lg:top-1/2 lg:-translate-y-1/2 w-[95%] gap-10 z-10">
+            <div className="relative max-w-full lg:max-w-[60%] left-0">
+              <ScrollButtons
+                nextElClass="sergeant-button-next"
+                prevElClass="sergeant-button-prev"
+              />
+              <Swiper
+                modules={[Navigation, A11y, Thumbs]}
+                watchSlidesProgress
+                autoplay
+                slidesPerView={"auto"}
+                spaceBetween={16}
+                onSwiper={setThumbsSwiper as any}
+                navigation={{
+                  nextEl: ".sergeant-button-next",
+                  prevEl: ".sergeant-button-prev",
+                }}
               >
                 {data?.map((slide, index) => (
-                  <TrendingCard
-                    onClick={() =>
-                      setSlideN({
-                        currentIndex: index,
-                        id: slide.id,
-                        desc: slide.overview!,
-                        title: slide.title || (slide as any).name,
-                        mediaType: slide.media_type!,
-                        genres: slide.genre_ids!,
-                        voteAvreage: slide.vote_average,
-                        posterPath:slide.poster_path!
-                      })
-                    }
-                    id={index}
-                    slideN={slideN.currentIndex}
-                    mediaType={slide.media_type!}
-                    title={slide.title || (slide as any).name}
-                    posterPath={slide.poster_path!}
-                    voteAverage={slide.vote_average}
-                    type="sergenat"
-                    key={index}
-                    genres={slide.genre_ids!}
-                  />
+                  <SwiperSlide key={index}>
+                    <TrendingCard
+                      onClick={() =>
+                        setSlideN({
+                          currentIndex: index,
+                          id: slide.id,
+                          desc: slide.overview!,
+                          title: slide.title || (slide as any).name,
+                          mediaType: slide.media_type!,
+                          genres: slide.genre_ids!,
+                          voteAvreage: slide.vote_average,
+                          posterPath: slide.poster_path!,
+                        })
+                      }
+                      id={index}
+                      slideN={slideN.currentIndex}
+                      mediaType={slide.media_type!}
+                      title={slide.title || (slide as any).name}
+                      posterPath={slide.poster_path!}
+                      voteAverage={slide.vote_average}
+                      type="sergenat"
+                      key={index}
+                      genres={slide.genre_ids!}
+                    />
+                  </SwiperSlide>
                 ))}
-              </div>
+              </Swiper>
             </div>
             <div className="flex flex-col gap-28 w-full">
               <div className="hidden lg:block">

@@ -1,12 +1,15 @@
 "use client"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import ScrollButtons from "../cartGeneral/ScrollButtons"
 import CastsCard from "./CastsCard"
-import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
-import useSwipe from "@/app/utils/hooks/useSwipe"
-import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
 import { types } from "@/app/utils/actions/config"
 import { getCasts } from "@/app/utils/actions/getSingleData"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { A11y, Navigation } from "swiper/modules"
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
+import "swiper/css/scrollbar"
+import ScrollButtons from "../cartGeneral/ScrollButtons"
 
 const Casts = ({
   type,
@@ -21,27 +24,34 @@ const Casts = ({
     queryKey: [type + id + (season ? season : 0) + "casts"],
     queryFn: () => getCasts({ type, id, season }),
   })
-  const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
-  
-  const {onTouchEnd,onTouchMove,onTouchStart} = useSwipe({
-    onSwipedLeft: () => scrollLeftRight(divRef,"left",width + 12),
-    onSwipedRight:  () => scrollLeftRight(divRef,"right",width + 12)
-  })
-
   return (
     <div className="relative">
-      <ScrollButtons ref={divRef} value={width + 12} />
-      <div
-        className="flex mt-4 gap-3 overflow-hidden scroll-smooth"
-        ref={divRef}
-        onTouchEnd={onTouchEnd}
-        onTouchMove={onTouchMove}
-        onTouchStart={onTouchStart}
+      <>
+        <ScrollButtons nextElClass="cast-button-next" prevElClass="cast-button-prev"/>
+      </>
+      <Swiper
+        modules={[Navigation, A11y]}
+        autoplay
+        slidesPerView={"auto"}
+        spaceBetween={16}
+        navigation={{
+          nextEl: ".cast-button-next",
+          prevEl: ".cast-button-prev",
+        }}
       >
         {data?.map((cast, index) => (
-          <CastsCard name={cast.name!} profilePath={cast?.profile_path} character={(cast as any)?.character} roles={(cast as any)?.roles} key={index} id={cast.id}/>
+          <SwiperSlide key={index}>
+            <CastsCard
+              name={cast.name!}
+              profilePath={cast?.profile_path}
+              character={(cast as any)?.character}
+              roles={(cast as any)?.roles}
+
+              id={cast.id}
+            />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   )
 }

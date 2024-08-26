@@ -1,47 +1,48 @@
 "use client"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import ScrollButtons from "../../cartGeneral/ScrollButtons"
 import TopImdbMainCart from "./TopImdbMainCart"
-import { useObserveElementWidth } from "@/app/utils/hooks/useObserveElementWidth"
-import useSwipe from "@/app/utils/hooks/useSwipe"
-import { scrollLeftRight } from "@/app/utils/functions/scrollLeftRight"
 import { getTopImdbMovies } from "@/app/utils/actions/sectionsAuction"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { A11y, Navigation } from "swiper/modules"
+import "swiper/css"
+import ScrollButtons from "../../cartGeneral/ScrollButtons"
 
 const TopImdbMain = () => {
-  const { ref: divRef, width } = useObserveElementWidth<HTMLDivElement>()
-  const { onTouchEnd, onTouchMove, onTouchStart } = useSwipe({
-    onSwipedLeft: () => scrollLeftRight(divRef, "left", divRef.current?.offsetWidth!),
-    onSwipedRight: () => scrollLeftRight(divRef, "right", divRef.current?.offsetWidth!),
-  })
-
   const { data } = useSuspenseQuery({
     queryKey: ["TopImdb"],
     queryFn: getTopImdbMovies,
   })
   return (
     <div className="relative">
-      <div
-        className="flex max-w-screen xl:w-[540px] h-max mt-4 overflow-x-hidden scroll-smooth"
-        ref={divRef}
-        onTouchEnd={onTouchEnd}
-        onTouchMove={onTouchMove}
-        onTouchStart={onTouchStart}
+      <ScrollButtons
+        nextElClass="imdb-button-next"
+        prevElClass="imdb-button-prev"
+      />
+      <Swiper
+        modules={[Navigation, A11y]}
+        className="w-[90vw] xl:w-[645px] !m-0"
+        slidesPerView={1}
+        navigation={{
+          nextEl: ".imdb-button-next",
+          prevEl: ".imdb-button-prev",
+        }}
       >
-        <ScrollButtons ref={divRef} value={divRef.current?.offsetWidth!} />
         {data?.map((res, index) => (
-          <TopImdbMainCart
-            backdropPath={res.backdrop_path!}
-            overview={res.overview!}
-            releaseDate={res.release_date!}
-            title={res.title!}
-            voteAverage={res.vote_average}
-            genres={res.genre_ids!}
-            id={res.id}
-            posterPath={res.poster_path!}
-            key={index}
-          />
+          <SwiperSlide key={index}>
+            <TopImdbMainCart
+              backdropPath={res.backdrop_path!}
+              overview={res.overview!}
+              releaseDate={res.release_date!}
+              title={res.title!}
+              voteAverage={res.vote_average}
+              genres={res.genre_ids!}
+              id={res.id}
+              posterPath={res.poster_path!}
+              key={index}
+            />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   )
 }

@@ -8,7 +8,6 @@ type RecommendationsSliderProps = {
   title: string
   voteAverage: number
   index: number
-  slide: number
   releaseDate: string
   id: number
   mediaType: string
@@ -20,8 +19,6 @@ const RecommendationsSlider = ({
   backdropPath,
   title,
   voteAverage,
-  index,
-  slide,
   releaseDate,
   id,
   mediaType,
@@ -31,9 +28,7 @@ const RecommendationsSlider = ({
   return (
     <>
       <div
-        className={`middleSlide ${
-          slide == index ? "active visible" : "invisible"
-        }`}
+        className={`middleSlide h-[900px] relative w-screen`}
       >
         <Image
           fill

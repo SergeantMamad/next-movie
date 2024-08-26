@@ -6,7 +6,7 @@ import { getDiscover } from "../actions/sectionsAuction"
 
 export function useDiscoverInfiniteQuery(filter: filter, inView: boolean,category:"movie" | "tv") {
   const searchQuery = useInfiniteQuery({
-    queryKey: ["discover" + category],
+    queryKey: ["discover" + category + filter],
     queryFn: ({ pageParam }) =>
       checkIfObjectHasValue(filter)
         ? getDiscover({
@@ -40,7 +40,7 @@ export function useDiscoverInfiniteQuery(filter: filter, inView: boolean,categor
   })
   useEffect(() => {
     searchQuery.refetch()
-  }, [filter])
+  }, [filter,searchQuery.refetch])
 
   useEffect(() => {
     if (inView && searchQuery.hasNextPage) {

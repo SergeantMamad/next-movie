@@ -13,7 +13,6 @@ import { updateQueryParams } from "@/app/utils/functions/updateQueryParams"
 import { getSearch } from "@/app/utils/actions/searchActions"
 
 export default function Search() {
-  const [isClicked] = useState(false)
   const [searchInput, setSearchInput] = useState("")
   const { mutate, data, isPending, reset } = useMutation({
     mutationKey: ["search"],
@@ -31,19 +30,19 @@ export default function Search() {
         })
       }
     },
-    [mutate, reset]
+    [mutate, reset,searchInput]
   )
   useEffect(() => {
     updateQueryParams({ search: searchInput })
     handleInput(searchInput)
-  }, [searchInput, handleInput, reset, updateQueryParams])
+  }, [searchInput, handleInput, reset])
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
   return (
     <div className="search-box relative">
       <FontAwesomeIcon
         className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
-        icon={isClicked ? faXmark : faMagnifyingGlass}
+        icon={faMagnifyingGlass}
         onClick={onOpen}
       />
       <SearchModal isOpen={isOpen} onOpenChange={onOpenChange}>

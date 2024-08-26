@@ -24,7 +24,7 @@ const EpisodesCard = ({
         />
         <div className="absolute bottom-0 p-2 flex flex-col gap-1">
           <h1 className="font-semibold">Episode {episodeNumber}</h1>
-          <p className="text-xs w-[310px] line-clamp-2 text-gray-500">
+          <p className="text-xs w-[310px] line-clamp-2 text-gray-200 shadow-lg drop-shadow-[0_0.5px_1.5px_rgba(0,0,0,1)]">
             {overview}
           </p>
         </div>

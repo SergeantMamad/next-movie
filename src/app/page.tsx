@@ -15,8 +15,9 @@ import WeekTrendingSkeleton from "./components/sections/TodaysTrending/WeekTrend
 import WeekTrending from "./components/sections/TodaysTrending/WeekTrending"
 import Link from "next/link"
 import { Metadata } from "next"
+import ShowMoreSection from "./components/other/ShowMoreSection"
 export const metadata: Metadata = {
-  title: 'Home | Next Movie',
+  title: "Home | Next Movie",
 }
 export default async function Home() {
   return (
@@ -33,10 +34,10 @@ export default async function Home() {
             <WeekTrending cat="all" />
           </Suspense>
           <div className="flex-col md:flex-row flex justify-between gap-4 md:gap-0">
-            <CustomH1 title="Popular Movie's Of The Day" />
-            <Link href="/advancedsearch/movie?sortBy=popularity.desc" className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl gap-2 md:mt-20 flex justify-center">
-              Show More
-            </Link>
+            <ShowMoreSection
+              title="Popular Movie's Of The Day"
+              href="/advancedsearch/movie?sortBy=popularity.desc"
+            />
           </div>
           <Suspense fallback={<PopularSkeleton />}>
             <Popular cat="movie" />
@@ -48,12 +49,10 @@ export default async function Home() {
           </Suspense>
         </div>
         <div className="p-6 lg:p-12">
-          <div className="flex-col md:flex-row flex justify-between gap-4 md:gap-0">
-            <CustomH1 title="Movies" />
-            <Link href="/advancedsearch/movie?releaseDate=2024-01-01_&sortBy=vote_count.desc" className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl gap-2 md:mt-20 flex justify-center">
-              Show More
-            </Link>
-          </div>
+          <ShowMoreSection
+            title="Movies"
+            href="/advancedsearch/movie?releaseDate=2024-01-01_&sortBy=vote_count.desc"
+          />
           <Suspense fallback={<DiscoverMainSkeleton />}>
             <Discover
               id={0}
@@ -65,12 +64,10 @@ export default async function Home() {
               }}
             />
           </Suspense>
-          <div className="flex-col md:flex-row flex justify-between gap-4 md:gap-0">
-            <CustomH1 title="TV Series" />
-            <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl gap-2 md:mt-20 flex justify-center">
-              Show More
-            </button>
-          </div>
+          <ShowMoreSection
+            title="TV Series"
+            href="/advancedsearch/tv?sortBy=vote_count.desc"
+          />
           <Suspense fallback={<DiscoverMainSkeleton />}>
             <Discover
               cat="tv"
@@ -82,12 +79,10 @@ export default async function Home() {
               }}
             />
           </Suspense>
-          <div className="flex-col md:flex-row flex justify-between gap-4 md:gap-0">
-            <CustomH1 title="Anime" />
-            <button className="border border-white text-white px-6 text-sm font-bold py-3 rounded-xl gap-2 md:mt-20 flex justify-center">
-              Show More
-            </button>
-          </div>
+          <ShowMoreSection
+            title="Anime"
+            href="/advancedsearch/tv?sortBy=vote_count.desc&country=JP&genres=16"
+          />
           <Suspense fallback={<DiscoverMainSkeleton />}>
             <Discover
               id={2}
@@ -103,14 +98,14 @@ export default async function Home() {
               }}
             />
           </Suspense>
-          <div className="flex flex-col xl:flex-row justify-between">
+          <div className="grid grid-cols-1 xl:grid-cols-2">
             <div>
               <CustomH1 title="Top IMDB Movies" />
               <Suspense fallback={<TopImdbSkeleton />}>
                 <TopImdbMain />
               </Suspense>
             </div>
-            <div className="lg:flex justify-around">
+            <div className="lg:flex justify-between">
               <div>
                 <CustomH1 title="Top Selling" />
                 <Suspense fallback={<UpTopSkeleton />}>

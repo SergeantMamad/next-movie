@@ -25,8 +25,8 @@ const TopImdbMainCart = ({
   posterPath,
 }: TopImdbCartProps) => {
   return (
-    <div className="min-w-full xl:min-w-full h-max flex flex-col gap-8">
-      <div className="w-full xl:w-full min-h-[300px] relative">
+    <div className="w-[90vw] xl:w-[645px] flex flex-col gap-8">
+      <div className="w-full xl:w-[645px] min-h-[300px] relative">
         <Image
           src={`https://image.tmdb.org/t/p/original${backdropPath}`}
           fill
