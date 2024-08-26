@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+First Of All I Want To Thanks Mobin Valikhani For His Testing, He Is One Of The Greatest C# Developers I Met
+Here Is His Github Repository, You Can Check It Out : [MOBIN_V](https://github.com/M0BIN-V)
+# NEXT MOVIE
 
-## Getting Started
+After a long time i want to introduce THE NEXT MOVIE, Your IMDB Alternative
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# What IS NEXT MOVIE?
+Next Movie Is a IMDB alternative that is built with next js (And this is the reason why its called next movie).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next Movie uses TMDB API and almost all of this app is running with tmdb api,from sliders to image galleries.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Why and how it is created
+After i finished my front end learning i thought to myself that i need to create an ultimate web application that covers all of my abilites so next movie came into my mind (because i wanted to build something like this on other programming languages as well.)
+So i searched on the internet and first i found tmdb api that covered my needs and then i found [this](https://www.figma.com/design/nfnhvUdS3WaV1mMo8UBkDF/Saintstream-Movie-Streaming-Website-%28Community%29?node-id=18-2808) free template on figma and i tried to recreate it.
+Also i added some components and pages by myself.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## What UI libraries did i use?
 
-## Learn More
+Tailwind,Next UI (for some ui components not all of them), and swiper for production (because my slider needs some works for now)
 
-To learn more about Next.js, take a look at the following resources:
+# How can i run it?
+First get an api key from tmdb and put it inside .env file and name it NEXT_PUBLIC_API_KEY and then run this command
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    npm install
+Then after you make sure all of the dependencies installed you can run this command
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    npm run dev
 
-## Deploy on Vercel
+# Some Pics From Ui
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I Will Add them later
