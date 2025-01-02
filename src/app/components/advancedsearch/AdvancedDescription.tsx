@@ -18,7 +18,7 @@ const AdvancedDescription = ({
         Genres,Release Date,Title and etc...
       </p>
       <Link href={category == "movie" ? "/advancedsearch/tv" : "/advancedsearch/movie"} className="text-green-500 font-semibold text-xs">
-        Or check the {category == "movie" ? "movies" : "tv series"} section
+        Or check the {category == "movie" ? "Tv Series" : "Movies"} section
       </Link>
     </div>
   )

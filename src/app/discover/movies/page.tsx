@@ -34,7 +34,7 @@ const Page = () => {
             }}
           />
         </Suspense>
-        <ShowMoreSection title="Popular Movies Of 2024" href="/advancedsearch/movie?sortBy=vote_average.desc&country=US&voteCount=18000-" />
+        <ShowMoreSection title="Best Of Hollywood" href="/advancedsearch/movie?sortBy=vote_average.desc&country=US&voteCount=18000-" />
         <Suspense fallback={<DiscoverMainSkeleton />}>
           <Discover
             id={5}
@@ -47,7 +47,7 @@ const Page = () => {
             }}
           />
         </Suspense>
-        <ShowMoreSection title="Popular Movies Of 2024" href="/advancedsearch/movie?sortBy=vote_average.desc&country=US&genres=18&releaseDate=2010-01-01_2019-12-30&voteCount=13000-" />
+        <ShowMoreSection title="Best Movies Of 2010s" href="/advancedsearch/movie?sortBy=vote_average.desc&country=US&genres=18&releaseDate=2010-01-01_2019-12-30&voteCount=13000-" />
         <Suspense fallback={<DiscoverMainSkeleton />}>
           <Discover
             id={6}

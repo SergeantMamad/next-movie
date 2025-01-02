@@ -45,7 +45,7 @@ const SearchBody = ({
             />
           ))}
           <Link
-            href={`searchall/?search=${searchParam}`}
+            href={`multisearch/?search=${searchParam}`}
             className="block text-center w-full p-5 hover:bg-[#0e0c11] rounded-md transition-colors border-gray-900"
           >
             Search For More

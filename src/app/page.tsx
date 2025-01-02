@@ -13,7 +13,6 @@ import PopularSkeleton from "./components/sections/PopularOfDay/PopularSkeleton"
 import Popular from "./components/sections/PopularOfDay/Popular"
 import WeekTrendingSkeleton from "./components/sections/TodaysTrending/WeekTrendingSkeleton"
 import WeekTrending from "./components/sections/TodaysTrending/WeekTrending"
-import Link from "next/link"
 import { Metadata } from "next"
 import ShowMoreSection from "./components/other/ShowMoreSection"
 export const metadata: Metadata = {

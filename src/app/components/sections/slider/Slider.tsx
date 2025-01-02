@@ -15,7 +15,7 @@ const Slider = ({ listNumber }: { listNumber: number }) => {
     queryKey: ["slider" + listNumber],
     queryFn: () => getSliderItems(listNumber),
   })
-  const [slide, setSlide] = useSliderTimer(5000, data?.length!)
+  const [slide, setSlide] = useSliderTimer(10000, data?.length!)
   return (
     <div className="relative h-[780px] max-w-[100vw]">
       <Swiper
@@ -23,7 +23,9 @@ const Slider = ({ listNumber }: { listNumber: number }) => {
         spaceBetween={1}
         centeredSlides={true}
         slidesPerView={"auto"}
-        autoplay
+        autoplay={{
+          delay:5000
+        }}
         pagination={{
           clickable: true,
           el: '.swiper-pagination',

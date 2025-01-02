@@ -10,15 +10,15 @@ const WatchList = ({mediaType,isLarge}:{
   const context = useContext(StorageContext)    
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4">
-      {context?.items?.filter((item) => item.mediaType == "tv").length != 0 ? (
+      {context?.items?.filter((item) => item.mediaType == mediaType).length != 0 ? (
         context?.items
-          ?.filter((item) => item.mediaType == "tv")
+          ?.filter((item) => item.mediaType == mediaType)
           .map((items, index) => {
             return isLarge ? (
               <TrendingCard
                 type="search"
                 id={parseInt(items.id)}
-                mediaType={"tv"}
+                mediaType={mediaType}
                 posterPath={items.poster!}
                 title={items.title!}
                 genres={items.genres}
@@ -38,7 +38,7 @@ const WatchList = ({mediaType,isLarge}:{
           })
       ) : (
         <p className="col-span-4 text-center font-bold text-3xl h-[100px]">
-          You Have No Item In Your TV Series List
+          You Have No Item In Your {mediaType == "tv" ? "TV Series" : "Movies"} List
         </p>
       )}
     </div>
