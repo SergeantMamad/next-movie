@@ -13,7 +13,7 @@ type EpisodesProps = {
 const Episodes = ({ episodes }: EpisodesProps) => {
 
   return (
-    <div className="relative mt-30">
+    <div className="relative mt-4">
       <ScrollButtons nextElClass="episode-button-next" prevElClass="episode-button-prev" />
       <Swiper
         modules={[Navigation, A11y]}
@@ -24,6 +24,7 @@ const Episodes = ({ episodes }: EpisodesProps) => {
           nextEl: ".episode-button-next",
           prevEl: ".episode-button-prev",
         }}
+        className="noMarginSwiper"
       >
         {episodes.map((episode, index) => (
           <SwiperSlide key={index}>

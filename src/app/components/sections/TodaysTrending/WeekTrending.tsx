@@ -31,6 +31,7 @@ const WeekTrending = ({ cat }: { cat: "movie" | "tv" | "all" }) => {
           nextEl: ".trending-button-next",
           prevEl: ".trending-button-prev",
         }}
+        className="noMarginSwiper"
       >
         {data?.map((res, index) =>
           res.vote_average == 0.0 ? null : (

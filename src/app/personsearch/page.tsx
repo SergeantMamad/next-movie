@@ -29,12 +29,12 @@ const Page = () => {
   }, [personSearch])
   return (
     <main className="w-screen">
-      <title>People Search | Next Movie</title>
       <div className="relative h-[500px] slider active">
         <Image
           unoptimized
           src="/images/people.jpg"
           fill
+          sizes="100vw"
           alt=""
           className="object-cover brightness-50"
         />

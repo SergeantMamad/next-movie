@@ -38,6 +38,7 @@ const Casts = ({
           nextEl: ".cast-button-next",
           prevEl: ".cast-button-prev",
         }}
+        className="noMarginSwiper"
       >
         {data?.map((cast, index) => (
           <SwiperSlide key={index}>

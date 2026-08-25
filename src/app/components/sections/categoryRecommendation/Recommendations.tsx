@@ -64,6 +64,7 @@ const Recommendations = ({ mainCategory }: mainCategory) => {
           nextEl: ".recommended-button-next",
           prevEl: ".recommended-button-prev",
         }}
+        className="noMarginSwiper"
       >
         {getMovieFromCategory.data ? (
           getMovieFromCategory.data.slice(0, 6).map((movie, index) => (

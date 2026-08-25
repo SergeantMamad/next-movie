@@ -39,19 +39,19 @@ const ResultComponent = ({
         )}
       >
         <div className="relative min-w-[70px] min-h-[120px]">
-          <Image
-            src={`${
-              posterPath
-                ? `https://image.tmdb.org/t/p/w500${posterPath}`
-                : "bg-slate-400"
-            }`}
-            fill
-            className={customcn(
-              "object-cover rounded-md",
-              posterPath == null && "bg-slate-400"
-            )}
-            alt={id.toString()}
-          />
+          {posterPath ? (
+            <Image
+              src={`https://image.tmdb.org/t/p/w500${posterPath}`}
+              fill
+              sizes="70px"
+              className="object-cover rounded-md"
+              alt={id.toString()}
+            />
+          ) : (
+            <div className="bg-slate-400 border border-slate-400 rounded-md w-full h-full flex items-center justify-center">
+              <span className="text-white font-bold">No Image</span>
+            </div>
+          )}
         </div>
         <div className="flex flex-col justify-center gap-[6px]">
           <p className="font-semibold line-clamp-2">{title}</p>

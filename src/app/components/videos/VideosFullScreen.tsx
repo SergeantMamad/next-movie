@@ -46,7 +46,7 @@ const VideosFullScreen = ({
         </p>
         <button
           onClick={handleModalClose}
-          className="w-[30px] h-[30px] border border-red-700 rounded-md"
+          className="w-[30px] h-[30px] border border-red-700 rounded-md cursor-pointer"
         >
           <FontAwesomeIcon className="text-red-700" icon={faXmark} />
         </button>

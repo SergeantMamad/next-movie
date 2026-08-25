@@ -8,12 +8,12 @@ export async function getMainWeekTrending(category: "movie" | "tv" | "all") {
       const { data } = await client.GET("/3/trending/movie/{time_window}", {
         params: {
           path: {
-            time_window: "day",
+            time_window: "day"
           },
           query: {
-            language: "en-US",
-          },
-        },
+            language: "en-US"
+          }
+        }
       })
       return data?.results
     }
@@ -21,12 +21,12 @@ export async function getMainWeekTrending(category: "movie" | "tv" | "all") {
       const { data } = await client.GET("/3/trending/tv/{time_window}", {
         params: {
           path: {
-            time_window: "day",
+            time_window: "day"
           },
           query: {
-            language: "en-US",
-          },
-        },
+            language: "en-US"
+          }
+        }
       })
       return data?.results
     }
@@ -34,12 +34,12 @@ export async function getMainWeekTrending(category: "movie" | "tv" | "all") {
       const { data } = await client.GET("/3/trending/all/{time_window}", {
         params: {
           path: {
-            time_window: "day",
+            time_window: "day"
           },
           query: {
-            language: "en-US",
-          },
-        },
+            language: "en-US"
+          }
+        }
       })
       return data?.results
     }
@@ -52,9 +52,9 @@ export async function getTodayPopularList(category: "movie" | "tv") {
       const { data } = await client.GET("/3/movie/popular", {
         params: {
           query: {
-            language: "en-US",
-          },
-        },
+            language: "en-US"
+          }
+        }
       })
       return data?.results?.slice(0, 9)
     }
@@ -62,9 +62,9 @@ export async function getTodayPopularList(category: "movie" | "tv") {
       const { data } = await client.GET("/3/tv/popular", {
         params: {
           query: {
-            language: "en-US",
-          },
-        },
+            language: "en-US"
+          }
+        }
       })
       return data?.results?.slice(0, 9)
     }
@@ -74,7 +74,7 @@ export async function getTodayPopularList(category: "movie" | "tv") {
 export async function getDiscover({
   cat,
   id = 0,
-  filter,
+  filter
 }: {
   cat: categoris
   id: number
@@ -87,16 +87,16 @@ export async function getDiscover({
     case "movie": {
       const { data } = await client.GET("/3/discover/movie", {
         params: {
-          query: filter as any | {},
-        },
+          query: filter as any | {}
+        }
       })
       return data?.results
     }
     case "tv": {
       const { data } = await client.GET("/3/discover/tv", {
         params: {
-          query: filter as any | {},
-        },
+          query: filter as any | {}
+        }
       })
       return data?.results
     }
@@ -104,20 +104,46 @@ export async function getDiscover({
       const { data } = await client.GET(`/3/movie/{movie_id}/recommendations`, {
         params: {
           path: {
-            movie_id: id,
-          },
-        },
+            movie_id: id
+          }
+        }
       })
-      return data?.results
+      return (
+        data as
+          | {
+              page: number
+              results?:
+                | {
+                    adult: boolean
+                    backdrop_path?: string | undefined
+                    genre_ids?: number[] | undefined
+                    id: number
+                    original_language?: string | undefined
+                    original_title?: string | undefined
+                    overview?: string | undefined
+                    popularity: number
+                    poster_path?: string | undefined
+                    release_date?: string | undefined
+                    title?: string | undefined
+                    video: boolean
+                    vote_average: number
+                    vote_count: number
+                  }[]
+                | undefined
+              total_pages: number
+              total_results: number
+            }
+          | undefined
+      )?.results
     }
 
     case "SimilarTv": {
       const { data } = await client.GET("/3/tv/{series_id}/similar", {
         params: {
           path: {
-            series_id: id.toString(),
-          },
-        },
+            series_id: id.toString()
+          }
+        }
       })
       return data?.results
     }
@@ -128,13 +154,13 @@ export async function getTopImdbMovies() {
   const { data } = await client.GET("/3/list/{list_id}", {
     params: {
       path: {
-        list_id: 1309,
+        list_id: 1309
       },
       query: {
         language: "en-US",
-        page: 1,
-      },
-    },
+        page: 1
+      }
+    }
   })
   return data?.items
 }
@@ -149,12 +175,12 @@ export async function getUpcomingAndTopSelling(cat: string) {
             include_video: false,
             language: "en-US",
             page: 1,
-            primary_release_year: 2024,
+            primary_release_year: 2026,
             region: "US",
             sort_by: "revenue.desc",
-            with_original_language: "en",
-          },
-        },
+            with_original_language: "en"
+          }
+        }
       })
       return data?.results?.slice(0, 12)
     }
@@ -163,9 +189,9 @@ export async function getUpcomingAndTopSelling(cat: string) {
         params: {
           query: {
             language: "en-US",
-            page: 1,
-          },
-        },
+            page: 1
+          }
+        }
       })
       return data?.results?.slice(0, 12)
     }

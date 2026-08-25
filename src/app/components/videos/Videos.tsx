@@ -63,6 +63,7 @@ const Videos = ({
             nextEl: ".videos-button-next",
             prevEl: ".videos-button-prev",
           }}
+          className="noMarginSwiper"
         >
           {data &&
             data?.map((vids, index) => (

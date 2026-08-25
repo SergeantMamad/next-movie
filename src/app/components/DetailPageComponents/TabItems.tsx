@@ -1,4 +1,4 @@
-import { Tab, Tabs } from "@nextui-org/react"
+import { Tabs } from "@heroui/react"
 import SelectBox from "../seriesPageComponent/SelectBox"
 import MainImages from "../mainImages/MainImages"
 import { Suspense } from "react"
@@ -57,23 +57,25 @@ const TabItems = ({
 }: TabItemsProps) => {
   return (
     <div className="flex flex-wrap gap-4">
-      <Tabs
-        className="mt-5"
-        variant="underlined"
-        color="primary"
-        selectedKey={item}
-        onSelectionChange={setItem as any}
-      >
-        {tabItems.map((tab, index) => (
-          <Tab className="w-full" key={tab} title={tab}>
+      <Tabs className="mt-5 w-full" selectedKey={item} onSelectionChange={setItem as any} variant="secondary">
+        <Tabs.ListContainer>
+          <Tabs.List aria-label="Content sections">
+            {tabItems.map((tab) => (
+              <Tabs.Tab id={tab} key={tab} className="w-max">
+                {tab}
+                <Tabs.Indicator />
+              </Tabs.Tab>
+            ))}
+          </Tabs.List>
+        </Tabs.ListContainer>
+        {tabItems.map((tab) => (
+          <Tabs.Panel id={tab} key={tab}>
             {tab == "Seasons" ? (
               <div className="relative flex h-[240px] items-center justify-center">
                 <SelectBox
                   season={season!}
                   seasons={seasons!}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                    setSeason!(e.target.value)
-                  }
+                  onChange={(value) => setSeason!(value)}
                 />
                 <p className="text-white text-3xl font-semibold">
                   Select A Season
@@ -103,9 +105,9 @@ const TabItems = ({
                   className="relative ml-auto mb-3"
                   season={season!}
                   seasons={seasons!}
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                  onChange={(value) =>
                     setCurrentSeason!({
-                      season: e.target.value,
+                      season: value,
                       selected: true,
                     })
                   }
@@ -117,7 +119,7 @@ const TabItems = ({
             ) : (
               ""
             )}
-          </Tab>
+          </Tabs.Panel>
         ))}
       </Tabs>
     </div>

@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { use, useEffect, useRef, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { updateQueryParams } from "../../utils/functions/updateQueryParams"
 import useDebounce from "../../utils/hooks/useDebounce"
@@ -11,7 +11,7 @@ import DotPulse from "../../components/loader/DotPulse"
 import ResultComponent from "../../components/search/ResultComponent"
 import TrendingCard from "../../components/sections/TodaysTrending/TrendingCard"
 import useOnScreen from "../../utils/hooks/useOnScreen"
-import { useDisclosure } from "@nextui-org/react"
+import { useOverlayState } from "@heroui/react"
 import useMediaQuery from "../../utils/hooks/useMediaQuery"
 import { FunnelIcon } from "@heroicons/react/24/outline"
 import FilterModal from "../../components/modals/FilterModal"
@@ -46,26 +46,25 @@ export type filter = {
 }
 
 const Page = ({
-  params: { category },
+  params,
 }: {
-  params: {
-    category: "movie" | "tv"
-  }
+  params: Promise<{ category: "movie" | "tv" }>
 }) => {
-  const params = useSearchParams()
+  const category = use(params).category
+  const searchParams = useSearchParams()
   const ref = useRef<HTMLDivElement>(null)
   const isVisible = useOnScreen(ref)
   const isLarge = useMediaQuery("(min-width: 1024px)")
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const filterModalState = useOverlayState()
   const [filter, setFilter] = useState<filter>({
-    title: params.get("title") || "",
-    genres: params.get("genres")?.split("-") || [],
-    releaseDate: params.get("releaseDate")?.split("_") || [],
-    country: params.get("country")?.split("-") || [],
-    voteCount: params.get("voteCount")?.split("-") || [],
-    ratings: params.get("ratings")?.split("-") || [],
-    runtime: params.get("runtime")?.split("-") || [],
-    sortBy: params.get("sortBy") || "",
+    title: searchParams.get("title") || "",
+    genres: searchParams.get("genres")?.split("-") || [],
+    releaseDate: searchParams.get("releaseDate")?.split("_") || [],
+    country: searchParams.get("country")?.split("-") || [],
+    voteCount: searchParams.get("voteCount")?.split("-") || [],
+    ratings: searchParams.get("ratings")?.split("-") || [],
+    runtime: searchParams.get("runtime")?.split("-") || [],
+    sortBy: searchParams.get("sortBy") || "",
   })
   const debouncedQuery = useDebounce(filter, 1000)
   useEffect(() => {
@@ -108,12 +107,12 @@ const Page = ({
   }
   return (
     <main>
-      <title>Advanced Search | Next Movie</title>
       <div className="relative h-[400px] slider active">
         <Image
           unoptimized
           src="/images/BackImage2.jpg"
           fill
+          sizes="100vw"
           alt=""
           className="object-cover brightness-50"
         />
@@ -127,12 +126,12 @@ const Page = ({
         <div className="w-full">
           <div className="flex justify-between lg:justify-end w-full gap-3">
             <FunnelIcon
-              onClick={onOpen}
+              onClick={filterModalState.open}
               className="mb-8 text-white w-7 h-7 block lg:hidden"
             />
             <FilterModal
-              isOpen={isOpen}
-              onOpenChange={onOpenChange}
+              isOpen={filterModalState.isOpen}
+              onOpenChange={filterModalState.setOpen}
               filter={filter}
               setFilter={setFilter}
             />

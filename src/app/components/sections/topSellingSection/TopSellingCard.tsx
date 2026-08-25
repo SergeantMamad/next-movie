@@ -24,6 +24,7 @@ const TopSellingCard = ({
         src={`https://image.tmdb.org/t/p/w780${backdropPath}`}
         className="object-cover rounded-lg brightness-50"
         fill
+        sizes="(min-width: 1280px) 32vw, 100vw"
         alt=""
       />
       <div className="absolute flex flex-col pl-5 bottom-3 gap-2">

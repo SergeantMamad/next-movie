@@ -16,7 +16,7 @@ import WeekTrending from "./components/sections/TodaysTrending/WeekTrending"
 import { Metadata } from "next"
 import ShowMoreSection from "./components/other/ShowMoreSection"
 export const metadata: Metadata = {
-  title: "Home | Next Movie",
+  title: "Home",
 }
 export default async function Home() {
   return (
@@ -50,7 +50,7 @@ export default async function Home() {
         <div className="p-6 lg:p-12">
           <ShowMoreSection
             title="Movies"
-            href="/advancedsearch/movie?releaseDate=2024-01-01_&sortBy=vote_count.desc"
+            href="/advancedsearch/movie?releaseDate=2026-01-01_&sortBy=vote_count.desc"
           />
           <Suspense fallback={<DiscoverMainSkeleton />}>
             <Discover
@@ -58,7 +58,7 @@ export default async function Home() {
               cat="movie"
               filter={{
                 sort_by: "vote_count.desc",
-                primary_release_year: 2024,
+                primary_release_year: 2026,
                 page: 1,
               }}
             />

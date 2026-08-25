@@ -30,6 +30,7 @@ const Popular = ({ cat }: { cat: "movie" | "tv" }) => {
           nextEl: ".popular-button-next",
           prevEl: ".popular-button-prev",
         }}
+        className="noMarginSwiper"
       >
         {data?.map((res, index) => (
           <SwiperSlide key={index}>

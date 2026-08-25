@@ -18,9 +18,10 @@ const VideosPreview = ({
       <div className="w-[320px] h-[200px] relative">
         <Image
           fill
+          sizes="320px"
           alt=""
           className="rounded-md object-cover hover:cursor-pointer"
-          src={`${youtubeKey}/hqdefault.jpg`}
+          src={`https://img.youtube.com/vi/${youtubeKey}/hqdefault.jpg`}
           onClick={() => handleVideoClick(index, youtubeKey)}
         />
       </div>

@@ -6,7 +6,19 @@ import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experime
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 
 const TanstackProvider = ({ children }: { children: React.ReactNode }) => {
-  const [queryClient] = useState(() => new QueryClient())
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            refetchOnMount:false,
+            retry:10,
+            retryDelay:1000
+          },
+        },
+      })
+  )
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>

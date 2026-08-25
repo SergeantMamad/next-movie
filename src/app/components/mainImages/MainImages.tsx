@@ -65,6 +65,7 @@ const MainImages = ({
             nextEl: ".images-button-next",
             prevEl: ".images-button-prev",
           }}
+          className="noMarginSwiper"
         >
           {data?.map((images, index) => (
             <SwiperSlide key={index}>

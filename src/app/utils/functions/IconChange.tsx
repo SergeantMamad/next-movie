@@ -5,55 +5,27 @@ import {
   faEarthAmericas,
   faLanguage,
   faMoneyBillTrendUp,
-  faStar,
+  faStar
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const IconChange = ({ iconType }: { iconType: string }) => {
   return (
-    <div>
+    <div className="border border-[#00925d] rounded-full max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] text-white text-2xl flex items-center justify-center">
       {iconType == "budget" ? (
-        <FontAwesomeIcon
-          icon={faMoneyBill1}
-          size="2x"
-          className="border border-[#00925d] rounded-full px-5 py-[23px] text-white"
-        />
+        <FontAwesomeIcon icon={faMoneyBill1} size="2x" />
       ) : iconType == "revenue" ? (
-        <FontAwesomeIcon
-          size="2x"
-          className="border border-[#00925d] rounded-full p-6 text-white"
-          icon={faMoneyBillTrendUp}
-        />
+        <FontAwesomeIcon size="2x" icon={faMoneyBillTrendUp} />
       ) : iconType == "language" ? (
-        <FontAwesomeIcon
-          size="2x"
-          className="border border-[#00925d] rounded-full px-5 py-[25px] text-white"
-          icon={faLanguage}
-        />
+        <FontAwesomeIcon size="2x" icon={faLanguage} />
       ) : iconType == "countries" ? (
-        <FontAwesomeIcon
-          size="2x"
-          className="border border-[#00925d] rounded-full p-6 text-white"
-          icon={faEarthAmericas}
-        />
+        <FontAwesomeIcon size="2x" icon={faEarthAmericas} />
       ) : iconType == "release" ? (
-        <FontAwesomeIcon
-          size="2x"
-          className="border border-[#00925d] rounded-full px-6 py-[23px] text-white"
-          icon={faCalendarWeek}
-        />
+        <FontAwesomeIcon size="2x" icon={faCalendarWeek} />
       ) : iconType == "rating" ? (
-        <FontAwesomeIcon
-          size="2x"
-          className="border border-[#00925d] rounded-full p-6 py-[27px] text-white"
-          icon={faStar}
-        />
+        <FontAwesomeIcon size="2x" icon={faStar} />
       ) : iconType == "companies" ? (
-        <FontAwesomeIcon
-          size="2x"
-          className="border border-[#00925d] rounded-full p-8 py-[28px] text-white"
-          icon={faBuilding}
-        />
+        <FontAwesomeIcon icon={faBuilding} size="2x" />
       ) : (
         <div></div>
       )}

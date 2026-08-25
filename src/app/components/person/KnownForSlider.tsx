@@ -3,6 +3,7 @@ import ResultComponent from "../search/ResultComponent"
 import { operations } from "../../../../schema"
 import { A11y, Navigation } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
+import 'swiper/css'
 
 type KnownForSliderProps = {
   works:
@@ -26,6 +27,7 @@ const KnownForSlider = ({ works }: KnownForSliderProps) => {
           nextEl: ".known-button-next",
           prevEl: ".known-button-prev",
         }}
+        className="noMarginSwiper"
       >
         {works!
           .sort(

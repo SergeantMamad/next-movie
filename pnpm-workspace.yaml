@@ -1,0 +1,4 @@
+allowBuilds:
+  '@heroui/shared-utils': set this to true or false
+  '@tailwindcss/oxide': false
+  unrs-resolver: false

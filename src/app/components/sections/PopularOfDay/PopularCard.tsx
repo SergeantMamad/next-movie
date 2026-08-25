@@ -29,6 +29,7 @@ const PopularCard = ({
           <Image
             src={`https://image.tmdb.org/t/p/w500${posterPath}`}
             fill
+            sizes="130px"
             className="rounded-xl object-cover"
             alt="Image of a movie cover"
           />

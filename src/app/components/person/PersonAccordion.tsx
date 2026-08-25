@@ -1,9 +1,30 @@
-import { Accordion, AccordionItem, Button } from "@nextui-org/react"
+import { Accordion, Button } from "@heroui/react"
 import { useState } from "react"
 import ResultComponent from "../search/ResultComponent"
 import { operations } from "../../../../schema"
 import { sortByDate } from "@/app/utils/functions/sortFunctions"
 import { customcn } from "@/app/utils/functions/customcn"
+
+const AccordionItem = ({
+  id,
+  title,
+  className,
+  children,
+}: {
+  id: string
+  title: string
+  className?: string
+  children: React.ReactNode
+}) => (
+  <Accordion.Item id={id}>
+    <Accordion.Heading>
+      <Accordion.Trigger className={className}>{title}</Accordion.Trigger>
+    </Accordion.Heading>
+    <Accordion.Panel>
+      <Accordion.Body>{children}</Accordion.Body>
+    </Accordion.Panel>
+  </Accordion.Item>
+)
 
 type PersonAccordionProps = {
   credits: operations["person-combined-credits"]["responses"]["200"]["content"]["application/json"]
@@ -40,11 +61,10 @@ const PersonAccordion = ({
   credits?.crew?.forEach((job) => deparments.add(job.department!))
   const accordionItems = Array.from(deparments).map((department, index) => (
     <AccordionItem
+      id={department}
       title={department}
       key={index}
-      classNames={{
-        title: customcn("font-semibold", isInModal && "text-lg"),
-      }}
+      className={customcn("font-semibold", isInModal && "text-lg")}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-x-hidden">
         {credits.crew
@@ -69,11 +89,8 @@ const PersonAccordion = ({
           ((credits.crew?.filter((work) => work.department === department)
             .length as any) >= visibleItemsCount[department] && (
             <Button
-              className="col-span-1 md:col-span-2 lg:col-span-3 mt-3"
-              variant="bordered"
-              radius="sm"
-              color="primary"
-              fullWidth={true}
+              variant="secondary"
+              className="w-full col-span-1 md:col-span-2 lg:col-span-3 mt-3"
               onClick={() => {
                 console.log(department)
                 setVisibleItemsCount((prevCount) => ({
@@ -91,10 +108,10 @@ const PersonAccordion = ({
   if (credits.cast?.length !== 0) {
     accordionItems.push(
       <AccordionItem
+        id="Acting"
+        key="Acting"
         title="Acting"
-        classNames={{
-          title: customcn("font-semibold", isInModal && "text-lg"),
-        }}
+        className={customcn("font-semibold", isInModal && "text-lg")}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 overflow-x-hidden">
           {credits.cast
@@ -118,11 +135,8 @@ const PersonAccordion = ({
           {isInModal == true ||
             ((credits.cast?.length as any) >= visibleItemsCount["Acting"] && (
               <Button
-                className="col-span-1 md:col-span-2 lg:col-span-3 mt-3"
-                variant="bordered"
-                radius="sm"
-                color="primary"
-                fullWidth={true}
+                variant="secondary"
+                className="w-full col-span-1 md:col-span-2 lg:col-span-3 mt-3"
                 onClick={() =>
                   setVisibleItemsCount((prevCount) => ({
                     ...prevCount,
@@ -137,6 +151,6 @@ const PersonAccordion = ({
       </AccordionItem>
     )
   }
-  return <Accordion selectionMode="multiple">{accordionItems}</Accordion>
+  return <Accordion allowsMultipleExpanded>{accordionItems}</Accordion>
 }
 export default PersonAccordion

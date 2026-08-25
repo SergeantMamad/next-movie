@@ -2,7 +2,7 @@
 import Image from "next/image"
 import { Fragment } from "react"
 import ActorModal from "../modals/ActorModal"
-import { useDisclosure } from "@nextui-org/react"
+import { useOverlayState } from "@heroui/react"
 
 type CastsCardProps = {
   profilePath: string | undefined
@@ -19,18 +19,19 @@ const CastsCard = ({
   id,
   roles,
 }: CastsCardProps) => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const actorModalState = useOverlayState()
   return (
     <div className="flex items-center gap-3 min-w-[400px] cursor-pointer">
       <div className="min-w-[90px] min-h-[90px] rounded-full relative">
         <Image
-          onClick={onOpen}
+          onClick={actorModalState.open}
           src={`${
             profilePath
               ? `https://image.tmdb.org/t/p/original${profilePath}`
               : "/images/personUnknown.png"
           }`}
           fill
+          sizes="90px"
           className="rounded-full object-cover bg-black"
           alt=""
         />
@@ -46,7 +47,11 @@ const CastsCard = ({
           </p>
         </div>
       </div>
-      <ActorModal id={id} isOpen={isOpen} onOpenChange={onOpenChange} />
+      <ActorModal
+        id={id}
+        isOpen={actorModalState.isOpen}
+        onOpenChange={actorModalState.setOpen}
+      />
     </div>
   )
 }

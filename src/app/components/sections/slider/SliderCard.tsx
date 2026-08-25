@@ -30,6 +30,7 @@ const SliderCard = ({
         <Image
           src={`https://image.tmdb.org/t/p/original${image}`}
           fill
+          sizes="100vw"
           className="object-cover object-top"
           alt=""
         />

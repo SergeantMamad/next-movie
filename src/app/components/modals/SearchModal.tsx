@@ -1,47 +1,37 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-} from "@nextui-org/react"
+import { Button, Modal, useOverlayState } from "@heroui/react"
 
 const SearchModal = ({
   isOpen,
   onOpenChange,
-  children,
+  children
 }: {
   isOpen: boolean
-  onOpenChange: () => void
+  onOpenChange: (isOpen: boolean) => void
   children: React.ReactNode
 }) => {
   return (
-    <Modal
-      isOpen={isOpen}
-      placement={"auto"}
-      onOpenChange={onOpenChange}
-      scrollBehavior="inside"
-      classNames={{
-        base: "max-w-[900px] border border-stone-700",
-      }}
-    >
-      <ModalContent>
-        {(onClose) => (
-          <>
-            <ModalHeader>
-                Search For Something
-            </ModalHeader>
-            <ModalBody>{children}</ModalBody>
-            <ModalFooter>
-              <Button color="danger" variant="bordered" onPress={onClose}>
-                Close
-              </Button>
-            </ModalFooter>
-          </>
-        )}
-      </ModalContent>
-    </Modal>
+    <Modal.Backdrop isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal.Container
+        placement="auto"
+        scroll="inside"
+      >
+        <Modal.Dialog>
+          {({ close: onClose }) => (
+            <>
+              <Modal.Header>
+                <Modal.Heading>Search For Something</Modal.Heading>
+              </Modal.Header>
+              <Modal.Body>{children}</Modal.Body>
+              <Modal.Footer>
+                <Button variant="danger" onPress={onClose}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </>
+          )}
+        </Modal.Dialog>
+      </Modal.Container>
+    </Modal.Backdrop>
   )
 }
 export default SearchModal

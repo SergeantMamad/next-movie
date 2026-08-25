@@ -3,7 +3,7 @@ import {
   sortByItemsMovie,
   sortByItemsTV,
 } from "@/app/utils/configs/sortbyItems"
-import { Select, SelectItem } from "@nextui-org/react"
+import { ListBox, Select } from "@heroui/react"
 
 const SortItems = ({
   filter,
@@ -17,25 +17,32 @@ const SortItems = ({
   return (
     <div className="flex flex-col gap-4">
       <Select
-        selectedKeys={filter.sortBy.split(",")}
+        value={filter.sortBy}
         aria-label="Select A Sort Item"
         placeholder="Select A Sort Item"
         className="w-[230px]"
-        size="sm"
-        onChange={(e) =>
+        onChange={(value) =>
           setFilter((prevFilter) => ({
             ...prevFilter,
-            sortBy: e.target.value,
+            sortBy: String(value),
           }))
         }
       >
+        <Select.Trigger>
+          <Select.Value />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.Popover>
+          <ListBox>
         {category == "movie"
           ? sortByItemsMovie.map((item) => (
-              <SelectItem key={item.id}>{item.name}</SelectItem>
+              <ListBox.Item key={item.id} id={item.id} textValue={item.name}>{item.name}</ListBox.Item>
             ))
           : sortByItemsTV.map((item) => (
-              <SelectItem key={item.id}>{item.name}</SelectItem>
+              <ListBox.Item key={item.id} id={item.id} textValue={item.name}>{item.name}</ListBox.Item>
             ))}
+          </ListBox>
+        </Select.Popover>
       </Select>
       <p className="text-xs">Default sort is the most popular</p>
     </div>

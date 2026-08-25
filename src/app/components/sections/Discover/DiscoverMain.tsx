@@ -64,6 +64,7 @@ const Discover = ({ cat, id, filter }: DiscoverProps) => {
         onSwiper={(swiper) => {
           (swiperRef.current as any) = swiper
         }}
+        className="noMarginSwiper"
       >
         {data?.map((res, index) => (
           <SwiperSlide key={index}>

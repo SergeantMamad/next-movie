@@ -37,6 +37,7 @@ const PersonInitialDetail = ({
         <Image
           src={`https://image.tmdb.org/t/p/original${profilePath}`}
           fill
+          sizes="(min-width: 1280px) 300px, 200px"
           alt=""
           className={customcn(
             "object-cover rounded-md",

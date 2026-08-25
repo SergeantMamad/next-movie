@@ -1,86 +1,32 @@
-"use client"
-import { useSuspenseQuery } from "@tanstack/react-query"
-import { Suspense, useState } from "react"
-import Casts from "@/app/components/casts/Casts"
-import "@fortawesome/fontawesome-svg-core/styles.css"
-import CastsSkeleton from "@/app/components/casts/CastsSkeleton"
-import Discover from "@/app/components/sections/Discover/DiscoverMain"
-import DiscoverMainSkeleton from "@/app/components/sections/Discover/DiscoverMainSkeleton"
-import NotFound from "@/app/not-found"
-import HeaderImage from "@/app/components/DetailPageComponents/HeaderImage"
-import TabItems from "@/app/components/DetailPageComponents/TabItems"
+import type { Metadata } from "next"
+import { notFound } from "next/navigation"
+import { cache } from "react"
+import MoviePageClient from "./MoviePageClient"
 import { getMovie } from "@/app/utils/actions/getSingleData"
-const Page = ({
-  params: { id },
-}: {
-  params: {
-    id: number
-  }
-}) => {
-  const [selected, setSelected] = useState("More Info")
 
-  const { data, error } = useSuspenseQuery({
-    queryKey: ["movie" + id],
-    queryFn: () => getMovie(id),
-  })
-  if (error || !data) {
-    return <NotFound />
+type PageProps = Readonly<{
+  params: Promise<{ id: string }>
+}>
+
+const getMovieCached = cache((id: number) => getMovie(id))
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params
+  const data = await getMovieCached(Number(id))
+
+  return {
+    title: data?.title ?? "Movie",
   }
-  return (
-    <div>
-      <title>{data.title} | Next Movie</title>
-      <HeaderImage
-        backdropPath={data.backdrop_path!}
-        genres={data.genres!}
-        isTvSeason={false}
-        isTvSeries={false}
-        releaseDate={data.release_date!}
-        title={data.title!}
-        runtime={data.runtime}
-        link={data.homepage!}
-        mediaType="Movie"
-        posterPath={data.poster_path!}
-        id={data.id}
-      />
-      <div className="p-12">
-        <div>
-          <h1 className="text-white text-lg font-semibold">Overview</h1>
-          <p className="text-[#9CA4AB] mt-3">{data.overview}</p>
-        </div>
-        <div className="mt-5">
-          <h1 className="text-white text-lg font-semibold">Top Cast</h1>
-          <Suspense fallback={<CastsSkeleton />}>
-            <Casts type="movie" id={id} season={0} />
-          </Suspense>
-        </div>
-        <TabItems
-          tabItems={["More Info", "Pictures", "Videos"]}
-          setItem={setSelected}
-          item={selected}
-          mediaType="movie"
-          id={id}
-          moreInfoData={{
-            budget: data.budget,
-            language: data.original_language!,
-            productionCompanies: data.production_companies!,
-            productionCountries: data.production_countries!,
-            releaseDate: data.release_date!,
-            revenue: data.revenue,
-            voteAverage: data.vote_average,
-          }}
-        />
-      </div>
-      <div className="border-t border-gray-700 p-0"></div>
-      <div className="p-12">
-        <div>
-          <h1 className="text-white text-2xl font-bold">Similar Movies</h1>
-          <Suspense fallback={<DiscoverMainSkeleton />}>
-            <Discover cat="SimilarMovie" id={id} filter={null} />
-          </Suspense>
-        </div>
-      </div>
-    </div>
-  )
 }
 
-export default Page
+export default async function MoviePage({ params }: PageProps) {
+  const { id: rawId } = await params
+  const id = Number(rawId)
+  const data = await getMovieCached(id)
+
+  if (!data) {
+    notFound()
+  }
+
+  return <MoviePageClient id={id} data={data} />
+}

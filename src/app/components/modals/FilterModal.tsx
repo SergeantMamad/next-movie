@@ -1,21 +1,37 @@
 import {
-    Accordion,
-    AccordionItem,
+  Accordion,
   Avatar,
   Button,
+  Label,
+  ListBox,
   Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
   Select,
-  SelectItem,
-} from "@nextui-org/react"
+  useOverlayState,
+} from "@heroui/react"
 import NumberBetweenInputs from "../advancedsearch/NumberBetweenInputs"
 import { movieGenre } from "@/app/utils/configs/genres"
 import GenreButtons from "../advancedsearch/GenreButtons"
 import { countries } from "@/app/utils/configs/countries"
 import { filter } from "@/app/advancedsearch/[category]/page"
+
+const AccordionItem = ({
+  id,
+  title,
+  children,
+}: {
+  id: string
+  title: string
+  children: React.ReactNode
+}) => (
+  <Accordion.Item id={id}>
+    <Accordion.Heading>
+      <Accordion.Trigger>{title}</Accordion.Trigger>
+    </Accordion.Heading>
+    <Accordion.Panel>
+      <Accordion.Body>{children}</Accordion.Body>
+    </Accordion.Panel>
+  </Accordion.Item>
+)
 
 const FilterModal = ({
   isOpen,
@@ -24,30 +40,25 @@ const FilterModal = ({
   setFilter
 }: {
   isOpen: boolean
-  onOpenChange: () => void
+  onOpenChange: (isOpen: boolean) => void
   filter:filter
   setFilter:React.Dispatch<React.SetStateAction<filter>>
 }) => {
   return (
-    <Modal
-      isOpen={isOpen}
-      placement={"auto"}
-      onOpenChange={onOpenChange}
-      scrollBehavior="inside"
-    >
-      <ModalContent>
-        {(onClose) => (
-          <>
-            <ModalHeader>Search For Something</ModalHeader>
-            <ModalBody>
+    <Modal state={useOverlayState({ isOpen, onOpenChange })}>
+      <Modal.Backdrop>
+        <Modal.Container placement="auto" scroll="inside">
+          <Modal.Dialog>
+            {({ close: onClose }) => (
+              <>
+                <Modal.Header>
+                  <Modal.Heading>Search For Something</Modal.Heading>
+                </Modal.Header>
+                <Modal.Body>
               <Accordion
-                selectionMode="multiple"
-                itemClasses={{
-                  title: "font-semibold",
-                }}
-                showDivider={false}
+                allowsMultipleExpanded
               >
-                <AccordionItem key="1" title="Title">
+                <AccordionItem id="1" title="Title">
                   <input
                     value={filter.title}
                     placeholder="Like Interstellar"
@@ -60,7 +71,7 @@ const FilterModal = ({
                     className="px-3 p-1 rounded-xl text-sm outline-none bg-default-100 border border-[#353535] placeholder-foreground-500 transition-all focus:border-stone-600 w-full h-[40px]"
                   />
                 </AccordionItem>
-                <AccordionItem key="2" title="Genres">
+                <AccordionItem id="2" title="Genres">
                   <div>
                     {movieGenre.map((genre) => (
                       <GenreButtons
@@ -72,7 +83,7 @@ const FilterModal = ({
                     ))}
                   </div>
                 </AccordionItem>
-                <AccordionItem key="3" title="Number Of Votes">
+                <AccordionItem id="3" title="Number Of Votes">
                   <NumberBetweenInputs
                     filter={filter}
                     numberField="voteCount"
@@ -81,7 +92,7 @@ const FilterModal = ({
                     maxPlaceHolder="Like 20000"
                   />
                 </AccordionItem>
-                <AccordionItem key="4" title="Ratings Average">
+                <AccordionItem id="4" title="Ratings Average">
                   <NumberBetweenInputs
                     filter={filter}
                     numberField="ratings"
@@ -90,7 +101,7 @@ const FilterModal = ({
                     maxPlaceHolder="Like 9.6"
                   />
                 </AccordionItem>
-                <AccordionItem key="5" title="Runtime">
+                <AccordionItem id="5" title="Runtime">
                   <NumberBetweenInputs
                     filter={filter}
                     numberField="runtime"
@@ -99,56 +110,66 @@ const FilterModal = ({
                     maxPlaceHolder="Like 160"
                   />
                 </AccordionItem>
-                <AccordionItem key="6" title="Release Date / First Air Time">
+                <AccordionItem id="6" title="Release Date / First Air Time">
                   <NumberBetweenInputs
                     filter={filter}
                     numberField="releaseDate"
                     setFilter={setFilter}
                   />
                 </AccordionItem>
-                <AccordionItem key="7" title="Origin Country">
+                <AccordionItem id="7" title="Origin Country">
                   <Select
                     className="max-w-full bg-[#08070A]"
                     selectionMode="multiple"
-                    size="md"
                     aria-label="Select Country"
                     placeholder="Select A Country"
-                    selectedKeys={filter.country}
-                    onChange={(e) =>
+                    value={filter.country}
+                    onChange={(value) =>
                       setFilter((prevFilter) => ({
                         ...prevFilter,
-                        country: e.target.value.split(","),
+                        country: value as string[],
                       }))
                     }
                   >
+                    <Label>Select Country</Label>
+                    <Select.Trigger>
+                      <Select.Value />
+                      <Select.Indicator />
+                    </Select.Trigger>
+                    <Select.Popover>
+                      <ListBox>
                     {countries.map((country) => (
-                      <SelectItem
+                      <ListBox.Item
+                        id={country.iso_3166_1}
+                        textValue={country.english_name}
                         key={country.iso_3166_1}
-                        startContent={
-                          <div>
-                            <Avatar
-                              className="w-6 h-5 rounded-md"
-                              alt={country.english_name}
-                              src={`https://flagcdn.com/${country.iso_3166_1.toLocaleLowerCase()}.svg`}
-                            />
-                          </div>
-                        }
                       >
+                        <Avatar className="w-6 h-5 rounded-md">
+                          <Avatar.Image
+                            src={`https://flagcdn.com/${country.iso_3166_1.toLocaleLowerCase()}.svg`}
+                            alt={country.english_name}
+                          />
+                        </Avatar>
                         {country.english_name}
-                      </SelectItem>
+                        <ListBox.ItemIndicator />
+                      </ListBox.Item>
                     ))}
+                      </ListBox>
+                    </Select.Popover>
                   </Select>
                 </AccordionItem>
               </Accordion>
-            </ModalBody>
-            <ModalFooter>
-              <Button color="danger" variant="bordered" onPress={onClose}>
+                </Modal.Body>
+                <Modal.Footer>
+              <Button variant="danger" onPress={onClose}>
                 Close
               </Button>
-            </ModalFooter>
-          </>
-        )}
-      </ModalContent>
+                </Modal.Footer>
+              </>
+            )}
+          </Modal.Dialog>
+        </Modal.Container>
+      </Modal.Backdrop>
     </Modal>
   )
 }

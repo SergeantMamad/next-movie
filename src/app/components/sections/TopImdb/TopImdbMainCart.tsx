@@ -30,6 +30,7 @@ const TopImdbMainCart = ({
         <Image
           src={`https://image.tmdb.org/t/p/original${backdropPath}`}
           fill
+          sizes="(min-width: 1280px) 645px, 90vw"
           className="object-cover object-top"
           alt=""
         />

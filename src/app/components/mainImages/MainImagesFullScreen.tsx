@@ -92,6 +92,7 @@ const MainImagesFullScreen = ({
           <Image
             alt=""
             fill
+            sizes="(max-width: 1200px) 100vw, 1200px"
             src={`https://image.tmdb.org/t/p/original${fullPic.filePath}`}
             className="rounded-sm object-contain object-center"
           />

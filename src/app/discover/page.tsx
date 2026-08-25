@@ -12,6 +12,7 @@ const Page = () => {
       <Link href="discover/movies" className="relative bg-green-500 h-1/2 md:h-screen left_pic w-full md:w-1/2">
           <Image
             fill
+            sizes="(min-width: 768px) 50vw, 100vw"
             src="https://image.tmdb.org/t/p/original/7I6VUdPj6tQECNHdviJkUHD2u89.jpg"
             className="object-cover mix-blend-multiply object-center"
             alt=""
@@ -23,6 +24,7 @@ const Page = () => {
       <Link href="discover/series" className="relative bg-red-600 h-1/2 md:h-screen right_pic w-full md:w-1/2">
         <Image
           fill
+          sizes="(min-width: 768px) 50vw, 100vw"
           src="https://image.tmdb.org/t/p/original/vFxjuhENDjEKzWXUGKmRFct15bA.jpg"
           className="object-cover mix-blend-multiply"
           alt=""

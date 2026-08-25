@@ -34,6 +34,7 @@ const TrendingCard = ({
       <Image
         src={`https://image.tmdb.org/t/p/w342${posterPath}`}
         fill
+        sizes="(min-width: 640px) 310px, 280px"
         className={customcn(`rounded-2xl object-cover`, slideN == id && "border border-green-500 mix-blend-multiply",posterPath == null && 'bg-stone-950 border border-stone-950')}
         alt=""
       />

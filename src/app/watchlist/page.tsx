@@ -3,7 +3,7 @@ import Image from "next/image"
 import { useContext } from "react"
 import { StorageContext } from "../utils/context/storageContext"
 import Link from "next/link"
-import { Accordion, AccordionItem } from "@nextui-org/react"
+import { Accordion } from "@heroui/react"
 import useMediaQuery from "../utils/hooks/useMediaQuery"
 import WatchList from "../components/watchlist/WatchList"
 
@@ -12,12 +12,12 @@ const Page = () => {
   const isLarge = useMediaQuery("(min-width: 1024px)")
   return (
     <main>
-      <title>Watchlist | Next Movie</title>
       <div className="relative h-[450px] slider active">
         <Image
           unoptimized
           src="/images/fury.png"
           fill
+          sizes="100vw"
           alt=""
           className="object-cover  brightness-50"
         />
@@ -43,17 +43,28 @@ const Page = () => {
         )}
         {context?.items?.length! > 0 && <div className="w-full lg:w-[80%]">
           <Accordion
-            itemClasses={{
-              title: "font-semibold",
-            }}
-            selectionMode="multiple"
+            allowsMultipleExpanded
           >
-            <AccordionItem key="1" title="Movies">
-            <WatchList isLarge={isLarge} mediaType="movie" />
-            </AccordionItem>
-            <AccordionItem key="2" title="Series">
-              <WatchList isLarge={isLarge} mediaType="tv" />
-            </AccordionItem>
+            <Accordion.Item id="movies">
+              <Accordion.Heading>
+                <Accordion.Trigger className="font-semibold">Movies</Accordion.Trigger>
+              </Accordion.Heading>
+              <Accordion.Panel>
+                <Accordion.Body>
+                  <WatchList isLarge={isLarge} mediaType="movie" />
+                </Accordion.Body>
+              </Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item id="series">
+              <Accordion.Heading>
+                <Accordion.Trigger className="font-semibold">Series</Accordion.Trigger>
+              </Accordion.Heading>
+              <Accordion.Panel>
+                <Accordion.Body>
+                  <WatchList isLarge={isLarge} mediaType="tv" />
+                </Accordion.Body>
+              </Accordion.Panel>
+            </Accordion.Item>
           </Accordion>
         </div>}
       </div>

@@ -11,6 +11,7 @@ const BackImage = ({ slideN, index, image }: BackImageProps) => {
     <div className={`middleSlide w-screen h-[1200px] lg:h-[800px]`}>
       <Image
         fill
+        sizes="100vw"
         key={index}
         src={`https://image.tmdb.org/t/p/w1280${image}`}
         className="object-cover"

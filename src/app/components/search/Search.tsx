@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query"
 import { useCallback, useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import SearchModal from "../modals/SearchModal"
-import { useDisclosure } from "@nextui-org/react"
+import { useOverlayState } from "@heroui/react"
 import SearchInput from "./SearchInput"
 import SearchBody from "./SearchBody"
 import { updateQueryParams } from "@/app/utils/functions/updateQueryParams"
@@ -36,17 +36,20 @@ export default function Search() {
     updateQueryParams({ search: searchInput })
     handleInput(searchInput)
   }, [searchInput, handleInput, reset])
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const searchModalState = useOverlayState()
 
   return (
     <div className="search-box relative">
       <FontAwesomeIcon
         className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
         icon={faMagnifyingGlass}
-        onClick={onOpen}
+        onClick={searchModalState.open}
       />
-      <SearchModal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <SearchInput setSearchInput={setSearchInput} />
+      <SearchModal
+        isOpen={searchModalState.isOpen}
+        onOpenChange={searchModalState.setOpen}
+      >
+        <SearchInput searchParam={searchParam} setSearchInput={setSearchInput} />
         <SearchBody
           data={data}
           isPending={isPending}

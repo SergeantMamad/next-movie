@@ -66,12 +66,12 @@ const Page = () => {
 
   return (
     <>
-    <title>Multi Search | Next Movie</title>
       <div className="relative h-[500px] slider active">
         <Image
           unoptimized
           src="/images/sherlock.jpg"
           fill
+          sizes="100vw"
           alt=""
           className="object-cover brightness-50 object-top"
         />

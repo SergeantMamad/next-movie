@@ -16,16 +16,19 @@ const PeopleCard = ({
     <Link href={`person/${id.toString()}`}>
       <div className="flex flex-col items-center gap-3 min-w-[200px] cursor-pointer">
         <div className="min-w-[180px] min-h-[180px] rounded-full relative">
-          <Image
-            src={`${
-              profilePath
-                ? `https://image.tmdb.org/t/p/original${profilePath}`
-                : "bg-stone-950 border border-stone-950"
-            }`}
-            fill
-            className="rounded-full object-cover bg-stone-950 border border-stone-950"
-            alt=""
-          />
+          {profilePath ? (
+            <Image
+              src={`https://image.tmdb.org/t/p/original${profilePath}`}
+              fill
+              sizes="180px"
+              className="rounded-full object-cover"
+              alt=""
+            />
+          ) : (
+            <div className="bg-stone-950 border border-stone-950 rounded-full w-full h-full flex items-center justify-center">
+              <span className="text-white font-bold">No Image</span>
+            </div>
+          )}
         </div>
         <div className="flex flex-col gap-3">
           <h1 className="text-white font-semibold text-lg text-center">

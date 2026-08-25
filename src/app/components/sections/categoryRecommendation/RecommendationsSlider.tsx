@@ -32,6 +32,7 @@ const RecommendationsSlider = ({
       >
         <Image
           fill
+          sizes="100vw"
           src={`https://image.tmdb.org/t/p/w1280${backdropPath}`}
           className="object-cover"
           alt=""

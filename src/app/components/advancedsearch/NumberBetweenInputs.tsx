@@ -1,7 +1,7 @@
 import { filter } from "@/app/advancedsearch/[category]/page"
 import { floatinReg, numberReg } from "@/app/utils/configs/regex"
 import { parseDate } from "@internationalized/date"
-import { DatePicker } from "@nextui-org/react"
+import { Calendar, DateField, DatePicker, Label } from "@heroui/react"
 
 type NumberField =
   | "ratings"
@@ -86,9 +86,6 @@ const NumberBetweenInputs = ({
       ) : (
         <>
           <DatePicker
-            label="From Date"
-            size="sm"
-            showMonthAndYearPickers={true}
             value={
               filter[numberField][0] ? parseDate(filter[numberField][0]) : null
             }
@@ -103,12 +100,24 @@ const NumberBetweenInputs = ({
                 [numberField]: [e ? e.toString() : undefined!, prevFilter[numberField][1]],
               }))
             }
-          />
+          >
+            <Label>From Date</Label>
+            <DateField.Group>
+              <DateField.Input>
+                {(segment) => <DateField.Segment segment={segment} />}
+              </DateField.Input>
+              <DateField.Suffix>
+                <DatePicker.Trigger>
+                  <DatePicker.TriggerIndicator />
+                </DatePicker.Trigger>
+              </DateField.Suffix>
+            </DateField.Group>
+            <DatePicker.Popover>
+              <Calendar aria-label="Choose from date" />
+            </DatePicker.Popover>
+          </DatePicker>
           <p className="hidden">TO</p>
           <DatePicker
-            label="To Date"
-            size="sm"
-            showMonthAndYearPickers={true}
             minValue={
               filter[numberField][0]
                 ? parseDate(filter[numberField][0])
@@ -123,7 +132,22 @@ const NumberBetweenInputs = ({
                 [numberField]: [prevFilter[numberField][0], e ? e.toString() : undefined!],
               }))
             }
-          />
+          >
+            <Label>To Date</Label>
+            <DateField.Group>
+              <DateField.Input>
+                {(segment) => <DateField.Segment segment={segment} />}
+              </DateField.Input>
+              <DateField.Suffix>
+                <DatePicker.Trigger>
+                  <DatePicker.TriggerIndicator />
+                </DatePicker.Trigger>
+              </DateField.Suffix>
+            </DateField.Group>
+            <DatePicker.Popover>
+              <Calendar aria-label="Choose to date" />
+            </DatePicker.Popover>
+          </DatePicker>
         </>
       )}
     </div>
