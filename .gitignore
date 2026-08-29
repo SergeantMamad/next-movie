@@ -38,3 +38,5 @@ next-env.d.ts
 .vercel
 # heroui-agents-md
 .heroui-docs/
+
+.env*

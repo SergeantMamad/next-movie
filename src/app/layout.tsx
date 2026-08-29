@@ -1,4 +1,4 @@
-import { Rubik } from "next/font/google"
+import { Pinyon_Script, Rubik } from "next/font/google"
 import "./globals.css"
 import NextTopLoader from "nextjs-toploader"
 import TanstackProvider from "./providers/TanStackProvider"
@@ -7,8 +7,10 @@ import Navbar from "./components/navbar/navbar"
 import { StorageContextProvider } from "./utils/context/storageContext"
 import PhoneNavbar from "./components/navbar/PhoneNavbar"
 import InstallAppPrompt from "./components/other/InstallAppPrompt"
-const rubik = Rubik({ subsets: ["latin"], display: "swap" })
+
 import type { Metadata } from 'next'
+import { rubik } from "./utils/fonts"
+import { Toast } from "@heroui/react"
  
 export const metadata: Metadata = {
   title: {
@@ -42,6 +44,7 @@ export default async function RootLayout({
                     height={1}
                   />
                   {children}
+                  <Toast.Provider />
                 </StorageContextProvider>
               </LayoutProvider>
             </TanstackProvider>

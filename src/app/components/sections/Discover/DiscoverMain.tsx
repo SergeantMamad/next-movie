@@ -44,16 +44,16 @@ const Discover = ({ cat, id, filter }: DiscoverProps) => {
       <>
         <button
           onClick={() => swiperRef?.current?.slideNext()}
-          className="w-10 h-10 bg-[#55545b] rounded-full absolute z-10 top-1/2 -translate-y-1/2 -right-0"
+          className="w-10 h-10 bg-[#55545b] rounded-full absolute z-10 top-1/2 -translate-y-1/2 -right-0 max-lg:w-6 max-lg:h-6"
         >
-          <ChevronRightIcon className="w-7 h-7 mx-auto text-white" />
+          <ChevronRightIcon className="w-7 h-7 max-lg:w-3 max-lg:h-3 mx-auto text-white" />
         </button>
 
         <button
           onClick={() => swiperRef?.current?.slidePrev()}
-          className="w-10 h-10 bg-[#55545b] rounded-full absolute top-1/2 -translate-y-1/2 -left-5 z-10"
+          className="w-10 h-10 bg-[#55545b] rounded-full absolute top-1/2 -translate-y-1/2 -left-5 z-10 max-lg:w-6 max-lg:h-6"
         >
-          <ChevronLeftIcon className="w-7 h-7 mx-auto text-white" />
+          <ChevronLeftIcon className="w-7 h-7 max-lg:w-3 max-lg:h-3 mx-auto text-white" />
         </button>
       </>
       <Swiper

@@ -22,14 +22,14 @@ const Page = () => {
         <Slider listNumber={8309849} />
       </Suspense>
       <div className="p-6 xl:p-12">
-        <ShowMoreSection title="Popular Movies Of 2024" href="/advancedsearch/movie?releaseDate=2024-01-01_&sortBy=vote_count.desc" />
+        <ShowMoreSection title="Popular Movies Of 2026" href="/advancedsearch/movie?releaseDate=2026-01-01_&sortBy=vote_count.desc" />
         <Suspense fallback={<DiscoverMainSkeleton />}>
           <Discover
             id={4}
             cat="movie"
             filter={{
               sort_by: "vote_count.desc",
-              primary_release_year: 2024,
+              primary_release_year: 2026,
               page: 1,
             }}
           />
@@ -63,7 +63,7 @@ const Page = () => {
             }}
           />
         </Suspense>
-        <CustomH1 title="Three Best Selling Movies Of 2024" />
+        <CustomH1 title="Three Best Selling Movies Of 2026" />
         <Suspense fallback={<TopSellingSkeleton />}>
           <TopSellingSection />
         </Suspense>

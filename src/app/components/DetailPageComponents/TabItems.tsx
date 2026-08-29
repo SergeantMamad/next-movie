@@ -61,7 +61,7 @@ const TabItems = ({
         <Tabs.ListContainer>
           <Tabs.List aria-label="Content sections">
             {tabItems.map((tab) => (
-              <Tabs.Tab id={tab} key={tab} className="w-max">
+              <Tabs.Tab id={tab} key={tab} className="w-max max-lg:w-full">
                 {tab}
                 <Tabs.Indicator />
               </Tabs.Tab>

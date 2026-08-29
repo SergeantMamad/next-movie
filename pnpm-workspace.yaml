@@ -1,4 +1,7 @@
+packages:
+  - "."
 allowBuilds:
-  '@heroui/shared-utils': set this to true or false
+  '@heroui/shared-utils': true
   '@tailwindcss/oxide': false
+  esbuild: true
   unrs-resolver: false

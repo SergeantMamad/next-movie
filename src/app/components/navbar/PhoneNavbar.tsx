@@ -2,6 +2,7 @@
 import { customcn } from "@/app/utils/functions/customcn"
 import {
   BookmarkIcon,
+  CakeIcon,
   EyeIcon,
   HomeIcon,
   MagnifyingGlassCircleIcon,
@@ -56,13 +57,13 @@ const PhoneNavbar = () => {
           <p>Advanced</p>
         </Link>
         <Link
-          href="/personsearch"
+          href="/2nd-anniversary"
           className={`flex flex-col justify-center items-center h-[40px] ${
-            pathName == "/personsearch" ? "" : "text-[#55545b]"
+            pathName == "/2nd-anniversary" ? "" : "text-[#55545b]"
           }`}
         >
-          <UserCircleIcon className="w-5 h-5" />
-          <p>People</p>
+          <CakeIcon className="w-5 h-5" />
+          <p>Anniversary</p>
         </Link>
       </div>
     </Suspense>

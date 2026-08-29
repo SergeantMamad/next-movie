@@ -11,7 +11,7 @@ const TopSellingSection = () => {
         cat: "movie",
         id: 7,
         filter: {
-          primary_release_year: 2024,
+          primary_release_year: 2026,
           sort_by: "revenue.desc",
           "vote_count.gte": 500,
           with_origin_country: "US",

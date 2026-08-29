@@ -42,7 +42,7 @@ const FooterMain = () => {
       </div>
       <div className="flex flex-col xl:flex-row justify-between">
         <p className="text-xs text-gray-500 text-center">
-          © 2024 All Rights Reserved To Sergeant & Irvan Wibowo
+          © 2026 All Rights Reserved To Sergeant & Irvan Wibowo
         </p>
         <div className="flex justify-around text-xs text-gray-500 gap-2 xl:gap-6 mt-3 xl:mt-0">
           <p>Sergeant Community</p>

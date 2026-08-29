@@ -10,7 +10,7 @@ type TrendingCardProps = {
   posterPath: string
   title: string
   voteAverage?: number
-  genres:number[]
+  genres: number[]
   type: "sergenat" | "main" | "search"
   onClick?: () => void
 }
@@ -24,27 +24,40 @@ const TrendingCard = ({
   voteAverage,
   genres,
   type,
-  onClick,
+  onClick
 }: TrendingCardProps) => {
   const content = (
     <div
       onClick={onClick}
-      className={customcn(`min-w-[310px] min-h-[430px] relative cursor-pointer rounded-xl`,slideN == id && "bg-green-200",type == "search" && "min-w-0 min-h-0 w-[280px] h-[410px]")}
+      className={customcn(
+        `min-w-[310px] min-h-[430px] relative cursor-pointer rounded-xl`,
+        slideN == id && "bg-green-200",
+        type == "search" && "min-w-0 min-h-0 w-[280px] h-[410px]"
+      )}
     >
       <Image
         src={`https://image.tmdb.org/t/p/w342${posterPath}`}
         fill
         sizes="(min-width: 640px) 310px, 280px"
-        className={customcn(`rounded-2xl object-cover`, slideN == id && "border border-green-500 mix-blend-multiply",posterPath == null && 'bg-stone-950 border border-stone-950')}
+        className={customcn(
+          `rounded-2xl object-cover`,
+          slideN == id && "border border-green-500 mix-blend-multiply",
+          posterPath == null && "bg-stone-950 border border-stone-950"
+        )}
         alt=""
       />
-      <div className="absolute bottom-5 ml-5">
+      <div className="absolute bottom-5 ml-5 z-[10]">
         <p className="text-white font-bold mb-2">{title}</p>
-          <CartDescription mediaType={mediaType} voteAverage={voteAverage} genres={genres} />
+        <CartDescription
+          mediaType={mediaType}
+          voteAverage={voteAverage}
+          genres={genres}
+        />
       </div>
+      <div className="w-full h-full absolute top-0 left-0 rounded-2xl bg-linear-to-t from-black from-0% to-[#ffffff00] to-30%"></div>
     </div>
   )
-  return (type == "main" || type == "search") ? (
+  return type == "main" || type == "search" ? (
     <Link href={mediaType == "tv" ? `series/${id}` : `movie/${id}`}>
       {content}
     </Link>

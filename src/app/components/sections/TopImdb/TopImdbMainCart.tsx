@@ -25,17 +25,17 @@ const TopImdbMainCart = ({
   posterPath,
 }: TopImdbCartProps) => {
   return (
-    <div className="w-[90vw] xl:w-[645px] flex flex-col gap-8">
-      <div className="w-full xl:w-[645px] min-h-[300px] relative">
+    <div className="w-full flex flex-col gap-8">
+      <div className="aspect-video h-[320px] relative">
         <Image
           src={`https://image.tmdb.org/t/p/original${backdropPath}`}
           fill
           sizes="(min-width: 1280px) 645px, 90vw"
-          className="object-cover object-top"
+          className="object-cover object-top rounded-2xl"
           alt=""
         />
       </div>
-      <p className="py-1 px-6 rounded-[20px] border border-gray-500 bg-black text-white w-fit font-medium">
+      <p className="py-1 px-6 rounded-[20px] border border-gray-500 bg-black text-white w-max font-medium">
         {`Release Date : ${dateConvertor(releaseDate)}`}
       </p>
       <h1 className="font-bold text-5xl text-white">{title}</h1>

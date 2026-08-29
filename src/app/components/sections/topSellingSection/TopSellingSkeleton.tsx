@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton"
 let contents = []
 for (let index = 0; index <= 2; index++) {
   contents.push(
-    <div className="w-[32%] h-[350px] relative">
+    <div className="w-[32%] h-[350px] relative" key={index}>
       <Skeleton
         baseColor="#7c7c7c"
         highlightColor="#8c8c8c"

@@ -11,6 +11,7 @@ const SingleFetch = async () => {
       id={data?.id!}
       name={data?.name!}
       overview={data?.overview!}
+      key={data?.id}
     />
   )
 }
