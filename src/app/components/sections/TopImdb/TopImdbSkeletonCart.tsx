@@ -18,7 +18,6 @@ const TopImdbSkeletonCart = () => {
         highlightColor="#8c8c8c"
       />
       <Skeleton
-        width={340}
         height={48}
         baseColor="#7c7c7c"
         highlightColor="#8c8c8c"
@@ -30,19 +29,16 @@ const TopImdbSkeletonCart = () => {
         highlightColor="#8c8c8c"
       />
       <Skeleton
-        width={645}
         height={16}
         baseColor="#7c7c7c"
         highlightColor="#8c8c8c"
       />
       <Skeleton
-        width={645}
         height={16}
         baseColor="#7c7c7c"
         highlightColor="#8c8c8c"
       />
       <Skeleton
-        width={345}
         height={16}
         baseColor="#7c7c7c"
         highlightColor="#8c8c8c"

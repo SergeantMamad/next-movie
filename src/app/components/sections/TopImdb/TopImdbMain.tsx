@@ -29,7 +29,8 @@ const TopImdbMain = () => {
       </div>
       <Swiper
         modules={[Navigation, A11y]}
-        slidesPerView={1}
+        slidesPerView={"auto"}
+        spaceBetween={1}
         navigation={{
           nextEl: ".imdb-button-next",
           prevEl: ".imdb-button-prev"

@@ -6,8 +6,10 @@ import AnniversaryForm from "../components/2nd-anniversary/AnniversaryForm"
 import AnniversaryMemorial from "../components/2nd-anniversary/AnniversaryMemorial"
 import { Suspense } from "react"
 import AnniversaryMemorialSkeleton from "../components/2nd-anniversary/AnniversaryMemorialSkeleton"
+import { getLists } from "../utils/actions/getLists"
 
-const Page = () => {
+const Page = async () => {
+  const lists = await getLists()
   return (
     <div className={vazirMatn.className}>
       <div className="relative h-[400px] slider active">
@@ -114,10 +116,13 @@ const Page = () => {
             هیچوقت فراموش نشه
           </p>
           <div className="w-max h-max border rounded-2xl border-[#00925daa] shadow-[0_0_5px_#00925d,0_0_15px_#00925d,0_0_35px_#00925daa,0_0_70px_#00925d66] mt-8 px-24 py-6 max-lg:px-8 text-white mx-auto text-center space-y-4">
-            <p className="font-black text-xl ">علی اکبر (ابی)</p>
-            <p className="font-black text-xl">
-              مبین <Link href="https://github.com/M0BIN-V">(MOBIN.V)</Link>
-            </p>
+            <p className="font-black text-xl ">علی اکبر (اِبی)</p>
+            <Link
+              className="font-black text-xl block"
+              href="https://github.com/M0BIN-V"
+            >
+              مبین (MOBIN.V)
+            </Link>
             <p className="font-black text-xl">رضا (R9ZA)</p>
             <p className="font-black text-xl">علی طبا</p>
             <p className="font-black text-xl">احسان</p>
@@ -151,13 +156,15 @@ const Page = () => {
         <h4 className="mt-12 text-2xl font-medium">
           افرادی که برای سایت یادبود ارسال کردند :
         </h4>
-        <Suspense fallback={<AnniversaryMemorialSkeleton />}>
+        {
+          lists?.map((list,index) => <Suspense fallback={<AnniversaryMemorialSkeleton />} key={index}>
           <AnniversaryMemorial
-            name="Sergeant M"
-            listNumber={8690256}
-            description="لیست خودم، البته فیلم ها و سریال های بیشتریو میپسندم ولی خب محدودیت 5 تاست :)"
+            name={list.name}
+            listNumber={list.listNumber}
+            description={list.description}
           />
-        </Suspense>
+        </Suspense>)
+        }
       </div>
       <div className="h-max flex flex-col items-center justify-center mt-12 gap-4 bg-[#00925d13] border border-[#3b3b3b] rounded-2xl p-6 w-max mx-auto mb-8">
         <div
@@ -167,8 +174,8 @@ const Page = () => {
           <p className="drop-shadow-2xl ml-1">MOVIE</p>
         </div>
         <div className="flex gap-8">
-          <p className="text-center font-black text-4xl">۱۴۰۲-۱۴۰۵</p>
-          <p className={`text-center font-medium text-4xl ${rubik.className}`}>
+          <p className="text-center font-black text-4xl max-lg:text-2xl">۱۴۰۲-۱۴۰۵</p>
+          <p className={`text-center font-medium text-4xl max-lg:text-2xl ${rubik.className}`}>
             2023-2026
           </p>
         </div>

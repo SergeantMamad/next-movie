@@ -12,7 +12,7 @@ import { useMediaQuery } from "usehooks-ts"
 type Props = {
   listNumber: number
   name: string
-  description?: string
+  description?: string | null
 }
 
 const tabItems = [
