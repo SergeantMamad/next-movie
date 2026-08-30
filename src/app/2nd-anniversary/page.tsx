@@ -8,6 +8,8 @@ import { Suspense } from "react"
 import AnniversaryMemorialSkeleton from "../components/2nd-anniversary/AnniversaryMemorialSkeleton"
 import { getLists } from "../utils/actions/getLists"
 
+
+export const dynamic = "force-dynamic"
 const Page = async () => {
   const lists = await getLists()
   return (

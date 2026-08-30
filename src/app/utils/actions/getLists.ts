@@ -9,3 +9,4 @@ export async function getLists() {
         console.log(e)
     }
 }
+export const fetchCache = 'force-no-store'

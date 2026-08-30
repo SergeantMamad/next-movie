@@ -38,6 +38,7 @@
     "framer-motion": "^13.1.1",
     "ldrs": "^1.1.9",
     "lodash.debounce": "^4.0.8",
+    "nanoid": "^6.0.1",
     "next": "16.3.2",
     "nextjs-toploader": "^3.9.17",
     "openapi-fetch": "^0.17.0",
